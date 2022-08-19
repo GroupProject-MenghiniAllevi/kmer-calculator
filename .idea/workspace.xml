@@ -5,11 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKUtils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.K-mer Calculator.vpp.lck" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/K-mer Calculator.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/K-mer Calculator.vpp" afterDir="false" />
     </list>
-    <list id="1f3b043a-94b7-41a9-b905-e63ce2498d84" name="Changes by emi63" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
