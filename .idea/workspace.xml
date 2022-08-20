@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKUtils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.K-mer Calculator.vpp.lck" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K-mer Calculator.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/K-mer Calculator.vpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +19,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Python Unit Test" />
       </list>
     </option>
   </component>
@@ -39,7 +38,9 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/progetti/kmer-calculator/kmer-calculator&quot;
   }
 }</component>
   <component name="RunManager">

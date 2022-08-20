@@ -8,7 +8,6 @@ class DSKAlgorithm:
         Questo metodo serve per impostare il numero di iterazioni dell'algoritmo.
         :param iteration_number: il numero di iterazioni
         """
-
     def set_partition_number(self,partition_number):
         """
         Questo metodo serve per impostare il numero di partizioni che userà l'algoritmo.
