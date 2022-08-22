@@ -1,7 +1,4 @@
-
-
 class DirectoryHandler:
-
 
     def set_directory_path(self, path):
         """
@@ -15,14 +12,14 @@ class DirectoryHandler:
         :return:
         """
 
-    def get_file_size(self,filename):
+    def get_file_size(self, filename):
         """
         Questo metodo restituisce la lunghezza di una sequenza contenuta in un file.
         :param filename: il nome del file.
         :return: lunghezza del sequenza in un file.
         """
 
-    def read_next_kmer_from_file(self,filename):
+    def read_next_kmer_from_file(self, filename):
         """
         Questo metodo legge il prossimo kmer dal file.
         :param filename: il nome del file.

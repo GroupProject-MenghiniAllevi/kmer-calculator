@@ -5,11 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_1.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_19.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_20.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/._16S" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_1.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_19.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_20.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_21.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_25.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_10.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_11.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_13.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_14.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_15.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_16.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_17.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_18.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_2.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_23.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_24.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_3.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_4.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_5.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_6.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_7.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_8.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_9.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_N_12.db" beforeDir="false" />
     </list>
+    <list id="2fdfc0c9-b288-45c4-bbfa-e5b7d3791443" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,15 +64,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/progetti/kmer-calculator/kmer-calculator&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "last_opened_file_path": "D:/progetti/kmer-calculator/kmer-calculator/Test/resource"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\progetti\kmer-calculator\kmer-calculator\Test\resource" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python tests.Python tests for DirectoryHandlerTest.MyTestCase.test_file_lenght">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -65,8 +99,38 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for DirectoryHandlerTest.MyTestCase.test_file_lenght" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/DSK" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;DirectoryHandlerTest.MyTestCase.test_file_lenght&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for DirectoryHandlerTest.MyTestCase.test_file_list" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/DSK" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;DirectoryHandlerTest.MyTestCase.test_file_list&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for DirectoryHandlerTest.MyTestCase.test_file_lenght" />
+        <item itemvalue="Python tests.Python tests for DirectoryHandlerTest.MyTestCase.test_file_list" />
         <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
