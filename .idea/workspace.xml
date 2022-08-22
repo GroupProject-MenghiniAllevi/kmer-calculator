@@ -8,7 +8,9 @@
       <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_1.db" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_19.db" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_20.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/KmerReader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/K-mer Calculator.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/K-mer Calculator.vpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" afterDir="false" />
@@ -47,8 +49,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Python Unit Test" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
