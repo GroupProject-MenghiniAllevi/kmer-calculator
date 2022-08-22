@@ -14,13 +14,16 @@ class DefaultKmerReader(KmerReader):
     def read_next_kmer(self):
         if self.__k == 0:
             ValueError("non è stato impostato un valore k!!")
-        if (self.__file != None):
+        if self.__file is not None:
             r = self.__file.read(self.__k)
             if b'\n' in r:
-                r = r.split(b'\n')[0].decode()
-                return r
+                self.__file.close()
+                return r.split(b'\n')[0].decode()
             else:
                 return r.decode()
+
+
+
 
     def set_kmer_lenght(self, k):
         if k > 0:
@@ -35,4 +38,3 @@ class DefaultKmerReader(KmerReader):
         self.__file.readline()
         self.__file.readline()
         self.__file.readline()
-

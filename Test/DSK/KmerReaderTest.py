@@ -7,12 +7,12 @@ from it.unicam.cs.groupproject.kmer.DSK.DefaultKmerReader import DefaultKmerRead
 
 class MyTestCase(unittest.TestCase):
 
-
     def test_kmer_reader(self):
         file_reader = self.__initialize_file_reader()
         r = file_reader.read_next_kmer()
         l = "ACUCCGGUUG"
-        self.assertEqual(l, r, " la stringa letta è: " + str(r))
+        self.assertEqual(l, r, " la stringa letta dal metodo è: " + str(r))
+        self.__check_last_string_test(file_reader)
 
     def __initialize_file_reader(self):
         project_root = Path(os.path.abspath(os.path.dirname(__file__)))
@@ -23,6 +23,14 @@ class MyTestCase(unittest.TestCase):
         file_reader.set_path(path)
         file_reader.set_kmer_lenght(10)
         return file_reader
+
+    def __check_last_string_test(self, file_reader):
+        i = 0
+        c = ""
+        while i < 150:
+            c = file_reader.read_next_kmer()
+            i = i + 1
+        self.assertEqual("CNNN", c, "la stringa letta dal metodo è: " + str(c))
 
 
 if __name__ == '__main__':
