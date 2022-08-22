@@ -14,14 +14,13 @@ class KmerReader:
     def set_kmer_lenght(self,k):
         """
         Questo metodo imposta la lunghezza del kmer da leggere
-        :param k: la lunchezza del kmer.
-        :return:
+        :param k: un intero che rappresenta la lunghezza del kmer.
         """
 
 
     def set_path(self, path):
         """
-        
-        :param path:
-        :return:
+        Questo metodo imposta il percorso del file da leggere e apre il file, facendo in modo che quando il
+        file viene letto, si legga solo le sequenze esatte.
+        :param path: una stringa che rappresenta il percorso del file.
         """

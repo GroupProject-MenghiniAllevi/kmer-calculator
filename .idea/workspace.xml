@@ -5,40 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_1.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_19.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/resource/CRW_16S_A_C_20.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/KmerReader.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultKmerReader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/K-mer Calculator.vpp" beforeDir="false" afterPath="$PROJECT_DIR$/K-mer Calculator.vpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDirectoryHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DirectoryHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/._16S" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_1.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_19.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_20.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_21.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_C_25.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_10.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_11.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_13.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_14.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_15.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_16.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_17.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_18.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_2.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_23.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_24.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_3.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_4.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_5.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_6.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_7.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_8.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_E_9.db" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/__MACOSX/16S/._CRW_16S_A_N_12.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/KmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/KmerReader.py" afterDir="false" />
     </list>
     <list id="2fdfc0c9-b288-45c4-bbfa-e5b7d3791443" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,8 +22,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Unit Test" />
         <option value="Python Script" />
+        <option value="Python Unit Test" />
       </list>
     </option>
   </component>
@@ -79,7 +52,7 @@
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\Test\resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for DirectoryHandlerTest.MyTestCase.test_file_lenght">
+  <component name="RunManager" selected="Python tests.Python tests for KmerReaderTest.MyTestCase">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,8 +102,38 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
+    <configuration name="Python tests for KmerReaderTest.MyTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/DSK" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;KmerReaderTest.MyTestCase&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for KmerReaderTest.MyTestCase.test_kmer_reader" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/DSK" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;KmerReaderTest.MyTestCase.test_kmer_reader&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for KmerReaderTest.MyTestCase" />
+        <item itemvalue="Python tests.Python tests for KmerReaderTest.MyTestCase.test_kmer_reader" />
         <item itemvalue="Python tests.Python tests for DirectoryHandlerTest.MyTestCase.test_file_lenght" />
         <item itemvalue="Python tests.Python tests for DirectoryHandlerTest.MyTestCase.test_file_list" />
         <item itemvalue="Python.main" />

@@ -19,12 +19,7 @@ class DirectoryHandler:
         :return: lunghezza del sequenza in un file.
         """
 
-    def read_next_kmer_from_file(self, filename):
-        """
-        Questo metodo legge il prossimo kmer dal file.
-        :param filename: il nome del file.
-        :return: il kmer letto.
-        """
+
 
     def get_all_files_names(self):
         """

@@ -22,9 +22,6 @@ class DefaultDirectoryHandler(DirectoryHandler):
         char_counter = 0
         return self.__lenght_file(full_path, line_counter, char_counter)
 
-    def read_next_kmer_from_file(self, filename):
-        pass
-
     def get_all_files_names(self):
         return [f for f in listdir(self.__path) if isfile(join(self.__path, f))]
 
