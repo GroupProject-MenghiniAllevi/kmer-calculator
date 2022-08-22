@@ -3,21 +3,18 @@
 class DSKAlgorithm:
 
 
-    def set_iteration_number(self, iteration_number):
+    def set_iteration_number(self):
         """
-        Questo metodo serve per impostare il numero di iterazioni dell'algoritmo.
-        :param iteration_number: il numero di iterazioni
+        Questo metodo serve per calcolare il numero di iterazioni dell'algoritmo.
         """
-    def set_partition_number(self,partition_number):
+    def set_partition_number(self):
         """
-        Questo metodo serve per impostare il numero di partizioni che userà l'algoritmo.
-        :param partition_number: il numero di partizioni.
+        Questo metodo serve per calcolare il numero di partizioni che userà l'algoritmo.
         """
 
-    def create_partition_files(self, path):
+    def create_partition_files(self):
         """
         Questo metodo serve per creare le partizioni al percorso stabilito.
-        :param path: il percorso dove si troveranno le partizioni.
         """
 
     def process(self):

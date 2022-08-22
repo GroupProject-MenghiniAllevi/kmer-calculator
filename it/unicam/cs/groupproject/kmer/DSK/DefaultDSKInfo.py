@@ -2,6 +2,9 @@ import math
 
 from it.unicam.cs.groupproject.kmer.DSK.DSKInfo import DSKInfo
 import numpy as np
+import math
+
+from it.unicam.cs.groupproject.kmer.DSK.DefaultDirectoryHandler import DefaultDirectoryHandler
 
 
 class DefaultDSKInfo(DSKInfo):
@@ -19,9 +22,14 @@ class DefaultDSKInfo(DSKInfo):
         
         """
 
-    def getFullKmerNumber(self, sequence_number_list):
-        for sequence_size in sequence_number_list:
-            self.__kmerSize = self.__kmerSize + self.getSingleKmerNumber(sequence_size)
+    def getFullKmerNumber(self):
+        dh = DefaultDirectoryHandler(self.__path)
+        filelist = dh.get_all_files_names()
+        total_size = 0
+        for name in filelist:
+            size = dh.get_file_size(name)
+            total_size = total_size + self.getSingleKmerNumber(size)
+        self.__kmerSize = total_size
         return self.__kmerSize
 
     """
@@ -34,14 +42,27 @@ class DefaultDSKInfo(DSKInfo):
 
     def iteration_number(self, file_disk_space):
         self.__check_invalid_kmer_size()
-        self.__itaretionNumber = self.__kmerSize * np.power(2, math.log(2 * self.__k, 2)) / file_disk_space
+        square = self.__get_square_of_ceil_log_2_k()
+        print("square: ", square)
+        self.__itaretionNumber = math.ceil(self.__kmerSize * square / file_disk_space)
         return self.__itaretionNumber
 
     def get_partition_number(self, memory_usage):
         self.__check_invalid_iteration_number()
-        self.__partitionNumber = self.__kmerSize * (np.power(2, math.log(2 * self.__k, 2)) * 2) / (
-                    0.7 * self.__itaretionNumber * memory_usage)
+        self.__partitionNumber = (self.__kmerSize * (np.power(2, math.ceil(self.__get_log_2_k())) + 32)) / (
+                0.7 * self.__itaretionNumber * memory_usage)
         return self.__partitionNumber
+
+    def __get_log_2_k(self):
+        log = math.log(2 * self.__kmerSize, 2)
+
+        print("log: ", log, " kmersize: ", self.__kmerSize)
+        return log
+
+    def __get_square_of_ceil_log_2_k(self):
+        ceil_log = math.ceil(self.__get_log_2_k())
+        print("ceil: ", ceil_log)
+        return np.power(2, ceil_log)
 
     def __check_invalid_kmer_size(self):
         if self.__kmerSize == -1:

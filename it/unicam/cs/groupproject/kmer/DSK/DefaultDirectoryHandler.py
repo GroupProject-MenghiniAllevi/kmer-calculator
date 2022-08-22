@@ -29,7 +29,6 @@ class DefaultDirectoryHandler(DirectoryHandler):
         with open(full_path, "rb") as file:
             while True:
                 c = file.read(1)
-                print("char: ", c, " line_counter: ", line_counter, " char_counter: ", char_counter)
                 if c == b'\n':
                     line_counter = line_counter + 1
                 if line_counter == 4 and c != b'\n':

@@ -24,7 +24,6 @@ class MyTestCase(unittest.TestCase):
         project_root = Path(os.path.abspath(os.path.dirname(__file__)))
         project_root = project_root.parent.absolute()
         path = os.path.join(project_root, "resource")
-        print(path)
         dh = DefaultDirectoryHandler(path=path)
         return dh
 

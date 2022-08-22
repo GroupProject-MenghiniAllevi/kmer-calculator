@@ -1,10 +1,9 @@
 
 class DSKInfo:
 
-    def getFullKmerNumber(self, sequence_number_list):
+    def getFullKmerNumber(self):
         """
         Questo metodo serve per calcolare il numero totale di k-mer presenti in tutti i file presi in input.
-        :param sequence_number_list: una lista di numeri che contiene la dimensione di ogni file.
         :return: il numero totale di k-mer presenti.
         """
 
