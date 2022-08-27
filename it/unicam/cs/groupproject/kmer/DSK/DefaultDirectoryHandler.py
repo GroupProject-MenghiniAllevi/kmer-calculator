@@ -1,3 +1,4 @@
+import os
 from os import listdir
 from os.path import isfile, join
 
@@ -18,21 +19,38 @@ class DefaultDirectoryHandler(DirectoryHandler):
 
     def get_file_size(self, filename):
         full_path = self.__path + "/" + filename
-        line_counter = 0
         char_counter = 0
-        return self.__lenght_file(full_path, line_counter, char_counter)
+        return self.__lenght_file(full_path, char_counter)
 
     def get_all_files_names(self):
-        return [f for f in listdir(self.__path) if isfile(join(self.__path, f))]
+        return [f for f in os.listdir(self.__path) if os.path.isfile(os.path.join(self.__path, f))]
 
-    def __lenght_file(self, full_path, line_counter, char_counter):
+    def get_partition_file_size(self, k, filename):
+        fullpath = os.path.join(self.__path,filename)
+        counter = 0
+        with open(fullpath,"rb") as f:
+            while True:
+                b = f.read(k)
+                if not b:
+                    f.close()
+                    break
+                else:
+                    counter+=1
+
+
+    def __lenght_file(self, full_path, char_counter):
         with open(full_path, "rb") as file:
+            file.readline()
+            file.readline()
+            file.readline()
+            file.readline()
             while True:
                 c = file.read(1)
                 if c == b'\n':
-                    line_counter = line_counter + 1
-                if line_counter == 4 and c != b'\n':
-                    char_counter = char_counter + 1
-                elif line_counter > 4:
                     break
+                elif c != b'\r':
+                    char_counter = char_counter + 1
+            file.close()
         return char_counter
+
+

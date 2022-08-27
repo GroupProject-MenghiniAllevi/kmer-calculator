@@ -30,3 +30,4 @@ class DSKInfo:
         :param memory_usage la memoria utilizzata dall'algoritmo, in bit.
         :return: numero totale di partizioni
         """
+

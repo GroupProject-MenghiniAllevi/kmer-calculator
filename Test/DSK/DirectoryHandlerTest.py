@@ -5,8 +5,7 @@ from it.unicam.cs.groupproject.kmer.DSK.DefaultDirectoryHandler import DefaultDi
 from pathlib import Path
 import logging as lg
 class MyTestCase(unittest.TestCase):
-    def test_something(self):
-        self.assertEqual(True, False)  # add assertion here
+
 
     def test_file_lenght(self):
         dh = self.__get_directory_handler()

@@ -22,7 +22,14 @@ class MyTestCase(unittest.TestCase):
         path = self.__get_path()
         dsk_info = DefaultDSKInfo(path, 10)
         dsk_info.getFullKmerNumber()
-        self.assertEqual(71520, dsk_info.iteration_number(1024))
+        self.assertEqual(140, dsk_info.iteration_number(1024))
+    def test_partition_number(self):
+        path = self.__get_path()
+        dsk_info = DefaultDSKInfo(path,10)
+        dsk_info.getFullKmerNumber()
+        dsk_info.iteration_number(1024)
+        #previsto 3
+        self.assertEqual(3,dsk_info.get_partition_number(1024))
 
     def __get_partitions_path(self):
         path = self.__get_path()

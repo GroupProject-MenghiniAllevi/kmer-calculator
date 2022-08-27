@@ -12,14 +12,22 @@ class DSKAlgorithm:
         Questo metodo serve per calcolare il numero di partizioni che userà l'algoritmo.
         """
 
-    def create_partition_files(self):
+    def create_partition_files(self, partition_path):
         """
         Questo metodo serve per creare le partizioni al percorso stabilito.
+        :param partition_path la cartella dove verranno creati i file temporanei.
         """
 
-    def process(self):
+    def save_to_partitions(self,i):
+        """
+        Questo metodo implementa la prima parte dell'algoritmo DSK. Il suo obiettivo è di scrivere
+        i kmer nei file temporanei.
+        :param numero del'iterazione.
+        """
+    def process(self,partition_path):
         """
         Questo metodo implementa l'algoritmo DSK.
+        :param la cartella dove le partizioni verranno salvate.
         """
 
     def initialize_hash_table(self):

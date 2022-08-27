@@ -33,7 +33,7 @@ class DefaultDSKInfo(DSKInfo):
         return self.__kmerSize
 
     """
-     Questo metodo calcola il numero totale dei k-mer di tutte le sequenze dwi file
+     Questo metodo calcola il numerous totale dei k-mer di tutte le sequenze dwi file
      
     """
 
@@ -43,25 +43,23 @@ class DefaultDSKInfo(DSKInfo):
     def iteration_number(self, file_disk_space):
         self.__check_invalid_kmer_size()
         square = self.__get_square_of_ceil_log_2_k()
-        print("square: ", square)
         self.__itaretionNumber = math.ceil(self.__kmerSize * square / file_disk_space)
         return self.__itaretionNumber
 
     def get_partition_number(self, memory_usage):
         self.__check_invalid_iteration_number()
-        self.__partitionNumber = (self.__kmerSize * (np.power(2, math.ceil(self.__get_log_2_k())) + 32)) / (
-                0.7 * self.__itaretionNumber * memory_usage)
+        numerator = self.__kmerSize * (self.__get_square_of_ceil_log_2_k() + 32)
+        denominator = 0.7 * self.__itaretionNumber * memory_usage
+        self.__partitionNumber = math.ceil(numerator / denominator)
         return self.__partitionNumber
 
     def __get_log_2_k(self):
-        log = math.log(2 * self.__kmerSize, 2)
-
-        print("log: ", log, " kmersize: ", self.__kmerSize)
+        double_k_size = 2 * self.__k
+        log = math.log(double_k_size, 2)
         return log
 
     def __get_square_of_ceil_log_2_k(self):
         ceil_log = math.ceil(self.__get_log_2_k())
-        print("ceil: ", ceil_log)
         return np.power(2, ceil_log)
 
     def __check_invalid_kmer_size(self):

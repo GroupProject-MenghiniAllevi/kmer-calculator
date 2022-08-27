@@ -24,3 +24,14 @@ class KmerReader:
         file viene letto, si legga solo le sequenze esatte.
         :param path: una stringa che rappresenta il percorso del file.
         """
+
+
+    def has_next(self, kmer_size):
+        """
+        Questo metodo controlla se la sequenza letta fino ad ora non sia finita.
+        :param kmer_size il numero di kmer da leggere.
+        :return: True se non è finita, False altrimenti.
+        """
+
+
+

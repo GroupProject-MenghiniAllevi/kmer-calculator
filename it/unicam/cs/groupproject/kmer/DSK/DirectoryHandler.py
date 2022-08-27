@@ -26,3 +26,12 @@ class DirectoryHandler:
         Questo metodo serve per sapere quali file sono presenti nella cartella.
         :return: una lista di stringhe contenente i nomi dei file.
         """
+
+
+    def get_partition_file_size(self,k,filename):
+        """
+        Questo metodo restituisce la dimensione di una partizione.
+        :param k la dimensione del singolo kmer.
+        :param filename il file di cui calcolare il numero di k_mer
+        :return: un  numero intero, maggiore o uguale a 0, che rappresenta la dimensione della partizione.
+        """
