@@ -30,7 +30,7 @@ class DSKUtils:
         :return: l'hash del kmer.
         """
 
-    def write_to_partitions(self, path, kmer):
+    def write_to_partitions(self, path, kmer, lock):
         """
         :param path:
         :param kmer:

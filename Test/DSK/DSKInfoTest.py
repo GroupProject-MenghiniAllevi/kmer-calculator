@@ -2,11 +2,10 @@ import os
 import unittest
 from pathlib import Path
 
-from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKAlgorithm import DefaultDskAlgorithm
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 
 
-class MyTestCase(unittest.TestCase):
+class InfoTest(unittest.TestCase):
 
     def test_create_partitions(self):
         # file1 = 1504

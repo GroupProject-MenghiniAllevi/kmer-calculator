@@ -10,10 +10,9 @@ class DefaultKmerReader(KmerReader):
 
     __file = None
     __index = 0
-    __file_length = -1
 
-    def __init__(self, file_lenght):
-        self.__file_length = file_lenght
+    def __init__(self):
+        pass
 
     def read_next_kmer(self):
         if self.__k == 0:
@@ -31,7 +30,10 @@ class DefaultKmerReader(KmerReader):
                 return r.decode()
 
     def has_next(self, kmer_size):
-        return self.__index < kmer_size
+        if not self.__index < kmer_size:
+            self.__file.close()
+        else:
+            return True
 
     def set_kmer_lenght(self, k):
         if k > 0:
@@ -46,3 +48,18 @@ class DefaultKmerReader(KmerReader):
         self.__file.readline()
         self.__file.readline()
         self.__file.readline()
+
+    def get_file_lenght(self):
+        char_counter = 0
+        self.__file.readline()
+        self.__file.readline()
+        self.__file.readline()
+        self.__file.readline()
+        while True:
+            c = self.__file.read(1)
+            if c == b'\n':
+                break
+            elif c != b'\r':
+                char_counter = char_counter + 1
+        self.__file.close()
+        return char_counter

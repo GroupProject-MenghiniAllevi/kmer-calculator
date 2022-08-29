@@ -24,10 +24,11 @@ class DSKAlgorithm:
         i kmer nei file temporanei.
         :param numero del'iterazione.
         """
-    def process(self,partition_path):
+    def process(self,partition_path, output_path):
         """
         Questo metodo implementa l'algoritmo DSK.
         :param la cartella dove le partizioni verranno salvate.
+        :param il percorso del file in cui verranno salvati i k-mer con le loro occorrenze.
         """
 
     def initialize_hash_table(self):

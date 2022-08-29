@@ -27,10 +27,10 @@ class MyTestCase(unittest.TestCase):
     def __check_last_string_test(self, file_reader):
         i = 0
         c = ""
-        while i < 150:
+        while file_reader.has_next(1495):
             c = file_reader.read_next_kmer()
             i = i + 1
-        self.assertEqual("CNNN", c, "la stringa letta dal metodo è: " + str(c))
+        self.assertEqual("UCACCUCNNN", c, "la stringa letta dal metodo è: " + str(c))
 
 
 if __name__ == '__main__':
