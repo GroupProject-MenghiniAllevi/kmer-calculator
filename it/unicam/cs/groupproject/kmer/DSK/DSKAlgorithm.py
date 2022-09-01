@@ -37,7 +37,8 @@ class DSKAlgorithm:
         :return: l'hash table.
         """
 
-    def write_to_output(self):
+    def write_to_output(self,lock):
         """
         Questo metodo serve per scrivere il numero di kmer e le occorrenze.
+        :param lock il lock utiizzato per scrivere nel file.
         """

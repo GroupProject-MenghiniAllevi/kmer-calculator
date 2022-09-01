@@ -1,10 +1,7 @@
-import array
 import os
-import time
 import unittest
 from pathlib import Path
 
-import numpy as np
 
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKAlgorithm import DefaultDskAlgorithm
 
@@ -105,11 +102,11 @@ class MyTestCase(unittest.TestCase):
             values = list()
             index = list()
             for line in lines:
-                if j != 0:
-                    str_arr = line.split(",")
-                    if len(str_arr) == 2:
-                        index.append(str_arr[0])
-                        values.append(str_arr[1])
+                print("line: ",line)
+                str_arr = line.split(",")
+                if len(str_arr) == 2:
+                    index.append(str_arr[0])
+                    values.append(str_arr[1])
                 else:
                     j = 1
             arr_expected = ['GGU', 'GUU', 'UUG', 'UGA', 'GAU', 'AUC', 'UCC', 'CCU', 'CUG', 'UGC', 'GCC', 'CCG', 'CGG',

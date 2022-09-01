@@ -11,6 +11,7 @@ class KmerReader:
         """
 
 
+
     def set_kmer_lenght(self,k):
         """
         Questo metodo imposta la lunghezza del kmer da leggere

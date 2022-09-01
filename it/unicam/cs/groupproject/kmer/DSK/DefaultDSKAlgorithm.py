@@ -1,16 +1,13 @@
 import os
-import threading
-from multiprocessing.pool import Pool
-from pathlib import Path
-from multiprocessing import Process,Lock
+from multiprocessing import Process, Lock
 import pandas as pd
 from it.unicam.cs.groupproject.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKUtils import DefaultDSKUtils
-from it.unicam.cs.groupproject.kmer.DSK.DefaultDirectoryHandler import DefaultDirectoryHandler
-from it.unicam.cs.groupproject.kmer.DSK.DefaultKmerReader import DefaultKmerReader
-from it.unicam.cs.groupproject.kmer.DSK.DirectoryHandler import DirectoryHandler
+from it.unicam.cs.groupproject.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from it.unicam.cs.groupproject.kmer.Utils.DefaultKmerReader import DefaultKmerReader
 from it.unicam.cs.groupproject.kmer.DSK.PartitionKmerReader import PartitionKmerReader
+from it.unicam.cs.groupproject.kmer.Utils.OutputWriter import OutputWriter
 
 
 class DefaultDskAlgorithm(DSKAlgorithm):
@@ -65,7 +62,6 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         p = 0
         while p < self.__partition_number:
             file_name = "partition-" + str(p) + ".bin"
-            print(file_name)
             fullpath = os.path.join(self.__partition_path, file_name)
             if os.path.exists(str(fullpath)):
                 file = open(fullpath, "r+")
@@ -83,10 +79,18 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     def process(self, partition_path, output_path):
         self.__out_path = output_path
         self.__partition_path = partition_path
+        process_list = list()
+        lock = Lock()
         for i in range(self.__iteration_number):
             self.create_partition_files(partition_path)
             self.save_to_partitions(i)
-            self.write_to_output()
+            p = Process(target=self.write_to_output, args=(lock,))
+            p.start()
+            process_list.append(p)
+        for p in process_list:
+            p.join()
+        for j in range(self.__partition_number):
+            self.__remove_partition_file("/partition-" + str(j) + ".bin")
 
     def initialize_hash_table(self):
         ht = dict()
@@ -108,45 +112,35 @@ class DefaultDskAlgorithm(DSKAlgorithm):
 
     def save_to_partitions(self, i):
         list_of_file = self.__list_of_file()
-        j = [i] * len(list_of_file)
-        print(j)
-        list_of_single_kmer_number = list()
-        p = None
         process_list = list()
         for file in list_of_file:
             dh = DefaultDirectoryHandler(self.__path)
             size = dh.get_file_size(file)
-            list_of_single_kmer_number.append(self.__dsk_info.getSingleKmerNumber(size))
-            # self.thread_partitions_write(file, i, self.__dsk_info.getSingleKmerNumber(size))
-            self.__lock = Lock()
             p = Process(target=self.thread_partitions_write,
-                           args=(file, i, self.__dsk_info.getSingleKmerNumber(size)))
+                        args=(file, i, self.__dsk_info.getSingleKmerNumber(size)))
             p.start()
             process_list.append(p)
         for process in process_list:
             process.join()
-        print("list_of_file: ", list_of_file, " j: ", j, " list_of_single_kmer_number: ", list_of_single_kmer_number)
-        # pool.starmap(self.thread_partitions_write, zip(list_of_file, j, list_of_single_kmer_number))
 
-    def write_to_output(self):
+    def write_to_output(self, lock):
         for j in range(self.__partition_number):
-            hash_table = self.initialize_hash_table()  # line 13
+            hash_table = self.initialize_hash_table()
             partition_kmer_reader = PartitionKmerReader(self.__partition_path + "/partition-" + str(j) + ".bin",
                                                         self.__k)
             size = partition_kmer_reader.get_file_lenght()
-            print("size partition: ", size)
-            index = 0
-            print(index)
-            while partition_kmer_reader.has_next(size):
-                m = partition_kmer_reader.read_next_kmer()
-                s = m.decode("utf-8")
-                if s in hash_table:
-                    hash_table[s] = hash_table[s] + 1
-                else:
-                    hash_table[s] = 1
-            dct = {k: [v] for k, v in hash_table.items()}
-            pd.DataFrame.from_dict(data=dct, orient='index').to_csv(self.__out_path, mode='a', index=True)
-            # self.__remove_partition_file("/partition-" + str(j) + ".bin")
+            if partition_kmer_reader.get_file_lenght() <= 0:
+                return
+            else:
+                while partition_kmer_reader.has_next(size):
+                    m = partition_kmer_reader.read_next_kmer()
+                    s = m.decode("utf-8")
+                    if s in hash_table:
+                        hash_table[s] = hash_table[s] + 1
+                    else:
+                        hash_table[s] = 1
+                out_writer = OutputWriter()
+                out_writer.write_to_output(self.__out_path, hash_table, lock,j)
 
     def __remove_partition_file(self, filename):
 

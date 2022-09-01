@@ -1,9 +1,9 @@
 import os
-import pathlib
 import unittest
-from it.unicam.cs.groupproject.kmer.DSK.DefaultDirectoryHandler import DefaultDirectoryHandler
+from it.unicam.cs.groupproject.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
 from pathlib import Path
-import logging as lg
+
+
 class MyTestCase(unittest.TestCase):
 
 

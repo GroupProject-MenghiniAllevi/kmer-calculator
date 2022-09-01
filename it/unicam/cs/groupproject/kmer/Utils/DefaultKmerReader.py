@@ -1,6 +1,4 @@
-import hashlib
-
-from it.unicam.cs.groupproject.kmer.DSK.KmerReader import KmerReader
+from it.unicam.cs.groupproject.kmer.Utils.KmerReader import KmerReader
 
 
 class DefaultKmerReader(KmerReader):
@@ -43,7 +41,10 @@ class DefaultKmerReader(KmerReader):
 
     def set_path(self, path):
         self.__path = path
-        self.__file = open(path, "rb")
+        self.__prepare_file()
+
+    def __prepare_file(self):
+        self.__file = open(self.__path, "rb")
         self.__file.readline()
         self.__file.readline()
         self.__file.readline()
@@ -51,10 +52,7 @@ class DefaultKmerReader(KmerReader):
 
     def get_file_lenght(self):
         char_counter = 0
-        self.__file.readline()
-        self.__file.readline()
-        self.__file.readline()
-        self.__file.readline()
+        self.__prepare_file()
         while True:
             c = self.__file.read(1)
             if c == b'\n':
@@ -62,4 +60,5 @@ class DefaultKmerReader(KmerReader):
             elif c != b'\r':
                 char_counter = char_counter + 1
         self.__file.close()
+        self.__prepare_file()
         return char_counter

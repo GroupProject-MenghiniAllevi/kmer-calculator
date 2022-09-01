@@ -1,6 +1,4 @@
-import os
-
-from it.unicam.cs.groupproject.kmer.DSK.KmerReader import KmerReader
+from it.unicam.cs.groupproject.kmer.Utils.KmerReader import KmerReader
 
 
 class PartitionKmerReader(KmerReader):

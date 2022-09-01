@@ -1,8 +1,6 @@
 import os
-from os import listdir
-from os.path import isfile, join
 
-from it.unicam.cs.groupproject.kmer.DSK.DirectoryHandler import DirectoryHandler
+from it.unicam.cs.groupproject.kmer.Utils.DirectoryHandler import DirectoryHandler
 
 
 class DefaultDirectoryHandler(DirectoryHandler):

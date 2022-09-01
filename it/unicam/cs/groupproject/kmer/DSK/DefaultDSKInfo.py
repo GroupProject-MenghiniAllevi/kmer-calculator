@@ -1,10 +1,8 @@
-import math
-
 from it.unicam.cs.groupproject.kmer.DSK.DSKInfo import DSKInfo
 import numpy as np
 import math
 
-from it.unicam.cs.groupproject.kmer.DSK.DefaultDirectoryHandler import DefaultDirectoryHandler
+from it.unicam.cs.groupproject.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
 
 
 class DefaultDSKInfo(DSKInfo):
@@ -44,6 +42,7 @@ class DefaultDSKInfo(DSKInfo):
         self.__check_invalid_kmer_size()
         square = self.__get_square_of_ceil_log_2_k()
         self.__itaretionNumber = math.ceil(self.__kmerSize * square / file_disk_space)
+        print("ith: ",self.__itaretionNumber)
         return self.__itaretionNumber
 
     def get_partition_number(self, memory_usage):
