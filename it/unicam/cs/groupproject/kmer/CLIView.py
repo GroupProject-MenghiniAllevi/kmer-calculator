@@ -27,7 +27,7 @@ class CLIView():
             part = self.__argv[6]
             output = self.__argv[8]
             k = int(self.__argv[10])
-            dsk = DefaultDskAlgorithm(k, 409600, 4096000, input_path)
+            dsk = DefaultDskAlgorithm(k, 81920, 81920, input_path)
             dsk.set_iteration_number()
             dsk.set_partition_number()
             dsk.process(part, output)

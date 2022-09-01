@@ -39,13 +39,10 @@ class DefaultDSKUtils(DSKUtils):
         return hash
 
     def write_to_partitions(self, path, kmer, lock):
-        #self.__lock = lock
-        #self.__lock.acquire()
         file = open(path, "a+b")
         byte_kmer = str.encode(kmer)
         file.write(byte_kmer)
         file.close()
-        #lock.release()
 
     def get_partition_index(self):
         return str(self.__partionion_index)

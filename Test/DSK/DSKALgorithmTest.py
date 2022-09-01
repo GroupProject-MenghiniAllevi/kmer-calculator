@@ -98,11 +98,9 @@ class MyTestCase(unittest.TestCase):
     def __check_out_file(self):
         with open(self.__get_output_path(), "r") as f:
             lines = f.readlines()
-            j = 0
             values = list()
             index = list()
             for line in lines:
-                print("line: ",line)
                 str_arr = line.split(",")
                 if len(str_arr) == 2:
                     index.append(str_arr[0])
@@ -115,6 +113,12 @@ class MyTestCase(unittest.TestCase):
                 self.assertEqual(True, arr_expected[i] in index, "non è stato trovato l'elemento... " + arr_expected[i])
             print(index)
 
+    def __get_full_dsk(self):
+        dsk_algorithm = DefaultDskAlgorithm(3, 256, 256, self.__get_path())
+        print(self.__get_path())
+        dsk_algorithm.set_iteration_number()
+        dsk_algorithm.set_partition_number()
+        return dsk_algorithm
 
 if __name__ == '__main__':
     unittest.main()

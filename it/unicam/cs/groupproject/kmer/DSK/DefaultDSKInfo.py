@@ -42,7 +42,6 @@ class DefaultDSKInfo(DSKInfo):
         self.__check_invalid_kmer_size()
         square = self.__get_square_of_ceil_log_2_k()
         self.__itaretionNumber = math.ceil(self.__kmerSize * square / file_disk_space)
-        print("ith: ",self.__itaretionNumber)
         return self.__itaretionNumber
 
     def get_partition_number(self, memory_usage):

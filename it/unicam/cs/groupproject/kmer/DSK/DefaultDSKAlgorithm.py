@@ -1,6 +1,5 @@
 import os
 from multiprocessing import Process, Lock
-import pandas as pd
 from it.unicam.cs.groupproject.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKUtils import DefaultDSKUtils
@@ -80,11 +79,11 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         self.__out_path = output_path
         self.__partition_path = partition_path
         process_list = list()
-        lock = Lock()
+        self.__lock = Lock()
         for i in range(self.__iteration_number):
             self.create_partition_files(partition_path)
             self.save_to_partitions(i)
-            p = Process(target=self.write_to_output, args=(lock,))
+            p = Process(target=self.write_to_output, args=(self.__lock,))
             p.start()
             process_list.append(p)
         for p in process_list:
@@ -124,14 +123,13 @@ class DefaultDskAlgorithm(DSKAlgorithm):
             process.join()
 
     def write_to_output(self, lock):
+        out_writer = OutputWriter()
         for j in range(self.__partition_number):
             hash_table = self.initialize_hash_table()
             partition_kmer_reader = PartitionKmerReader(self.__partition_path + "/partition-" + str(j) + ".bin",
                                                         self.__k)
             size = partition_kmer_reader.get_file_lenght()
-            if partition_kmer_reader.get_file_lenght() <= 0:
-                return
-            else:
+            if partition_kmer_reader.get_file_lenght() > 0:
                 while partition_kmer_reader.has_next(size):
                     m = partition_kmer_reader.read_next_kmer()
                     s = m.decode("utf-8")
@@ -139,9 +137,9 @@ class DefaultDskAlgorithm(DSKAlgorithm):
                         hash_table[s] = hash_table[s] + 1
                     else:
                         hash_table[s] = 1
-                out_writer = OutputWriter()
-                out_writer.write_to_output(self.__out_path, hash_table, lock,j)
-
+                lock.acquire()
+                out_writer.write_to_output(self.__out_path, hash_table, j)
+                lock.release()
     def __remove_partition_file(self, filename):
 
         if os.path.exists(self.__partition_path + filename):
