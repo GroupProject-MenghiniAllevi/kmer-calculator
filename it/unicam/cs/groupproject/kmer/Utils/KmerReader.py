@@ -37,6 +37,10 @@ class KmerReader:
     def get_file_lenght(self):
         """
         Questo metodo restituisce il numero di kmer presenti nel file.
-        :return: la lunghezza del file.
+        :return: kmer contenuti nel file.
         """
 
+    def close_file(self):
+        """
+        Questo metodo chiude il file contenente i kmer.
+        """

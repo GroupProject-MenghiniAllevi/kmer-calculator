@@ -10,12 +10,13 @@ class SKmerWriter:
         """
 
 
-    def write_super_kmer(self ,minimizer,super_kmer, lock):
+    def write_super_kmer(self ,minimizer,super_kmer, lock, file_path: str):
         """
         Scrive il superKmer dentro il file di destinazione
         :param minimizer: la sequenza del minimizer
         :param super_kmer: la sequenza superkmer
         :param lock:
+        :param file_path: il percorso del file.
         :return:
         """
 

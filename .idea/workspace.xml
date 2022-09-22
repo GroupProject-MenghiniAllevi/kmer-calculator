@@ -5,17 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Test/Gerbil/SuperKmerReaderTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/resource/OutputWriter/out.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Test/utils/OutputWriterTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/DSK/DSKInfoTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DSKInfoTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Gerbil/GerbilTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Gerbil/GerbilTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/output/new_out.csv" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/resource/output/out.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/output/out.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/partition-0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/partition-1.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/test_algorithm/file1.db" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/test_algorithm/file1.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/test_algorithm/file2.db" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/test_algorithm/file2.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/CLIView.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/PartitionKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/PartitionKmerReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbilUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbilUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultMinimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultMinimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultSKmerWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultSKmerWriter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/Gerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/Gerbil.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/GerbilUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/GerbilUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SKmerWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SKmerWriter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SuperKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SuperKmerReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultDirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultKmerReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/KmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/KmerReader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/OutputWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/OutputWriter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
+    <list id="46c92cd3-e7d3-4114-ba36-755af937ead6" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +70,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/progetti/kmer-calculator/kmer-calculator/Test/resource&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/progetti/kmer-calculator/kmer-calculator&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
@@ -55,11 +79,33 @@
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\Test\resource" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\progetti\kmer-calculator\kmer-calculator\Test\resource" />
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for DSKALgorithmTest.MyTestCase">
-    <configuration name="Python tests for DSKALgorithmTest.MyTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.main">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="-n dsk -input D:\kmerdsk\16s\input -part D:\kmerdsk\16s\partizioni -out D:\kmerdsk\16s\output\out.csv -k 3" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_create_partition" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -69,11 +115,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;DSKALgorithmTest.MyTestCase&quot;" />
+      <option name="_new_target" value="&quot;DSKALgorithmTest.DSKAlgorithmTest.test_create_partition&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for DSKALgorithmTest.MyTestCase.test_full_algorithm" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_full_algorithm" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -83,11 +129,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;DSKALgorithmTest.MyTestCase.test_full_algorithm&quot;" />
+      <option name="_new_target" value="&quot;DSKALgorithmTest.DSKAlgorithmTest.test_full_algorithm&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for DSKInfoTest.InfoTest" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_save_to_partition" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -97,25 +143,39 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;DSKInfoTest.InfoTest&quot;" />
+      <option name="_new_target" value="&quot;DSKALgorithmTest.DSKAlgorithmTest.test_save_to_partition&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for DirectoryHandlerTest.MyTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for OutputWriterTest.OutputWriterTest.test_write_to_output" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/DSK" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/utils" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;DirectoryHandlerTest.MyTestCase&quot;" />
+      <option name="_new_target" value="&quot;OutputWriterTest.OutputWriterTest.test_write_to_output&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for KmerReaderTest.MyTestCase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for OutputWriterTest.OutputWriterTest.test_write_to_output_update_count" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;OutputWriterTest.OutputWriterTest.test_write_to_output_update_count&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests in D:/progetti/kmer-calculator/kmer-calculator/Test/DSK/DSKALgorithmTest.py -k 10" type="tests" factoryName="Autodetect" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -125,17 +185,17 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;KmerReaderTest.MyTestCase&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py -k 10&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for DSKALgorithmTest.MyTestCase" />
-        <item itemvalue="Python tests.Python tests for DSKALgorithmTest.MyTestCase.test_full_algorithm" />
-        <item itemvalue="Python tests.Python tests for DirectoryHandlerTest.MyTestCase" />
-        <item itemvalue="Python tests.Python tests for DSKInfoTest.InfoTest" />
-        <item itemvalue="Python tests.Python tests for KmerReaderTest.MyTestCase" />
+        <item itemvalue="Python tests.Python tests for OutputWriterTest.OutputWriterTest.test_write_to_output_update_count" />
+        <item itemvalue="Python tests.Python tests for OutputWriterTest.OutputWriterTest.test_write_to_output" />
+        <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_full_algorithm" />
+        <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_save_to_partition" />
+        <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_create_partition" />
       </list>
     </recent_temporary>
   </component>
@@ -150,12 +210,29 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

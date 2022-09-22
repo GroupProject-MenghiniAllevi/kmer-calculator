@@ -7,10 +7,6 @@ from pathlib import Path
 class MyTestCase(unittest.TestCase):
 
 
-    def test_file_lenght(self):
-        dh = self.__get_directory_handler()
-        file_lenght = dh.get_file_size("CRW_16S_A_C_1.db")
-        self.assertEqual(1504, file_lenght, "la lunghezza del file non è la stessa di quella passata...")
 
     def test_file_list(self):
         dh = self.__get_directory_handler()

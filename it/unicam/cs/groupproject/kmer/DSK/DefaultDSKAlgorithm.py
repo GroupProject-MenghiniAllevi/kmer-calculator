@@ -18,18 +18,16 @@ class DefaultDskAlgorithm(DSKAlgorithm):
 
     __path = ""
 
-    __iteration_number = 0
-
-    __partition_number = 0
-
     __dsk_info = None
 
     __partition_path = ""
     __kmer_size: int
-
+    __dh = None
     __lock = None
+    __file_list = list()
+    __molecules_name = dict()
 
-    def __init__(self, k, memory_usage, disk_usage, path):
+    def __init__(self, k, memory_usage, disk_usage, path, partition_path):
         self.__out_path = ""
         self.__kmer_size = 0
         self.__k = k
@@ -37,6 +35,8 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         self.__diskUsage = disk_usage
         self.__path = path
         self.__initialize_values()
+        self.__dh = DefaultDirectoryHandler(self.__path)
+        self.__partition_path = partition_path
         """
         Metodo costruttore della classe
 
@@ -49,99 +49,126 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     Qeusto metodo imposta il numero delle iterazioni
     """
 
-    def set_partition_number(self):
-        self.__partition_number = self.__dsk_info.get_partition_number(self.__memoryUsage)
-
-    """
-    Questo metodo imposta il numero delle partizioni
-    """
-
-    def create_partition_files(self, partition_path):
-        self.__partition_path = partition_path
+    def create_partition_files(self, partition_path, partition_number):
         p = 0
-        while p < self.__partition_number:
+        if not os.path.exists(partition_path):
+            os.mkdir(partition_path)
+        while p < partition_number:
             file_name = "partition-" + str(p) + ".bin"
-            fullpath = os.path.join(self.__partition_path, file_name)
+            fullpath = os.path.join(partition_path, file_name)
             if os.path.exists(str(fullpath)):
                 file = open(fullpath, "r+")
                 file.truncate()
             else:
                 file = open(fullpath, "x")
-
             file.close()
             p = p + 1
+            file = open(fullpath, "r+")
+            file.close()
 
     """
     Questo metodo crea i file delle partizioni 
     """
 
+    def apply_algorithm_for_file(self, filename, file_path, partition_path, lock, molecule_name):
+        dsk_info = self.get_dsk_info_complete(os.path.join(self.__path, file_path))
+        ith_number = dsk_info.iteration_number(self.__diskUsage)
+        partition_number = dsk_info.get_partition_number(self.__memoryUsage)
+        self.create_partition_files(partition_path, partition_number)
+        for i in range(ith_number):
+            self.save_to_partitions(i, partition_number, ith_number, file_path)
+            lock.acquire()
+            # print("iniziando a salvare nel file di output i kmer della molecola",molecule_name)
+            self.write_to_output(lock, partition_number, molecule_name, filename)
+            lock.release()
+
     def process(self, partition_path, output_path):
         self.__out_path = output_path
         self.__partition_path = partition_path
+        lock = Lock()
+        with open(self.__out_path, "wb+") as ff:
+            ff.truncate()
+            ff.close()
+
+        self.__file_list = self.__dh.get_all_files_names()
         process_list = list()
+        self.detect_molecule_name_from_input()
         self.__lock = Lock()
-        for i in range(self.__iteration_number):
-            self.create_partition_files(partition_path)
-            self.save_to_partitions(i)
-            p = Process(target=self.write_to_output, args=(self.__lock,))
-            p.start()
-            process_list.append(p)
-        for p in process_list:
-            p.join()
-        for j in range(self.__partition_number):
-            self.__remove_partition_file("/partition-" + str(j) + ".bin")
+        for file in self.__file_list:
+            file_without_dot = file.split(".")[0]
+            partition_file_path = os.path.join(partition_path, file_without_dot)
+            if not os.path.exists:
+                os.mkdir(partition_file_path)
+            # p = Process(target=self.apply_algorithm_for_file, args=(file_without_dot,file, partition_file_path, lock,self.__molecules_name[file]))
+            # process_list.append(p)
+            # p.start()
+            self.apply_algorithm_for_file(file_without_dot, file, partition_file_path, lock,
+                                          self.__molecules_name[file])
+        for process in process_list:
+            pass
+            # process.join()
 
     def initialize_hash_table(self):
         ht = dict()
         return ht
 
-    def thread_partitions_write(self, filename, j, k_number):
+    def thread_partitions_write(self, filename, j, partition_number, iteration_number):
         kmer_reader = DefaultKmerReader()
         kmer_reader.set_kmer_lenght(self.__k)
-        kmer_reader.set_path(self.__path + "/" + filename)
+        kmer_reader.set_path(os.path.join(self.__path, filename))
+        k_number = kmer_reader.get_file_lenght()
+        # print("leggendo il file di input... ", filename, " k_number", k_number)
         while kmer_reader.has_next(k_number):
             kmer = kmer_reader.read_next_kmer()
             dsk_utils = DefaultDSKUtils(j, kmer)
-            dsk_utils.set_partition_number(self.__partition_number)
-            dsk_utils.set_iteration_number(self.__iteration_number)
+            dsk_utils.set_partition_number(partition_number)
+            dsk_utils.set_iteration_number(iteration_number)
             if dsk_utils.equals_to_ith_iteration():
                 dsk_utils.set_partition_index()
-                fullpath = self.__partition_path + "/partition-" + dsk_utils.get_partition_index() + ".bin"
-                dsk_utils.write_to_partitions(fullpath, kmer, self.__lock)
+                path = os.path.join(self.__partition_path, filename.split(".")[0])
+                path = os.path.join(path, "partition-" + str(dsk_utils.get_partition_index()) + ".bin")
+                dsk_utils.write_to_partitions(path, kmer, self.__lock)
+        kmer_reader.close_file()
 
-    def save_to_partitions(self, i):
-        list_of_file = self.__list_of_file()
-        process_list = list()
-        for file in list_of_file:
-            dh = DefaultDirectoryHandler(self.__path)
-            size = dh.get_file_size(file)
-            p = Process(target=self.thread_partitions_write,
-                        args=(file, i, self.__dsk_info.getSingleKmerNumber(size)))
-            p.start()
-            process_list.append(p)
-        for process in process_list:
-            process.join()
+    def save_to_partitions(self, i, partition_number, ith_number, filename):
+        # print("iniziando a salvare nelle partizioni il file ", filename)
+        self.thread_partitions_write(filename, i, partition_number, ith_number)
 
-    def write_to_output(self, lock):
-        out_writer = OutputWriter()
-        for j in range(self.__partition_number):
+    def write_to_output(self, lock, partition_number, molecule_name, filename):
+        molecule_name = molecule_name.strip()
+        for j in range(partition_number):
             hash_table = self.initialize_hash_table()
-            partition_kmer_reader = PartitionKmerReader(self.__partition_path + "/partition-" + str(j) + ".bin",
-                                                        self.__k)
+            path = os.path.join(self.__partition_path, filename)
+            path = os.path.join(path, "partition-" + str(j) + ".bin")
+            partition_kmer_reader = PartitionKmerReader(path, self.__k)
             size = partition_kmer_reader.get_file_lenght()
-            if partition_kmer_reader.get_file_lenght() > 0:
-                while partition_kmer_reader.has_next(size):
-                    m = partition_kmer_reader.read_next_kmer()
-                    s = m.decode("utf-8")
-                    if s in hash_table:
-                        hash_table[s] = hash_table[s] + 1
-                    else:
-                        hash_table[s] = 1
-                lock.acquire()
-                out_writer.write_to_output(self.__out_path, hash_table, j)
-                lock.release()
-    def __remove_partition_file(self, filename):
+            while partition_kmer_reader.has_next(size):
+                m = partition_kmer_reader.read_next_kmer()
+                #print(filename, m)
+                s = m.decode("utf-8")
+                if s in hash_table:
+                    hash_table[s] = hash_table[s] + 1
+                else:
+                    hash_table[s] = 1
+            out_writer = OutputWriter(filename=molecule_name, path=self.__out_path)
+            out_writer.write_to_output(hash_table)
+            hash_table = self.initialize_hash_table()
+            out_writer.close_all_files()
 
+    def get_dsk_info_complete(self, filepath):
+        dsk_info = DefaultDSKInfo(filepath, self.__k)
+        dsk_info.getSingleKmerNumber(filepath)
+        return dsk_info
+
+    def detect_molecule_name_from_input(self):
+        for file in self.__file_list:
+            reader = DefaultKmerReader()
+            path = os.path.join(self.__path, file)
+            reader.set_path(path)
+            self.__molecules_name[file] = reader.get_file_name()
+            reader.close_file()
+
+    def __remove_partition_file(self, filename):
         if os.path.exists(self.__partition_path + filename):
             os.remove(self.__partition_path + filename)
 

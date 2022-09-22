@@ -16,14 +16,12 @@ class DefaultSKmerWriter(SKmerWriter):
     def set_partition_path(self, path):
         self.__directory_path = path
 
-    def write_super_kmer(self, minimizer, super_kmer, lock: multiprocessing.Lock()):
-        file_fullpath = os.path.join(self.__directory_path, str(minimizer) + ".bin")
-        lock.acquire()
-        if not os.path.exists(str(file_fullpath)):
-            f = open(file_fullpath, "x")
+    def write_super_kmer(self, minimizer, super_kmer, lock: multiprocessing.Lock(), file_path:str):
+        if not os.path.exists(str(file_path)):
+            f = open(file_path, "x")
             f.close()
-        with open(file_fullpath, "ab") as f:
-            f.write(super_kmer)
+        with open(file_path, "ab") as f:
+            for ele in super_kmer:
+                f.write(ele)
             f.close()
-        lock.release()
 

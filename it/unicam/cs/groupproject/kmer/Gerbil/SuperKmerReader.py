@@ -8,6 +8,7 @@ class SuperKmerReader(KmerReader):
     __minimizer = b""
     __super_kmer_size = 0
     __ith = 0
+    __size_counter = 0
 
     def __init__(self, file_path, k, minimizer):
         self.__file = None
@@ -16,14 +17,22 @@ class SuperKmerReader(KmerReader):
         self.__m = len(minimizer)
         self.__super_kmer_size = k - self.__m
         self.__minimizer = minimizer
-        self.__ith = k - 1
+        self.__ith = self.__super_kmer_size
+        self.__file = open(file_path, "rb")
 
     def read_next_kmer(self):
         super_kmer = self.__file.read(self.__super_kmer_size)
-        kmer = super_kmer[:self.__ith] + self.__minimizer + super_kmer[self.__ith:]
+        super_kmer = super_kmer.decode("utf-8")
+        if self.__ith == self.__super_kmer_size:
+            kmer = super_kmer + self.__minimizer
+        elif self.__ith == 0:
+            kmer = self.__minimizer + super_kmer
+        else:
+            kmer = super_kmer[:self.__ith] + self.__minimizer + super_kmer[self.__ith:]
         self.__ith -= 1
-        if self.__ith == -1:
-            self.__ith = self.__k - 1
+        if self.__ith < 0:
+            self.__ith = self.__super_kmer_size
+        self.__size_counter += 1
         return kmer
 
     def set_kmer_lenght(self, k):
@@ -34,7 +43,11 @@ class SuperKmerReader(KmerReader):
         self.__file = open(path, "rb")
 
     def has_next(self, kmer_size):
-        super().has_next(kmer_size)
+        if self.__size_counter <= kmer_size:
+            return True
+        else:
+            self.__file.close()
+            return False
 
     def get_file_lenght(self):
         counter = 0

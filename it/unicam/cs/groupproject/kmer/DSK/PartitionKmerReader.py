@@ -20,6 +20,7 @@ class PartitionKmerReader(KmerReader):
             ValueError("non è stato impostato la dimensione del kmer")
         if self.__file is None:
             ValueError("non è stato impostato il path del file")
+        #print("index:", self.__index)
         self.__index += 1
         return self.__file.read(self.__k)
 
@@ -42,11 +43,14 @@ class PartitionKmerReader(KmerReader):
     def get_file_lenght(self):
         counter = 0
         with open(self.__file_path, "rb") as f:
+            f.seek(0,0)
             while True:
                 c = f.read(self.__k)
-                if  not c:
-                   break
+                if not c:
+                    f.close()
+                    break
                 else:
-                    counter+=1
+                    counter += 1
         self.__file_length = counter
+        self.__file.seek(0)
         return counter

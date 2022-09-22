@@ -1,8 +1,11 @@
+import os.path
+
 from it.unicam.cs.groupproject.kmer.DSK.DSKInfo import DSKInfo
 import numpy as np
 import math
 
 from it.unicam.cs.groupproject.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from it.unicam.cs.groupproject.kmer.Utils.DefaultKmerReader import DefaultKmerReader
 
 
 class DefaultDSKInfo(DSKInfo):
@@ -22,11 +25,18 @@ class DefaultDSKInfo(DSKInfo):
 
     def getFullKmerNumber(self):
         dh = DefaultDirectoryHandler(self.__path)
+        kmer_reader = DefaultKmerReader()
+        kmer_reader.set_kmer_lenght(self.__k)
         filelist = dh.get_all_files_names()
         total_size = 0
         for name in filelist:
-            size = dh.get_file_size(name)
-            total_size = total_size + self.getSingleKmerNumber(size)
+            #print("file_name: "+name)
+            kmer_reader.set_path(os.path.join(self.__path,name))
+            size = kmer_reader.get_file_lenght()
+            #print("size:"+str(size))
+            kmer_reader.close_file()
+            total_size = total_size + size
+            #print(total_size)
         self.__kmerSize = total_size
         return self.__kmerSize
 
@@ -35,8 +45,14 @@ class DefaultDSKInfo(DSKInfo):
      
     """
 
-    def getSingleKmerNumber(self, sequence_size):
-        return sequence_size - self.__k + 1
+    def getSingleKmerNumber(self, filepath):
+        kmer_reader = DefaultKmerReader()
+        kmer_reader.set_kmer_lenght(self.__k)
+        kmer_reader.set_path(filepath)
+        sequence_size = kmer_reader.get_file_lenght()
+        kmer_reader.close_file()
+        self.__kmerSize = sequence_size
+        return sequence_size
 
     def iteration_number(self, file_disk_space):
         self.__check_invalid_kmer_size()
@@ -45,6 +61,7 @@ class DefaultDSKInfo(DSKInfo):
         return self.__itaretionNumber
 
     def get_partition_number(self, memory_usage):
+        #print("kmer_size = ",self.__kmerSize)
         self.__check_invalid_iteration_number()
         numerator = self.__kmerSize * (self.__get_square_of_ceil_log_2_k() + 32)
         denominator = 0.7 * self.__itaretionNumber * memory_usage

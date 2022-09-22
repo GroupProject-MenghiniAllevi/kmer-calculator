@@ -12,13 +12,6 @@ class DirectoryHandler:
         :return:
         """
 
-    def get_file_size(self, filename):
-        """
-        Questo metodo restituisce la lunghezza di una sequenza contenuta in un file.
-        :param filename: il nome del file.
-        :return: lunghezza del sequenza in un file.
-        """
-
 
 
     def get_all_files_names(self):

@@ -7,10 +7,10 @@ class DSKInfo:
         :return: il numero totale di k-mer presenti.
         """
 
-    def getSingleKmerNumber(self, sequence_size):
+    def getSingleKmerNumber(self, filepath):
         """
         Questo metodo serve per calcolare il numero di k-mer presenti in un file preso in input.
-        :param sequence_size: la grandezza della sequenza da analizzare
+        :param filepath: il file di input.
         :return: il numero di k-mer presenti
         """
 

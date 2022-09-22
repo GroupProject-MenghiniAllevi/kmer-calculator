@@ -15,10 +15,6 @@ class DefaultDirectoryHandler(DirectoryHandler):
     def get_directory_path(self):
         return self.__path
 
-    def get_file_size(self, filename):
-        full_path = self.__path + "/" + filename
-        return self.__lenght_file(full_path)
-
     def get_all_files_names(self):
         return [f for f in os.listdir(self.__path) if os.path.isfile(os.path.join(self.__path, f))]
 
@@ -35,20 +31,6 @@ class DefaultDirectoryHandler(DirectoryHandler):
                     counter+=1
 
 
-    def __lenght_file(self, full_path):
-        char_counter = 0
-        with open(full_path, "rb") as file:
-            file.readline()
-            file.readline()
-            file.readline()
-            file.readline()
-            while True:
-                c = file.read(1)
-                if c == b'\n':
-                    break
-                elif c != b'\r':
-                    char_counter = char_counter + 1
-            file.close()
-        return char_counter
+
 
 

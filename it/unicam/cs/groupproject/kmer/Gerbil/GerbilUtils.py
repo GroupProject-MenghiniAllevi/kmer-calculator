@@ -18,7 +18,7 @@ class GerbilUtils:
         """
 
 
-    def find_super_kmer_and_write(self,kmer_list:list, lock:Lock, minimizer:str):
+    def find_super_kmer_and_write(self,kmer_list:list, lock:Lock, minimizer:str, partition_path:str):
         """
         scrive i superkmer dentro il file di partizione
         :param kmer_list:la lista dei k-mer

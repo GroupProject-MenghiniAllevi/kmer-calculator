@@ -1,7 +1,9 @@
+import time
+
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKAlgorithm import DefaultDskAlgorithm
 
 
-class CLIView():
+class CLIView:
     __argc = 0
     __argv = []
 
@@ -22,12 +24,13 @@ class CLIView():
                   "-k              dimensione del kmer")
 
     def check_if_is_DSK(self):
+        print(self.__argv[6],self.__argv[8],self.__argv[10])
         if self.__argv[1] == "-n" and self.__argv[2] == "dsk":
             input_path = self.__argv[4]
             part = self.__argv[6]
             output = self.__argv[8]
             k = int(self.__argv[10])
-            dsk = DefaultDskAlgorithm(k, 81920, 81920, input_path)
+            dsk = DefaultDskAlgorithm(k, 81920, 81920, input_path,part)
             dsk.set_iteration_number()
             dsk.set_partition_number()
             dsk.process(part, output)
