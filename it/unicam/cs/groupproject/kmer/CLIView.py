@@ -24,7 +24,6 @@ class CLIView:
                   "-k              dimensione del kmer")
 
     def check_if_is_DSK(self):
-        print(self.__argv[6],self.__argv[8],self.__argv[10])
         if self.__argv[1] == "-n" and self.__argv[2] == "dsk":
             input_path = self.__argv[4]
             part = self.__argv[6]

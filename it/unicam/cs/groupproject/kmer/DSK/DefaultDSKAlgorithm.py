@@ -1,4 +1,5 @@
 import os
+import shutil
 from multiprocessing import Process, Lock
 from it.unicam.cs.groupproject.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
@@ -78,7 +79,6 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         for i in range(ith_number):
             self.save_to_partitions(i, partition_number, ith_number, file_path)
             lock.acquire()
-            # print("iniziando a salvare nel file di output i kmer della molecola",molecule_name)
             self.write_to_output(lock, partition_number, molecule_name, filename)
             lock.release()
 
@@ -94,11 +94,13 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         process_list = list()
         self.detect_molecule_name_from_input()
         self.__lock = Lock()
+        partition_path_list = list()
         for file in self.__file_list:
             file_without_dot = file.split(".")[0]
             partition_file_path = os.path.join(partition_path, file_without_dot)
-            if not os.path.exists:
+            if not os.path.exists(partition_file_path):
                 os.mkdir(partition_file_path)
+            partition_path_list.append(partition_file_path)
             # p = Process(target=self.apply_algorithm_for_file, args=(file_without_dot,file, partition_file_path, lock,self.__molecules_name[file]))
             # process_list.append(p)
             # p.start()
@@ -106,7 +108,14 @@ class DefaultDskAlgorithm(DSKAlgorithm):
                                           self.__molecules_name[file])
         for process in process_list:
             pass
+        for path in partition_path_list:
+                shutil.rmtree(path)
             # process.join()
+
+        new_out_path = os.path.dirname(self.__out_path)
+        new_out_path = os.path.join(new_out_path,"new_out.csv")
+        if os.path.exists(new_out_path):
+            os.remove(new_out_path)
 
     def initialize_hash_table(self):
         ht = dict()
@@ -150,6 +159,8 @@ class DefaultDskAlgorithm(DSKAlgorithm):
                     hash_table[s] = hash_table[s] + 1
                 else:
                     hash_table[s] = 1
+            if os.path.exists(path):
+                os.remove(path)
             out_writer = OutputWriter(filename=molecule_name, path=self.__out_path)
             out_writer.write_to_output(hash_table)
             hash_table = self.initialize_hash_table()

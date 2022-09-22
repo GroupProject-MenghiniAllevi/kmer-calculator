@@ -19,7 +19,6 @@ class OutputWriter:
     def write_to_output(self, kmer_dictionary):
         if len(kmer_dictionary) == 0:
             return
-        # print(self.__file_name,kmer_dictionary)
         file_lenght = self.__get_file_lenght(self.__out_file_path)
         values = list()
         kmer_keys = list()
@@ -46,17 +45,13 @@ class OutputWriter:
                     kmer_new_values.append(kmer_dictionary[key])
             for key in filename_dict:
                 self.__out_file.seek(filename_dict[key], 0)
-                print(new_kmer_indexs, kmer_new_values, kmer_duplicates_indexs, list(kmer_duplicates_values), key)
                 self.write_new_out_line(new_kmer_indexs, kmer_new_values, kmer_duplicates_indexs,
                                         list(kmer_duplicates_values), key)
-            # print(self.__new_out_file.tell())
             self.__new_out_file.seek(0, 2)
             if not self.__file_name in filename_dict:
                 kmer_index = self.__get_index_of_kmer(kmer_dictionary)
                 kmer_values = self.__get_kmer_order_values(kmer_keys, kmer_dictionary)
-                # print(self.__file_name, kmer_index, kmer_values)
                 self.write_new_line(kmer_index, kmer_values)
-                # print("----------------")
         self.close_all_files()
         os.remove(self.__out_file_path)
         os.rename(self.__new_out_path, self.__out_file_path)
@@ -303,7 +298,6 @@ class OutputWriter:
         index_kmer_new_key = 0
         line = 0
         self.__new_out_file.seek(0, 2)
-        # print( kmer_duplicates_indexs, kmer_duplicates_values)
         while index_column < self.__row_lenght:
             c = self.__out_file.read(1)
             if not c:
@@ -338,7 +332,6 @@ class OutputWriter:
                         v = readed_value
                     else:
                         v = str(int(kmer_duplicates_values[index_kmer_dup] + int(readed_value)))
-                        # print(self.__new_out_file.tell())
                     index_kmer_dup += 1
                 else:
                     v = readed_value
@@ -383,7 +376,6 @@ class OutputWriter:
         self.__new_out_file.seek(0, 2)
         index_column = 0
         index_knv = 0
-        print(new_kmer_index)
         while index_column < self.__row_lenght:
             if index_column == 0:
                 v = self.__file_name
@@ -399,7 +391,6 @@ class OutputWriter:
                 else:
                     s = ","
             string = v + s
-            print("scrivendo..."+string+" alla colonna:"+str(index_column)+" con knv:"+str(index_knv))
             index_column += 1
             self.__new_out_file.write(string.encode('utf-8'))
 
@@ -411,12 +402,10 @@ class OutputWriter:
         while True:
             c = self.__new_out_file.read(1)
             if not c or c == b'\r' or c == b'\n':
-                print(readed_value,kmer_dictionary.keys(),readed_value in kmer_dictionary)
                 if readed_value in kmer_dictionary:
                     l.append(ic)
                 break
             elif c == b",":
-                print(readed_value, kmer_dictionary.keys(), readed_value in kmer_dictionary,ic)
                 if readed_value in kmer_dictionary:
                     l.append(ic)
                 ic += 1
@@ -429,7 +418,6 @@ class OutputWriter:
         ic = 0
         readed_value = ""
         l = list()
-        # print(kmer_dict)
         self.__new_out_file.seek(0, 0)
         while True:
             c = self.__new_out_file.read(1)
@@ -447,7 +435,6 @@ class OutputWriter:
                     ic += 1
                 else:
                     readed_value += c.decode('utf-8')
-        # print(l)
         return l
 
     def __get_kmer_order_values(self, kmer_keys, kmer_dictionary):

@@ -5,39 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Test/Gerbil/SuperKmerReaderTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/resource/OutputWriter/out.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/utils/OutputWriterTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/DSKInfoTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DSKInfoTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Gerbil/GerbilTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Gerbil/GerbilTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/output/new_out.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/output/out.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/output/out.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/test_algorithm/file1.db" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/test_algorithm/file1.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/test_algorithm/file2.db" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/test_algorithm/file2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/CLIView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/PartitionKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/PartitionKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbilUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbilUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultMinimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultMinimizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultSKmerWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultSKmerWriter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/Gerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/Gerbil.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/GerbilUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/GerbilUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SKmerWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SKmerWriter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SuperKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SuperKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultDirectoryHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DirectoryHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/KmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/KmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/OutputWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/OutputWriter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <list id="46c92cd3-e7d3-4114-ba36-755af937ead6" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />
