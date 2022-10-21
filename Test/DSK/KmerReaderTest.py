@@ -2,7 +2,7 @@ import os
 import unittest
 from pathlib import Path
 
-from it.unicam.cs.groupproject.kmer.Utils.DefaultKmerReader import DefaultKmerReader
+from Main.kmer.Utils.Reader.DefaultKmerReader import DefaultKmerReader
 
 
 class MyTestCase(unittest.TestCase):

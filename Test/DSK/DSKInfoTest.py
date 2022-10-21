@@ -2,7 +2,7 @@ import os
 import unittest
 from pathlib import Path
 
-from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
+from Main.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 
 
 class InfoTest(unittest.TestCase):

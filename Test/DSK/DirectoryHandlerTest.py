@@ -1,6 +1,6 @@
 import os
 import unittest
-from it.unicam.cs.groupproject.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from Main.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
 from pathlib import Path
 
 

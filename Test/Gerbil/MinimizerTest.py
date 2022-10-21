@@ -1,6 +1,6 @@
 import unittest
 
-from it.unicam.cs.groupproject.kmer.Gerbil.DefaultMinimizer import DefaultMinimizer
+from Main.kmer.Utils.minimizer.DefaultMinimizer import DefaultMinimizer
 
 
 class MinimizersTest(unittest.TestCase):

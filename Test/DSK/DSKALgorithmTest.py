@@ -2,7 +2,7 @@ import os
 import shutil
 import unittest
 from pathlib import Path
-from it.unicam.cs.groupproject.kmer.DSK.DefaultDSKAlgorithm import DefaultDskAlgorithm
+from Main.kmer.DSK.DefaultDSKAlgorithm import DefaultDskAlgorithm
 
 
 class DSKAlgorithmTest(unittest.TestCase):
@@ -37,8 +37,19 @@ class DSKAlgorithmTest(unittest.TestCase):
         self.__check_saves_second_file(p[1])
         path1 = os.path.join(self.__get_partitions_path(), "file1")
         path2 = os.path.join(self.__get_partitions_path(), "file2")
-        # shutil.rmtree(path1)
-        # shutil.rmtree(path2)
+        shutil.rmtree(path1)
+        shutil.rmtree(path2)
+
+    def test_molecules_name(self):
+        dsk = self.__get_full_dsk()
+        expected_dict = {"file1.db": "file1", "file2.db": "file2"}
+        d = dsk.detect_molecule_name_from_input()
+        self.assertEqual(expected_dict, d)
+        dsk_nh = self.__get_dsk_nh()
+        expected_dict = {"file1_nH.db": "file1", "file2_nH.db": "file2"}
+        d.clear()
+        d = dsk_nh.detect_molecule_name_from_input()
+        self.assertEqual(expected_dict, d)
 
     def __get_partition_file_path(self):
         return Path(os.path.join(self.__get_partitions_path(), "partition-0.bin")), Path(
@@ -54,6 +65,8 @@ class DSKAlgorithmTest(unittest.TestCase):
         return path1, path2
 
     def __get_dsk_algorithm(self):
+        self.__write_files(("file1.db", "file2.db"),
+                           ("name: file1\nL\nL\nL\nACUCCGGU\n", "name: file2\nL\nL\nL\nGGUUGAUCCUGCCGGGC\n"))
         dsk_algorithm = DefaultDskAlgorithm(3, 1024, 1024, self.__get_path(), self.__get_partitions_path())
         dsk_algorithm.set_iteration_number()
         dsk_algorithm.set_partition_number()
@@ -73,22 +86,6 @@ class DSKAlgorithmTest(unittest.TestCase):
         path = os.path.join(path, "output")
         path = os.path.join(path, "out.csv")
         return path
-
-    def test_kmer_strings(self):
-        dsk_algorithm = self.__get_dsk_algorithm()
-        dsk_algorithm.create_partition_files(self.__get_partitions_path())
-        dsk_algorithm.thread_partitions_write("file1.db", 0, 6)
-        list_of_kmer_inside_file1 = self.__get_kmer_from_files1()
-        self.__check_kmer_inside_partition(0, list_of_kmer_inside_file1)
-        os.remove(self.__get_partition_file_path()[0])
-        os.remove(self.__get_partition_file_path()[1])
-
-    def test_all_kmer_strings(self):
-        dsk_algorithm = self.__get_dsk_algorithm()
-        dsk_algorithm.create_partition_files(self.__get_partitions_path())
-        dsk_algorithm.thread_partitions_write("file1.db", 0)
-        dsk_algorithm.thread_partitions_write("file2.db", 0)
-        self.__check_kmer_inside_partition(0, self.__get_kmer_from_files1_and_2())
 
     def __get_partitions_path(self):
         project_root = Path(os.path.abspath(os.path.dirname(__file__)))
@@ -121,20 +118,27 @@ class DSKAlgorithmTest(unittest.TestCase):
         return bb
 
     def test_full_algorithm(self):
+        self.__clear_out_file()
         dsk_algorithm = self.__get_full_dsk()
-        dsk_algorithm.process(self.__get_partitions_path(), self.__get_output_path())
+        dsk_algorithm.process(self.__get_output_path())
+        self.__check_out_file()
+
+    def test_full_algorithm_nh_files(self):
+        self.__clear_out_file()
+        self.__write_files(("file1_nH.db", "file2_nH.db"),
+                           ("name: file1\nL\nL\nL\nACUCCGGU\n", "name: file2\nL\nL\nL\nGGUUGAUCCUGCCGGGC\n"))
+        dsk = self.__get_dsk_nh()
+        dsk.process(self.__get_output_path())
         self.__check_out_file()
 
     def __check_out_file(self):
         with open(self.__get_output_path(), "rb") as file:
-            values = list()
             index = list()
             readed_value = ""
             while True:
                 c = file.read(1)
                 if not c or c == b"\n" or c == b"\r":
                     index.append(readed_value)
-                    readed_value = ""
                     break
                 else:
                     if c == b",":
@@ -149,17 +153,30 @@ class DSKAlgorithmTest(unittest.TestCase):
         first_line = self.__get_valeus_from_file(1)
         second_line = self.__get_valeus_from_file(2)
         for i in range(len(arr_expected)):
-                self.assertEqual(True, arr_expected[i] in index, "non è stato trovato l'elemento... " + arr_expected[i])
-        ex_l1 = ['1','0','1','0','1','0','0','0','0','0','1','0','1','1','0','0','0']
-        ex_l2 = ['0','1','1','1','1','1','1','1','1','1','1','1','1','0','1','1','1']
-        self.assertEqual(ex_l1,first_line)
-        self.assertEqual(ex_l2,second_line)
+            self.assertEqual(True, arr_expected[i] in index, "non è stato trovato l'elemento... " + arr_expected[i])
+        ex_l1 = ['1', '0', '1', '0', '1', '1', '0', '0', '0', '0', '0', '1', '0', '1', '0', '0', '0']
+        ex_l2 = ['0', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+        self.assertEqual(ex_l1, first_line)
+        self.assertEqual(ex_l2, second_line)
 
     def __get_full_dsk(self):
         dsk_algorithm = DefaultDskAlgorithm(3, 128, 128, self.__get_path(), self.__get_partitions_path())
         dsk_algorithm.set_iteration_number()
         dsk_algorithm.set_partition_number()
         return dsk_algorithm
+
+    def __get_nh_path(self):
+        project_root = Path(os.path.abspath(os.path.dirname(__file__)))
+        project_root = project_root.parent.absolute()
+        path = os.path.join(project_root, "resource")
+        path = os.path.join(path, "test_algorithm_nH")
+        return path
+
+    def __get_dsk_nh(self):
+        dsk = DefaultDskAlgorithm(3, 128, 128, self.__get_nh_path(), self.__get_partitions_path())
+        dsk.set_iteration_number()
+        dsk.set_partition_number()
+        return dsk
 
     def __check_saves_first_file(self, path):
         list_of_kmer = list()
@@ -202,21 +219,32 @@ class DSKAlgorithmTest(unittest.TestCase):
                 break
             else:
                 if c == b"\n" or c == b"\r":
-                    if ic > 0 and l>0 and l == line:
+                    if ic > 0 and l > 0 and l == line:
                         values.append(readed_values)
                     ic = 0
                     l += 1
                     readed_values = ""
-                elif c == b"," and l>0:
+                elif c == b"," and l > 0:
                     if ic > 0 and l == line:
                         values.append(readed_values)
                     ic += 1
-                    readed_values =""
+                    readed_values = ""
                 else:
                     readed_values += c.decode('utf-8')
 
         f.close()
         return values
+
+    def __write_files(self, file_name_list, content_list):
+        for i in range(len(file_name_list)):
+            c = content_list[i]
+            with open(os.path.join(self.__get_path(), file_name_list[i]), "wb+") as file:
+                file.write(c.encode('utf-8'))
+                file.close()
+
+    def __clear_out_file(self):
+        with open(self.__get_output_path(), "wb+") as file:
+            file.close()
 
 
 if __name__ == '__main__':
