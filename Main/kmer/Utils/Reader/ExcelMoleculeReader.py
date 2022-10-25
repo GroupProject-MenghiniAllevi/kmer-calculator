@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 
@@ -9,6 +11,15 @@ class ExcelMoleculeReader:
 
     def __init__(self, path):
         self.__path = path
+        act_path = os.path.abspath(__file__)
+        read_path = os.path.dirname(act_path)
+        utils_path = os.path.dirname(read_path)
+        kmer_path = os.path.dirname(utils_path)
+        main_path = os.path.dirname(kmer_path)
+        root = os.path.dirname(main_path)
+        resource_path = os.path.join(root,"resource")
+        excel_path = os.path.join(resource_path,"ExcelFile")
+        print(excel_path)
 
     def extract_sheet(self, sheet_name):
         xls = pd.ExcelFile(self.__path)

@@ -1,25 +1,27 @@
 import os
 import shutil
 from multiprocessing import Lock, Process
+
+from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
+from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader
 from Main.kmer.Utils.minimizer.DefaultMinimizerHandler import DefaultMinimizerHandler
 from Main.kmer.Gerbil.Gerbil import Gerbil
 from Main.kmer.Utils.Reader.SuperKmerReader import SuperKmerReader
-from Main.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
-from Main.kmer.Utils.Reader.DefaultKmerReader import DefaultKmerReader
+from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
 
 class DefaultGerbil(Gerbil):
     __partition_path = ""
-
     __input_path = ""
-    __molecule_list = dict()
+    __molecules_name = dict()
     __m = 0
     __k = 0
     __output_path = ""
     __lock = Lock()
     __partition_path_list = list()
     __super_kmer_length = 0
+    __file_list = []
 
     def __init__(self, input_path, partition_path, out_path, k, m) -> None:
         self.__partition_path = partition_path
@@ -28,6 +30,8 @@ class DefaultGerbil(Gerbil):
         self.__k = k
         self.__super_kmer_length = k - m + 1
         self.__output_path = out_path
+        dh = DefaultDirectoryHandler(input_path)
+        self.__file_list = dh.get_all_files_names()
 
     def process(self):
         self.start_first_phase_process()
@@ -40,14 +44,35 @@ class DefaultGerbil(Gerbil):
         file_list = dh.get_all_files_names()
         for file in file_list:
             file_fullpath = os.path.join(self.__input_path, file)
-            reader = DefaultKmerReader()
+            reader = DefaultDbNhReader()
             reader.set_path(file_fullpath)
             reader.set_kmer_lenght(self.__k)
-            name = reader.get_file_name()
             reader.close_file()
-            name = name.strip()
-            self.__molecule_list[file] = name
-        return self.__molecule_list
+        return self.__molecules_name
+
+    def detect_molecule_name_from_input(self):
+        l = [f for f in os.listdir(self.__input_path) if os.path.isfile(os.path.join(self.__input_path, f)) and f.endswith(".xlsx")]
+        excel_file_list = [v for v in l if v.endswith(".xlsx")]
+        check_nH = False
+        if not self.__file_list[0].find("_nH.db") == -1:
+            check_nH = True
+        clean_file_list = [v.replace("_nH.db", ".db") for v in self.__file_list]
+        for excel_file in excel_file_list:
+            path = os.path.join(self.__input_path, excel_file)
+            reader = ExcelMoleculeReader(path=path)
+            reader.extract_list_of_all_sheet()
+            reader.extract_all_molecule_name()
+            d = reader.get_molecules()
+            d = self.__add_db_to_filename(d)
+            print(d,clean_file_list)
+            for key in d:
+                if key in clean_file_list:
+                    s = key
+                    s_index = len(s) - 3
+                    if check_nH:
+                        s = s[:s_index] + "_nH" + s[s_index:]
+                    self.__molecules_name[s] = d[key]
+        return self.__molecules_name
 
     def start_first_phase_process(self):
         dh = DefaultDirectoryHandler(self.__input_path)
@@ -56,15 +81,13 @@ class DefaultGerbil(Gerbil):
         self.__lock = Lock()
         for file in file_list:
             file_fullpath = os.path.join(self.__input_path, file)
-            reader = DefaultKmerReader()
+            reader = DefaultDbNhReader()
             reader.set_path(file_fullpath)
             reader.set_kmer_lenght(self.__k)
-            name = reader.get_file_name()
             reader.close_file()
-            name = name.strip()
-            partition_file_path = self.create_partition(name)
+            partition_file_path = self.create_partition(self.__molecules_name[file])
             self.__partition_path_list.append(partition_file_path)
-            p = Process(target=self.process_read_and_write_minimizer(file_fullpath, partition_file_path, name))
+            p = Process(target=self.process_read_and_write_minimizer(file_fullpath, partition_file_path, self.__molecules_name[file]))
             p.start()
             process_list.append(p)
         for process in process_list:
@@ -76,10 +99,17 @@ class DefaultGerbil(Gerbil):
             os.mkdir(file_part)
         return file_part
 
+    def __add_db_to_filename(self, d):
+        x = dict()
+        for key in d:
+            s = key + ".db"
+            x[s] = d[key]
+        return x
+
     def process_read_and_write_minimizer(self, file_fullpath, partition_file_path, filename):
         self.__lock.acquire()
         min_ith = 0
-        reader = DefaultKmerReader()
+        reader = DefaultDbNhReader()
         reader.set_path(file_fullpath)
         reader.set_kmer_lenght(self.__k)
         size = reader.get_file_lenght()
@@ -105,13 +135,13 @@ class DefaultGerbil(Gerbil):
         self.__lock.release()
 
     def start_second_phase_process(self):
-        for key in self.__molecule_list:
-            name = self.__molecule_list[key]  # nome della molecola
+        for key in self.__molecules_name:
+            name = self.__molecules_name[key]  # nome della molecola
             part_path = os.path.join(self.__partition_path,
                                      name)  # path della partizione che corrisponde al nome della molecola.
             dh = DefaultDirectoryHandler(part_path)
-            file_list = dh.get_all_files_names()  # leggo tutti i file dentro la partizione.
-            # print("file_name:",key," part_list:",part_path)
+            file_list = os.listdir(part_path)  # leggo tutti i file dentro la partizione.
+            print("file_name:", key, " part_list:", file_list)
             for file in file_list:  # itero tutti i file dentro la partizione
                 filepath = os.path.join(part_path, file)  # path del file nella partizione
                 ht = self.read_from_partition_and_counting(filepath, self.__lock, name)

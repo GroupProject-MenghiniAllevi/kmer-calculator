@@ -5,70 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Main/FeaturesSelection/LowVarianceSelector.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/CLIView.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/Gerbil/Gerbil.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultPartitionHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/KMC3/KMC3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/KMC3/PartitionHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/Utils/MostSignificantRadixSort.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DbNhKmerReader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/Utils/Writer/DefaultSKmerWriter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Main/kmer/simplekmercounter/SimpleKmerCounter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/Gerbil/GerbilUtilsTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/KMC3/KMC3Test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/SimpleKmerReader/SimpleKCounterTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/utils/DbNhReaderTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/utils/ExcelReaderTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/utils/MSRadixSortTest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FeaturesSelection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KmerCalculator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DSKALgorithmTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/DSKInfoTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DSKInfoTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/FeaturesSelection/LowVarianceSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/View/CLIView.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DefaultDirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/DirectoryHandlerTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/DSK/KmerReaderTest.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/Gerbil/GerbilTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Gerbil/GerbilTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Gerbil/MinimizerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Gerbil/MinimizerTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/Gerbil/SuperKmerReaderTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Gerbil/SuperKmerReaderTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/OutputWriter/out.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/OutputWriter/out.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test/resource/output/out.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/output/out.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file1/partition-0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file1/partition-1.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file1/partition-2.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-1.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-2.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-3.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-4.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-5.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2/partition-6.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/test_algorithm/file1.db" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/test_algorithm/file1.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/resource/test_algorithm/file2.db" beforeDir="false" afterPath="$PROJECT_DIR$/Test/resource/test_algorithm/file2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Test/utils/OutputWriterTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/utils/OutputWriterTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/CLIView.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DSKInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DSKUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DSKUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/DefaultDSKUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/DSK/PartitionKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/PartitionKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultGerbilUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizerHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultMinimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/DefaultSKmerWriter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/Gerbil.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/GerbilUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/MinimizerHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/Minimizers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/Minimizers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SKmerWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Writer/SKmerWriter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Gerbil/SuperKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/SuperKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/DefaultDirectoryHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DefaultKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DefaultKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/DirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/DirectoryHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/KmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/KmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/it/unicam/cs/groupproject/kmer/Utils/OutputWriter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Writer/OutputWriter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file1.db/CC.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file1.db/CU.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file1.db/GG.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2.db/AU.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2.db/CC.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2.db/GC.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2.db/GG.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2.db/GU.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/resource/partitions/file2.db/UG.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <list id="ba01c171-396f-471d-a4d4-ff60c071513a" name="Changes by francesco" comment="" />
@@ -97,28 +57,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "last_opened_file_path": "D:/progetti/TaxonClassifier-main",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/progetti/kmer-calculator/kmer-calculator&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\Test\resource" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\progetti\kmer-calculator\kmer-calculator\Main\kmer\Utils\Reader" />
+      <recent name="D:\progetti\kmer-calculator\kmer-calculator\Main\View" />
       <recent name="D:\progetti\kmer-calculator\kmer-calculator" />
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils\minimizer" />
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils\Writer" />
-      <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils\Reader" />
-      <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python tests.Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -140,45 +100,59 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for KMC3Test.MyTestCase.test_check_file_list" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/KMC3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/utils" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;KMC3Test.MyTestCase.test_check_file_list&quot;" />
+      <option name="_new_target" value="&quot;ExcelReaderTest.MyTestCase.test_get_sheet_names&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for KMC3Test.MyTestCase.test_create_partition_sub_folder" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for GerbilTest.GerbilTest.test_first_phase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/KMC3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/Gerbil" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;KMC3Test.MyTestCase.test_create_partition_sub_folder&quot;" />
+      <option name="_new_target" value="&quot;GerbilTest.GerbilTest.test_first_phase&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for KMC3Test.MyTestCase.test_phase_one" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for GerbilTest.GerbilTest.test_large_dataset" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/KMC3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/Gerbil" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;KMC3Test.MyTestCase.test_phase_one&quot;" />
+      <option name="_new_target" value="&quot;GerbilTest.GerbilTest.test_large_dataset&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for GerbilTest.GerbilTest.test_second_phase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/Gerbil" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;GerbilTest.GerbilTest.test_second_phase&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -193,20 +167,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;KMC3Test.MyTestCase.test_second_phase&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for MSRadixSortTest.MyTestCase.test_sort_list" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="kmer-calculator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/utils" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;MSRadixSortTest.MyTestCase.test_sort_list&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -226,11 +186,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names" />
+        <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_large_dataset" />
+        <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_second_phase" />
+        <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_first_phase" />
         <item itemvalue="Python tests.Python tests for KMC3Test.MyTestCase.test_second_phase" />
-        <item itemvalue="Python tests.Python tests for KMC3Test.MyTestCase.test_phase_one" />
-        <item itemvalue="Python tests.Python tests for KMC3Test.MyTestCase.test_create_partition_sub_folder" />
-        <item itemvalue="Python tests.Python tests for KMC3Test.MyTestCase.test_check_file_list" />
-        <item itemvalue="Python tests.Python tests for MSRadixSortTest.MyTestCase.test_sort_list" />
       </list>
     </recent_temporary>
   </component>

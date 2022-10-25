@@ -2,10 +2,9 @@ import os.path
 import shutil
 
 from Main.kmer.KMC3.KMC3 import KMC3
-from Main.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.MostSignificantRadixSort import MostSignificantRadixSort
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
-from Main.kmer.Utils.Reader.DefaultKmerReader import DefaultKmerReader
 from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader
 from Main.kmer.Utils.Reader.SuperKmerReader import SuperKmerReader
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter

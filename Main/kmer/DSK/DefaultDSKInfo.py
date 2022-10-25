@@ -4,7 +4,7 @@ from Main.kmer.DSK.DSKInfo import DSKInfo
 import numpy as np
 import math
 
-from Main.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
 
 

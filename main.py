@@ -1,6 +1,6 @@
 import sys
 
-from Main.kmer.CLIView import CLIView
+from Main.View.CLIView import CLIView
 
 
 def cli():
@@ -15,7 +15,7 @@ def cli():
     command_line.check_if_is_sequential_features_selection()
     command_line.check_if_is_chi2()
     command_line.check_if_is_recursive_tree_features_selection()
-    command_line.check_if_is_three_FS()
+    # command_line.check_if_is_three_FS()
 
 if __name__ == '__main__':
     cli()

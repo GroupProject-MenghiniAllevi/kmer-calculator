@@ -3,14 +3,12 @@ from os.path import dirname
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.feature_selection import VarianceThreshold, SelectFromModel, SequentialFeatureSelector, RFE, SelectKBest, \
+from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE, \
     chi2, SelectPercentile
-from sklearn.linear_model import RidgeCV
-from sklearn.model_selection import StratifiedKFold
 from sklearn.svm import LinearSVC, SVC
-from sklearn.pipeline import make_pipeline
 
-class LowVarianceSelector:
+
+class FSelector:
     __df = None
     __output_arr = []
     __columns_list = list()
@@ -50,10 +48,9 @@ class LowVarianceSelector:
         y = np.asarray(list(self.__molecule_expected.values()))
         svc = SVC(kernel="linear", C=1)
         rfe = RFE(estimator=svc)
-        rfe.fit(self.__df,y)
+        rfe.fit(self.__df, y)
         self.__selected_features = rfe.get_support()
         self.__output_arr = rfe.transform(X=self.__df)
-
 
     def write_to_output(self, output_path):
         l = list()
@@ -65,7 +62,7 @@ class LowVarianceSelector:
                 c += 1
         df = pd.DataFrame(columns=l)
         row = list()
-        print(len(self.__selected_features),len(self.__output_arr))
+        print(len(self.__selected_features), len(self.__output_arr))
         for i in range(len(self.__molecule_list)):
             row.append(self.__molecule_list[i])
             j = 0

@@ -4,7 +4,7 @@ from multiprocessing import Process, Lock
 from Main.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from Main.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 from Main.kmer.DSK.DefaultDSKUtils import DefaultDSKUtils
-from Main.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
 from Main.kmer.DSK.PartitionKmerReader import PartitionKmerReader
 from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader

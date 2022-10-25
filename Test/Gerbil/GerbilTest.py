@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 from Main.kmer.Gerbil.DefaultGerbil import DefaultGerbil
-from Main.kmer.Utils.DefaultDirectoryHandler import DefaultDirectoryHandler
+from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.Reader.DefaultKmerReader import DefaultKmerReader
 
 
@@ -15,6 +15,7 @@ class GerbilTest(unittest.TestCase):
 
     def test_first_phase(self):
         gerbil = DefaultGerbil(self.__get_path(), self.__get_partitions_path(), str(self.__get_output_path()), 3, 2)
+        gerbil.detect_molecule_name_from_input()
         gerbil.start_first_phase_process()
         self.__check_first_phase(self.__get_partitions_path())
         self.__delete_all_partition(self.__get_partitions_path())
@@ -23,9 +24,8 @@ class GerbilTest(unittest.TestCase):
         self.__create_and_clean_out_file("")
         self.__write_partitions("file1", "file2")
         gerbil = DefaultGerbil(self.__get_path(), self.__get_partitions_path(), str(self.__get_output_path()), 3, 2)
-        gerbil.check_molecule_lists()
+        gerbil.detect_molecule_name_from_input()
         gerbil.start_second_phase_process()
-        self.__check_out_file()
         s = "id,ACU,AUC,CCG,CCU,CGG,CUG,GAU,GCC,GGC,GGG,GGU,GUU,UCC,CUC,UGA,UGC,UUG\n" \
             "file1,0,5,0,6,0,9,10,1,1,5,3,23,43,33,54,2,3\n" \
             "file2,1,5,2,6,40,9,10,1,1,5,3,2,3,5,6,2,6\n"
@@ -39,6 +39,7 @@ class GerbilTest(unittest.TestCase):
             actual = file.read().decode('utf-8')
             file.close()
         self.assertEqual(expected_out, actual)
+        self.__check_out_file()
         self.__create_and_clean_out_file("")
         self.__delete_all_partition(self.__get_partitions_path())
 
@@ -55,34 +56,6 @@ class GerbilTest(unittest.TestCase):
         path = os.path.join(path, "test_algorithm")
         return path
 
-    def __get_valeus_from_file(self, line):
-        f = open(self.__get_output_path(), "rb")
-        l = 0
-        ic = 0
-        values = list()
-        readed_values = ""
-        while True:
-            c = f.read(1)
-            if not c or l > line:
-                break
-            else:
-                if c == b"\n" or c == b"\r":
-                    if ic > 0 and l > 0 and l == line:
-                        values.append(readed_values)
-                    ic = 0
-                    l += 1
-                    readed_values = ""
-                elif c == b"," and l > 0:
-                    if ic > 0 and l == line:
-                        values.append(readed_values)
-                    ic += 1
-                    readed_values = ""
-                else:
-                    readed_values += c.decode('utf-8')
-
-        f.close()
-        return values
-
     def __get_partitions_path(self):
         project_root = Path(os.path.abspath(os.path.dirname(__file__)))
         project_root = project_root.parent.absolute()
@@ -98,20 +71,12 @@ class GerbilTest(unittest.TestCase):
         path = os.path.join(path, "out.csv")
         return path
 
-    def test_large_dataset(self):
-        gerbil = DefaultGerbil(os.path.abspath("D:/16S"), os.path.abspath("D:/part"), os.path.abspath("D:/out/out.csv"),
-                               10, 5)
-        gerbil.process()
-
     def __check_out_file(self):
         kmer_string = list()
         kmer_count = list()
         index_row = 0
         index_column = 0
         readed_value = ""
-        with open(self.__get_output_path(), "rb") as file:
-            print(file.read())
-            file.close()
         with open(self.__get_output_path(), "rb") as file:
             while True:
                 c = file.read(1)
@@ -233,7 +198,6 @@ class GerbilTest(unittest.TestCase):
             p = os.path.join(p2_path, file)
             with open(p, "r+b") as ff:
                 r = ff.read().decode('utf-8')
-                print(r, file)
                 actual_list.append(r)
                 ff.close()
         self.assertEqual(exp_len, len(actual_list))
