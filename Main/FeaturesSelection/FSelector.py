@@ -62,7 +62,7 @@ class FSelector:
                 c += 1
         df = pd.DataFrame(columns=l)
         row = list()
-        print(len(self.__selected_features), len(self.__output_arr))
+        print(len(self.__selected_features), len(self.__output_arr), len(self.__molecule_list))
         for i in range(len(self.__molecule_list)):
             row.append(self.__molecule_list[i])
             j = 0
@@ -103,6 +103,7 @@ class FSelector:
         return counter
 
     def __detect_column_name(self, path):
+        self.__molecule_list.clear()
         column = 0
         readed_value = ""
         with open(path, "rb") as file:
@@ -114,18 +115,19 @@ class FSelector:
                         self.__molecule_list.append(readed_value)
                     break
                 elif c == b",":
-                    if column == 0:
+                    if column == 0 and not readed_value == "":
                         self.__molecule_list.append(readed_value)
                     column += 1
                     readed_value = ""
                 elif c == b"\n" or c == b"\r":
-                    if column == 0:
+                    if column == 0 and not readed_value == "":
                         self.__molecule_list.append(readed_value)
                     column = 0
                     readed_value = ""
                 else:
                     readed_value += c.decode('utf-8')
             file.close()
+            print(self.__molecule_list)
 
     def __detect_molecule_expected(self):
         molecules_path = self.__get_molecules_path()

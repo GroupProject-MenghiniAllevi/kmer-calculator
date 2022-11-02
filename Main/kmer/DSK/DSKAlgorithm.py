@@ -40,11 +40,10 @@ class DSKAlgorithm:
         :return: l'hash table.
         """
 
-    def write_to_output(self ,lock ,partition_number ,molecule_name ,filename):
+    def write_to_output(self  ,partition_number ,molecule_name ,filename):
         """
         Questo metodo serve per scrivere il numero di kmer e le occorrenze.
         :param molecule_name: il nome della molecola che si sta scrivendo o aggiornando nel file di uscita
-        :param lock il lock utiizzato per scrivere nel file.
         :param partition_number il numero totale di partizioni.
         :param filename il nome del file d'ingresso
 
@@ -63,13 +62,11 @@ class DSKAlgorithm:
         :return: una lista di stringhe contenenti i nomi delle molecole presenti nel file di input.
         """
 
-    def apply_algorithm_for_file(self, filename, file_path, partition_path, lock, molecule_name):
+    def apply_algorithm_for_file(self, filename, file_path, partition_path, molecule_name):
         """
         Questo metodo applica l'algoritmo al file passato come ingresso.
         :param file_path: il nome completo del file
         :param molecule_name: il nome della molecola
         :param filename: il nome del file su cui applicare l'algoritmo dsk.
         :param partition_path: il percorso dove creare le partizioni.
-        :param lock: un meccanismo per la mutua esclusione del file in cui poi si
-        andrà a scrivere i kmer con le occorrenze.
         """

@@ -3,23 +3,28 @@ import os
 import pandas as pd
 
 
+def get_default_path():
+    act_path = os.path.abspath(__file__)
+    read_path = os.path.dirname(act_path)
+    utils_path = os.path.dirname(read_path)
+    kmer_path = os.path.dirname(utils_path)
+    main_path = os.path.dirname(kmer_path)
+    root = os.path.dirname(main_path)
+    resource_path = os.path.join(root, "resource")
+    return os.path.join(resource_path, "ExcelFile")
+
+
 class ExcelMoleculeReader:
     __path = ""
     __df = None
     __sheet_list = list()
     __molecules = dict()
+    __excel_files = ("Archaea.xlsx", "Bacteria.xlsx", "Eukaryota.xlsx")
+    __mode = True
 
     def __init__(self, path):
         self.__path = path
-        act_path = os.path.abspath(__file__)
-        read_path = os.path.dirname(act_path)
-        utils_path = os.path.dirname(read_path)
-        kmer_path = os.path.dirname(utils_path)
-        main_path = os.path.dirname(kmer_path)
-        root = os.path.dirname(main_path)
-        resource_path = os.path.join(root,"resource")
-        excel_path = os.path.join(resource_path,"ExcelFile")
-        print(excel_path)
+
 
     def extract_sheet(self, sheet_name):
         xls = pd.ExcelFile(self.__path)
@@ -50,3 +55,4 @@ class ExcelMoleculeReader:
 
     def get_molecules(self):
         return self.__molecules
+

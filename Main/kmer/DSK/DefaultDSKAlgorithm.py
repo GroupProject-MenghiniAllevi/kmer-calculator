@@ -1,13 +1,14 @@
+import multiprocessing
 import os
 import shutil
-from multiprocessing import Process, Lock
+from multiprocessing import Process, Lock, Pool
 from Main.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from Main.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 from Main.kmer.DSK.DefaultDSKUtils import DefaultDSKUtils
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
 from Main.kmer.DSK.PartitionKmerReader import PartitionKmerReader
-from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader
+from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader, get_default_path
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
 
@@ -35,6 +36,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         self.__dh = DefaultDirectoryHandler(self.__path)
         self.__file_list = self.__dh.get_all_files_names()
         self.__partition_path = partition_path
+        self.__lock = Lock()
         """
         Metodo costruttore della classe
 
@@ -64,28 +66,22 @@ class DefaultDskAlgorithm(DSKAlgorithm):
             file = open(fullpath, "r+")
             file.close()
 
-    """
-    Questo metodo crea i file delle partizioni 
-    """
-
-    def apply_algorithm_for_file(self, filename, file_path, partition_path, lock, molecule_name):
+    def apply_algorithm_for_file(self, filename, file_path, partition_path, molecule_name):
         dsk_info = self.get_dsk_info_complete(os.path.join(self.__path, file_path))
         ith_number = dsk_info.iteration_number(self.__diskUsage)
-        print("analizzando il file: " + filename)
+        print("analizzando il file: " + filename+"...")
         partition_number = dsk_info.get_partition_number(self.__memoryUsage)
         self.create_partition_files(partition_path, partition_number)
         for i in range(ith_number):
             self.save_to_partitions(i, partition_number, ith_number, file_path)
-            lock.acquire()
-            self.write_to_output(lock, partition_number, molecule_name, filename)
-            lock.release()
+            self.__lock.acquire()
+            self.write_to_output(partition_number, molecule_name, filename)
+            self.__lock.release()
 
     def process(self, output_path):
         self.__out_path = output_path
-        lock = Lock()
         process_list = list()
         self.__molecules_name = self.detect_molecule_name_from_input()
-        self.__lock = Lock()
         partition_path_list = list()
         for file in self.__file_list:
             file_without_dot = file.split(".")[0]
@@ -93,15 +89,12 @@ class DefaultDskAlgorithm(DSKAlgorithm):
             if not os.path.exists(partition_file_path):
                 os.mkdir(partition_file_path)
             partition_path_list.append(partition_file_path)
-            p = Process(target=self.apply_algorithm_for_file,
-                        args=(file_without_dot, file, partition_file_path, lock, self.__molecules_name[file]))
-            process_list.append(p)
-            p.start()
+            self.apply_algorithm_for_file(file_without_dot, file, partition_file_path,
+                                          self.__molecules_name[file])
         for process in process_list:
             process.join()
         for path in partition_path_list:
             shutil.rmtree(path)
-
         new_out_path = os.path.dirname(self.__out_path)
         new_out_path = os.path.join(new_out_path, "new_out.csv")
         if os.path.exists(new_out_path):
@@ -125,15 +118,13 @@ class DefaultDskAlgorithm(DSKAlgorithm):
                 dsk_utils.set_partition_index()
                 path = os.path.join(self.__partition_path, filename.split(".")[0])
                 path = os.path.join(path, "partition-" + str(dsk_utils.get_partition_index()) + ".bin")
-                dsk_utils.write_to_partitions(path, kmer, self.__lock)
+                dsk_utils.write_to_partitions(path, kmer)
         kmer_reader.close_file()
-
-
 
     def save_to_partitions(self, i, partition_number, ith_number, filename):
         self.thread_partitions_write(filename, i, partition_number, ith_number)
 
-    def write_to_output(self, lock, partition_number, molecule_name, filename):
+    def write_to_output(self, partition_number, molecule_name, filename):
         molecule_name = molecule_name.strip()
         for j in range(partition_number):
             hash_table = self.initialize_hash_table()
@@ -166,14 +157,16 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         return dsk_info
 
     def detect_molecule_name_from_input(self):
-        l = [f for f in os.listdir(self.__path) if os.path.isfile(os.path.join(self.__path, f)) and f.endswith(".xlsx")]
+        resource_path = get_default_path()
+        l = [f for f in os.listdir(resource_path) if
+             os.path.isfile(os.path.join(resource_path, f)) and f.endswith(".xlsx")]
         excel_file_list = [v for v in l if v.endswith(".xlsx")]
         check_nH = False
         if not self.__file_list[0].find("_nH.db") == -1:
             check_nH = True
-        clean_file_list = [v.replace("_nH.db", ".db") for v in self.__file_list if "_nH.db" in v]
+        clean_file_list = [v.replace("_nH.db", ".db") for v in self.__file_list]
         for excel_file in excel_file_list:
-            path = os.path.join(self.__path, excel_file)
+            path = os.path.join(resource_path, excel_file)
             reader = ExcelMoleculeReader(path=path)
             reader.extract_list_of_all_sheet()
             reader.extract_all_molecule_name()

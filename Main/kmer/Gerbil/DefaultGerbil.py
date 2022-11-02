@@ -3,12 +3,13 @@ import shutil
 from multiprocessing import Lock, Process
 
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
-from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader
 from Main.kmer.Utils.minimizer.DefaultMinimizerHandler import DefaultMinimizerHandler
 from Main.kmer.Gerbil.Gerbil import Gerbil
 from Main.kmer.Utils.Reader.SuperKmerReader import SuperKmerReader
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
+from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader, get_default_path
+
 
 
 class DefaultGerbil(Gerbil):
@@ -34,8 +35,9 @@ class DefaultGerbil(Gerbil):
         self.__file_list = dh.get_all_files_names()
 
     def process(self):
-        self.start_first_phase_process()
+        self.detect_molecule_name_from_input()
         self.check_molecule_lists()
+        self.start_first_phase_process()
         self.start_second_phase_process()
         self.__delete_all_partitions()
 
@@ -51,20 +53,20 @@ class DefaultGerbil(Gerbil):
         return self.__molecules_name
 
     def detect_molecule_name_from_input(self):
-        l = [f for f in os.listdir(self.__input_path) if os.path.isfile(os.path.join(self.__input_path, f)) and f.endswith(".xlsx")]
+        default_path = get_default_path()
+        l = [f for f in os.listdir(default_path) if os.path.isfile(os.path.join(default_path, f)) and f.endswith(".xlsx")]
         excel_file_list = [v for v in l if v.endswith(".xlsx")]
         check_nH = False
         if not self.__file_list[0].find("_nH.db") == -1:
             check_nH = True
         clean_file_list = [v.replace("_nH.db", ".db") for v in self.__file_list]
         for excel_file in excel_file_list:
-            path = os.path.join(self.__input_path, excel_file)
+            path = os.path.join(default_path, excel_file)
             reader = ExcelMoleculeReader(path=path)
             reader.extract_list_of_all_sheet()
             reader.extract_all_molecule_name()
             d = reader.get_molecules()
             d = self.__add_db_to_filename(d)
-            print(d,clean_file_list)
             for key in d:
                 if key in clean_file_list:
                     s = key
@@ -139,9 +141,7 @@ class DefaultGerbil(Gerbil):
             name = self.__molecules_name[key]  # nome della molecola
             part_path = os.path.join(self.__partition_path,
                                      name)  # path della partizione che corrisponde al nome della molecola.
-            dh = DefaultDirectoryHandler(part_path)
             file_list = os.listdir(part_path)  # leggo tutti i file dentro la partizione.
-            print("file_name:", key, " part_list:", file_list)
             for file in file_list:  # itero tutti i file dentro la partizione
                 filepath = os.path.join(part_path, file)  # path del file nella partizione
                 ht = self.read_from_partition_and_counting(filepath, self.__lock, name)

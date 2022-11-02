@@ -5,7 +5,7 @@ from Main.kmer.KMC3.KMC3 import KMC3
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.MostSignificantRadixSort import MostSignificantRadixSort
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
-from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader
+from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader,get_default_path
 from Main.kmer.Utils.Reader.SuperKmerReader import SuperKmerReader
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 from Main.kmer.Utils.minimizer.DefaultMinimizerHandler import DefaultMinimizerHandler
@@ -60,7 +60,7 @@ class DefaultKMC3(KMC3):
         sorted_part = self.__get_file_list_from_part(filepart_path)
         for file in sorted_part:
             minimizer = os.path.basename(os.path.normpath(file))
-            minimizer = minimizer.replace(".bin","")
+            minimizer = minimizer.replace(".bin", "")
             reader = SuperKmerReader(file, self.__k, minimizer)
             size = reader.get_file_lenght()
             ht = dict()
@@ -110,15 +110,16 @@ class DefaultKMC3(KMC3):
             self.__partition_sub_dict[file] = part_path
 
     def extract_molecule_name(self):
-        l = [f for f in os.listdir(self.__input_path) if
-             os.path.isfile(os.path.join(self.__input_path, f)) and f.endswith(".xlsx")]
+        excel_files_path = get_default_path()
+        l = [f for f in os.listdir(excel_files_path) if
+             os.path.isfile(os.path.join(excel_files_path, f)) and f.endswith(".xlsx")]
         excel_file_list = [v for v in l if v.endswith(".xlsx")]
         check_nH = False
         if not self.__input_file_list[0].find("_nH.db") == -1:
             check_nH = True
         clean_file_list = [v.replace("_nH.db", ".db") for v in self.__input_file_list]
         for excel_file in excel_file_list:
-            path = os.path.join(self.__input_path, excel_file)
+            path = os.path.join(excel_files_path, excel_file)
             reader = ExcelMoleculeReader(path=path)
             reader.extract_list_of_all_sheet()
             reader.extract_all_molecule_name()

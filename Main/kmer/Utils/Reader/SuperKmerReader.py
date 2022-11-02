@@ -55,7 +55,6 @@ class SuperKmerReader(KmerReader):
 
     def get_file_lenght(self):
         counter = 0
-        print(self.__file_path)
         with open(self.__file_path, "rb") as f:
             while True:
                 r = f.read(self.__super_kmer_size)

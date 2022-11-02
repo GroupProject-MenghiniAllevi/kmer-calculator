@@ -53,7 +53,7 @@ class CLIView:
             part = self.__argv[6]
             output = self.__argv[8]
             k = int(self.__argv[10])
-            k_index = 2
+            k_index = 1
             if os.path.exists(output):
                 with open(output, "wb+") as ff:
                     ff.truncate()
@@ -64,7 +64,10 @@ class CLIView:
                     ff.close()
             while k_index <= k:
                 print("eseguendo il calcolo per k == " + str(k_index))
-                if not k_index == 1:
+                if k_index == 1:
+                    kmer_count = SimpleKmerCounter(input_path, 1)
+                    kmer_count.process(output)
+                else:
                     min_size = k_index - 1
                     gerbil = DefaultGerbil(input_path, part, output, k_index, min_size)
                     gerbil.process()
@@ -99,7 +102,7 @@ class CLIView:
                     kmer_count.process(output)
                 k_index += 1
 
-    def check_if_is_low_variance(self):  # main -n features_selection -m low_variance path/input/file path/output/file
+    def check_if_is_low_variance(self):  # -n features_selection -m low_variance path/input/file path/output/file
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__argv[3] == "-m" and self.__argv[4] == "low_variance":
             self.__check_if_input_output_empty()
             selector = FSelector(self.__argv[5])
@@ -127,7 +130,7 @@ class CLIView:
     # main -n features_selection -m rtree path/input/file path/output/file
     def check_if_is_recursive_tree_features_selection(self):
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
-            if self.__argv[3] == "-m" and self.__argv[4] == "rtree":
+            if self.__argv[3] == "-m" and self.__argv[4] == "tree":
                 self.__check_if_input_output_empty()
                 selector = FSelector(self.__argv[5], supervised=True)
                 selector.apply_recursive_tree()
@@ -136,12 +139,12 @@ class CLIView:
     def __check_if_input_output_empty(self):
         if self.__argv[5] == "" or self.__argv[6] == "":
             raise ValueError("comando errato. il programma accetta questo comando:\n"
-                             "main -n features_selection -m low_variance path/input/file path/output/file")
+                             "-n features_selection -m low_variance path/input/file path/output/file")
 
-    # main -n features_selection -m univariate path/input/file path/output/file
+    # main -n features_selection -m chi2 path/input/file path/output/file
     def check_if_is_chi2(self):
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection":
-            if self.__argv[3] == "-m" and self.__argv[4] == "univariate":
+            if self.__argv[3] == "-m" and self.__argv[4] == "chi2":
                 self.__check_if_input_output_empty()
                 selector = FSelector(self.__argv[5], supervised=True)
                 selector.apply_chi2_test()

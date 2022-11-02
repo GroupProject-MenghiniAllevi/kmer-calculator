@@ -38,7 +38,7 @@ class DefaultDSKUtils(DSKUtils):
         hash = int.from_bytes(hashlib.md5(bb).digest()[:8], 'little')
         return hash
 
-    def write_to_partitions(self, path, kmer, lock):
+    def write_to_partitions(self, path, kmer):
         file = open(path, "a+b")
         byte_kmer = str.encode(kmer)
         file.write(byte_kmer)

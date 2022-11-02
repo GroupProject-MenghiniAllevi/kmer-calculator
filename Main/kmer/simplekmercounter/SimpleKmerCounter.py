@@ -1,7 +1,7 @@
 import os
 
 from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
-from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader
+from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader, get_default_path
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
 
@@ -40,14 +40,15 @@ class SimpleKmerCounter:
             self.__reader.close_file()
 
     def detect_molecule_name_from_input(self):
-        l = [f for f in os.listdir(self.__input_path) if os.path.isfile(os.path.join(self.__input_path, f)) and f.endswith(".xlsx")]
+        excel_files_path = get_default_path()
+        l = [f for f in os.listdir(excel_files_path) if os.path.isfile(os.path.join(excel_files_path, f)) and f.endswith(".xlsx")]
         excel_file_list = [v for v in l if v.endswith(".xlsx")]
         check_nH = False
         if not self.__file_list[0].find("_nH.db") == -1:
             check_nH = True
         clean_file_list = [v.replace("_nH.db", ".db") for v in self.__file_list]
         for excel_file in excel_file_list:
-            path = os.path.join(self.__input_path, excel_file)
+            path = os.path.join(excel_files_path, excel_file)
             reader = ExcelMoleculeReader(path=path)
             reader.extract_list_of_all_sheet()
             reader.extract_all_molecule_name()
