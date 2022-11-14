@@ -5,21 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/latex/relazione.tex" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/latex/ringraziamenti.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FeaturesSelection.py" beforeDir="false" afterPath="$PROJECT_DIR$/FeaturesSelection.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/View/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/View/CLIView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/ExcelFile/Bacteria.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/resource/ExcelFile/Bacteria.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resource/Molecules/Bacteria.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/resource/Molecules/Bacteria.xlsx" afterDir="false" />
     </list>
     <list id="89a99cfa-5d7e-4b40-8538-b2c8f9222d2b" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />

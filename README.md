@@ -47,7 +47,7 @@ dove:
 
 Esempio di utilizzo dello script:
     
-    -python FeaturesSelection.py -n features_selection -m low_variance D://input.csv D:// 
+    -python FeaturesSelection.py -n features_selection -m low_variance D://input.csv D://output/out.csv  
 Il file di output, se non esiste, viene generato. Se invece il file esiste già, a questo vengono cancellati tutti i byte presenti. 
 
 
