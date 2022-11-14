@@ -28,7 +28,7 @@ dove:
 
 Esempio di utilizzo dello script:
     
-    * -n dsk -input D://input -part D://partizioni -out D://output/out.csv -k 3
+    * python KmerCalculator.py -n dsk -input D://input -part D://partizioni -out D://output/out.csv -k 3
 
 # selezione delle features:
 La selezione delle features è possibile farla tramite lo script presente nel file [FeaturesSelection.py](FeaturesSelection.py). Per avviare il programma bisogna inserire i seguenti argomenti:
@@ -39,12 +39,15 @@ dove:
               
             * low_variance: Questo algoritmo eleimina le features la cui varianza è inferiore a una certa soglia. La soglia impostata è l' 80 percento.
             
-            * l1_based: Questo algoritmo utilizza un modello lineare chiamato "LinearSVC" (Linear Support Vector Classification) con la penalità "l1", ovvero usando la norma (magnitudine) dei vettori generati dal modello lineare.
+            * l1_based: Questo algoritmo utilizza un modello lineare chiamato "LinearSVC" (Linear Support Vector Classification) con la penalità "l1", ovvero usando la norma (magnitudine) dei vettori generati dal modello lineare. 
     
             * chi2: Questo algoritmo attua il test del chi quadrato.
 
             * tree: Utilizza uno stimatore ad albero. Viene utilizzata la classe ExtraTreesClassifier che adatta un numero di alberi decisionali randomizzati su vari sottocampioni sul set di dati.
 
+Esempio di utilizzo dello script:
+    
+    -python FeaturesSelection.py -n features_selection -m low_variance D://input.csv D:// 
 Il file di output, se non esiste, viene generato. Se invece il file esiste già, a questo vengono cancellati tutti i byte presenti. 
 
 

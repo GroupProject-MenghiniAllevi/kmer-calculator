@@ -5,6 +5,7 @@ import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE, \
     chi2, SelectPercentile
+from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC, SVC
 
 
@@ -39,6 +40,10 @@ class FSelector:
 
     def apply_L1_based(self):
         y = np.asarray(list(self.__molecule_expected.values()))
+        for mol in self.__molecule_list:
+            if not mol in self.__molecule_expected:
+                print(mol)
+        print(len(y))
         lsvc = LinearSVC(C=0.1, penalty="l1", dual=False).fit(X=self.__df, y=y)
         model = SelectFromModel(lsvc, prefit=True)
         self.__output_arr = model.transform(X=self.__df)
@@ -127,19 +132,24 @@ class FSelector:
                 else:
                     readed_value += c.decode('utf-8')
             file.close()
-            print(self.__molecule_list)
+            # print(self.__molecule_list)
 
     def __detect_molecule_expected(self):
+        # print(self.__molecule_list)
         molecules_path = self.__get_molecules_path()
         sub_file_path = [name for name in os.listdir(molecules_path) if
                          os.path.isfile(os.path.join(molecules_path, name))]
         for file in sub_file_path:
             path = os.path.join(molecules_path, file)
+            print(path)
             for s in self.__sheets:
                 df = pd.read_excel(path, sheet_name=s)
+                #print(len(self.__molecule_list))
                 for mol in self.__molecule_list:
                     if not mol in self.__molecule_expected:
                         v = df.loc[df['Organisms'] == mol]
+                        if s == "16S" and mol == "Lactococcus lactis subsp. lactis" and path == "D:\progetti\kmer-calculator\kmer-calculator\resource\ExcelFile\Bacteria.xlsx":
+                            print(df.loc[95, 'Organisms'])
                         if not v.empty:
                             value = v.iloc[0]['Phylum']
                             value = value.replace('\xa0', '')
@@ -155,7 +165,7 @@ class FSelector:
     def __get_molecules_path(self):
         root = dirname(dirname(dirname(os.path.abspath(__file__))))
         resource_path = os.path.join(root, "resource")
-        return os.path.join(resource_path, "Molecules")
+        return os.path.join(resource_path, "ExcelFile")
 
     def apply_recursive_tree(self):
         y = np.asarray(list(self.__molecule_expected.values()))
@@ -170,3 +180,6 @@ class FSelector:
         chi2_feat = SelectPercentile(chi2)
         self.__output_arr = chi2_feat.fit_transform(self.__df, y)
         self.__selected_features = chi2_feat.get_support()
+
+    def rlr(self):
+        pass

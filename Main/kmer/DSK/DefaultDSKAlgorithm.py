@@ -100,7 +100,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         if os.path.exists(new_out_path):
             os.remove(new_out_path)
 
-    def initialize_hash_table(self):
+    def initialize_dict(self):
         ht = dict()
         return ht
 
@@ -127,7 +127,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     def write_to_output(self, partition_number, molecule_name, filename):
         molecule_name = molecule_name.strip()
         for j in range(partition_number):
-            hash_table = self.initialize_hash_table()
+            hash_table = self.initialize_dict()
             path = os.path.join(self.__partition_path, filename)
             path = os.path.join(path, "partition-" + str(j) + ".bin")
             partition_kmer_reader = PartitionKmerReader(path, self.__k)

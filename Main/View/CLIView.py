@@ -106,7 +106,7 @@ class CLIView:
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__argv[3] == "-m" and self.__argv[4] == "low_variance":
             self.__check_if_input_output_empty()
             selector = FSelector(self.__argv[5])
-            selector.apply_low_variance(threshold=(.9 * (1 - .9)))
+            selector.apply_low_variance(threshold=(.8 * (1 - .8)))
             selector.write_to_output(self.__argv[6])
 
     # main -n features_selection -m l1_based path/input/file path/output/file
@@ -167,3 +167,11 @@ class CLIView:
                 selector2 = FSelector(f2_path, supervised=True)
                 selector2.apply_chi2_test()
                 selector2.write_to_output(self.__argv[6])
+
+    def check_if_is_rand_log_reg(self):
+        if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
+            if self.__argv[3] == "-m" and self.__argv[4] == "rlr":
+                self.__check_if_input_output_empty()
+                selector = FSelector(self.__argv[5])
+                selector.rlr()
+                selector.write_to_output(self.__argv[6])

@@ -1,0 +1,54 @@
+\chapter{Selezione Delle Features}
+\label{ch:selezionedellefeatures}
+
+In questo capitolo andremo a discutere della selezione delle features.
+Nel nostro caso le features sono i k-mer.
+L'obiettivo della riduzione delle features \`e la diminuzione delle features inutili per
+determinare la filogenesi delle molecole.
+Per selezionare le features, nella nostra implementazione abbiamo utilizzato la libreria \textbf{Scikit }.
+\section{Bassa varianza}\label{sec:low-variance}
+Con questo metodo \`e possibile ridurre le features la cui varianza \`e minore dell'80\%.
+\subsection{implementazione della riduzione delle features a bassa varianza:}\label{subsec:implementazione-della-riduzione-delle-features-a-bassa-varianza:}
+L'implementazione \`e la seguente:
+\begin{lstlisting}[label={lst:low-variance}]
+        def apply_low_variance(self, threshold):
+            sel = VarianceThreshold(threshold=threshold)
+            arr = sel.fit_transform(X=self.__df)
+            self.__selected_features = sel.get_support()
+            self.__output_arr = arr
+\end{lstlisting}
+Il parametro ``threshold'' corrisponde al valore minimo della varianza per cui una feature \`e selezionata.
+\section{LinearSVC con Penalit\`a L1}\label{sec:linearsvc-penalita-l1}
+Questo metodo~\cite{l1-based} utilizza un modello lineare chiamato ``LinearSVC'' con una penalit\`a al modello chiamata L1.
+LinearSVC sta per ``Linear Support Vector Classification''.
+Un modello ``LinearSVC'' \`e un metodo simile a SVC, ma implementato con una libreria diversa, che permette pi\`u flessibilit\`a
+nella scelta delle penalit\`a e della funzione di loss.
+Nel nostro caso \`e stato implementato nel seguente modo:
+\begin{lstlisting}[label={lst:l1-based}]
+    y = np.asarray(list(self.__molecule_expected.values()))
+        lsvc = LinearSVC(C=0.1, penalty="l1", dual=False).fit(X=self.__df, y=y)
+        model = SelectFromModel(lsvc, prefit=True)
+        self.__output_arr = model.transform(X=self.__df)
+\end{lstlisting}
+\section{Alberi di ricorsione}\label{sec:alberi-di-ricorsione}
+Questo metodo permette di rimuovere le features inutili tramite un classificatore chiamato ``ExtraTreeClassificator''.
+Il classificatore si adatta a un numero di alberi decisionali randomizzati su vari sotto campioni del dataset e utilizza la media
+per migliorare l'accuratezza predittiva e il controllo dell'overfitting.
+\begin{lstlisting}[label={lst:tree}]
+    y = np.asarray(list(self.__molecule_expected.values()))
+        clf = ExtraTreesClassifier(n_estimators=5)
+        clf = clf.fit(self.__df, y)
+        model = SelectFromModel(clf, prefit=True)
+        self.__output_arr = model.transform(self.__df)
+\end{lstlisting}
+
+\section{Test del chi2}\label{sec:test-del-chi2}
+Il test del chi quadrato \`e un test statistico.
+Esso trasforma i valori in valori positivi facendone il quadrato.
+Chi quadrato misura la dipendenza tra variabili stocastiche, quindi questo metodo elimina le features
+che hanno maggiori probabilit\`a di essere indipendenti dalla classe.
+\begin{lstlisting}
+
+\end{lstlisting}
+
+

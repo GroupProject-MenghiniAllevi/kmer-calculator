@@ -1,0 +1,103 @@
+\chapter{Introduzione}
+\label{chap:intro}
+\newcommand{\klenght}{\textit{k }}
+\newcommand{\slenght}{\textbf{L }}
+\newcommand{\vslenght}[1]{\textit{#1}}
+
+Questo progetto tratta della realizzazione di un framework in python per il conteggio dei k-mer e la selezione dei k-mer interessanti per il riconoscimento della filogenesi.
+
+\section{Motivazione}
+
+\section{Scopo del Progetto}
+Lo scopo del progetto \`e di costruire un framework in \textbf{python} per il riconoscimento della filogenesi di una sequenza di RNA.
+Il progetto, in particolare, cerca di predire il \textbf{Phylum}, la \textbf{Classe}, e l'\textbf{ordine} di una sequenza.
+Il framework \`e composto da due parti: la prima parte del framework servir\`a a calcolare i k-mer di una sequenza genetica.
+La seconda parte del framework serve per ridurre i k-mew che non sono utili al riconoscimento della filogenesi.
+Il riconoscimento della filogenesi avverr\`a tramite i k-mer presenti all'interno della stessa.
+
+\section{Contesto Generale}
+    In questa sezione, in primo luogo, verr\`a spiegato quale alfabeto viene preso in considerazione per le sequenze
+    di RNA.Successivamente verr\`a spiegato che cosa \`e un k-mer e come si pu\`o estrarre un k-mer da una sequenza di RNA.
+    \subsubsection{Alfabeto Accettato}
+        In una sequenza di RNA vengono accettati i seguenti caratteri.\\ \\
+        \begin{tabular}{|l|c|}
+            \hline
+            \textbf{Carattere} & \textbf{Significato}\\
+            \hline
+            ``A'' & Adenosina\\
+            \hline
+            ``C'' & Citosina\\
+            \hline
+            ``G'' & Guanina\\
+            \hline
+            ``U'' & Uracile\\
+            \hline
+            ``R'' & Adenosina o Guanina\\
+            \hline
+            ``Y'' & Citosina o Uracile\\
+            \hline
+            ``S'' & Guanina o Citosina\\
+            \hline
+            ``W'' & Adenosina o Uracile\\
+            \hline
+            ``K'' & Guanina o Uracile\\
+            \hline
+            ``M'' & Adenosina o Citosina\\
+            \hline
+            ``B'' & Citosina o Guanina o Uracile\\
+            \hline
+            ``D'' & Adenosina o Guanina o Uracile\\
+            \hline
+            ``H'' & Adenosina o Citosina o Uracile\\
+            \hline
+            ``V'' & Adenosina o Citosina o Guanina\\
+            \hline
+            ``N'' & Qualsiasi base\\
+            \hline
+            ``.'' o ``-'' & gap\\
+            \hline
+        \end{tabular}
+
+    \subsubsection{Definizione ed esempi di k-mer e della loro frequenza}
+    Data una sequenza biologica, un k-mer \`e una sottostringa della medesima, di lunghezza \klenght.
+    Quando \klenght \`e di lunghezza uguale ad 1, i k-mer vengono chiamati monomeri.
+    Il conteggio della frequenza dei k-mer viene utilizzato nella bioinformatica per analizzare le sequenze di DNA/RNA.
+    Nel nostro caso vengono analizzati i k-mer delle sequenze di RNA per ricostruire la filogenesi della sequenza
+    tramite l'utilizza di un modello di machine learning.
+    Per filogenesi si intende il processo di ramificazione delle linee di discendenza.
+    Il conteggio dei k-mer pu\`o essere utilizzato come firma della sequenza analizzata. Infatti
+    il numero di k-mer presenti in una sequenza di lunghezza \slenght \`e uguale a
+    \begin{equation*}
+        L-k+1
+    \end{equation*}
+    \textbf{Esempio dei k-mer all'interno di una sequenza di RNA:}
+    \\
+    Prendiamo come esempio la sequenza:``ACGACUYN''.
+    Mentre come valore \klenght prendiamo uno, inizialmente.
+    La sequenza \`e di lunghezza \vslenght{8}, di conseguenza il numero dei k-mer presenti nella sequenza \`e di \text{8}.
+    Il primo k-mer individuato \`e il k-mer ``A'' (il primo carattere all'interno della sequenza).
+    Il k-mer ``A'' avr\`a frequenza due, visto che \`e presente due volte all'interno della sequenza.
+    Il prossimo k-mer di lunghezza uno presente \`e ``C'', con frequenza due.
+    Ecco l'elenco di tutti i k-mer con la loro frequenza di lunghezza 1:
+    \begin{itemize}
+        \item A:2
+        \item C:2
+        \item G:1
+        \item U:1
+        \item Y:1
+        \item N:1
+    \end{itemize}
+    Successivamente si imposter\`a il valore \klenght a due.
+    Di conseguenza il numero di k-mer con \klenght uguale a due \`e di sette.
+    Per \klenght uguale a due il primo k-mer disponibile \`e ``AC'', con frequenza due.
+    Il secondo k-mer della sequenza sar\`a ``CG'' che ha frequenza uno.
+    Di seguito l'elenco con la frequenza di tutti i k-mer di lunghezza due della sequenza ``ACGACUYN'':
+    \begin{itemize}
+        \item AC:2
+        \item CG:1
+        \item GA:1
+        \item CU:1
+        \item UY:1
+        \item YN:1
+    \end{itemize}
+    E cos\`{\i} via fino al valore \klenght desiderato.

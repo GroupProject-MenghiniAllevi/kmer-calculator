@@ -51,7 +51,6 @@ class DefaultKMC3(KMC3):
             else:
                 kmer_list.append(kmer)
                 min_ith += 1
-
         if len(kmer_list) > 0:
             mh.find_super_kmer_and_write(kmer_list, minimizer, partition_sub_path)
 

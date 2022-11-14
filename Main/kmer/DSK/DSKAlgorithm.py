@@ -34,7 +34,7 @@ class DSKAlgorithm:
         :return il percorso del file in cui verranno salvati i k-mer con le loro occorrenze.
         """
 
-    def initialize_hash_table(self):
+    def initialize_dict(self):
         """
         Questo metodo inizializza un Hash table e lo restituisce.
         :return: l'hash table.

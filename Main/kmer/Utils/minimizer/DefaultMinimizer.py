@@ -10,7 +10,7 @@ class DefaultMinimizer(Minimizers):
 
     def __init__(self, m):
         if m <= 0:
-            ValueError("la dimensione del minimizer è mnore o uguale a 0...")
+            ValueError("la dimensione del minimizer è minore o uguale a 0...")
         self.__m = m
         self.__super_kmer = list()
 

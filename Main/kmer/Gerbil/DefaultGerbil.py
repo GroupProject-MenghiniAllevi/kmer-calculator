@@ -77,6 +77,7 @@ class DefaultGerbil(Gerbil):
         return self.__molecules_name
 
     def start_first_phase_process(self):
+        print("iniziata la prima fase...")
         dh = DefaultDirectoryHandler(self.__input_path)
         file_list = dh.get_all_files_names()
         process_list = list()
@@ -89,11 +90,13 @@ class DefaultGerbil(Gerbil):
             reader.close_file()
             partition_file_path = self.create_partition(self.__molecules_name[file])
             self.__partition_path_list.append(partition_file_path)
-            p = Process(target=self.process_read_and_write_minimizer(file_fullpath, partition_file_path, self.__molecules_name[file]))
-            p.start()
-            process_list.append(p)
+            self.process_read_and_write_minimizer(file_fullpath, partition_file_path, self.__molecules_name[file])
+            # p = Process(target=self.process_read_and_write_minimizer(file_fullpath, partition_file_path, self.__molecules_name[file]))
+            # p.start()
+            # process_list.append(p)
         for process in process_list:
             process.join()
+        print("terminata la prima fase...")
 
     def create_partition(self, file):
         file_part = os.path.join(self.__partition_path, file)
@@ -137,6 +140,7 @@ class DefaultGerbil(Gerbil):
         self.__lock.release()
 
     def start_second_phase_process(self):
+        print("iniziata la seconda fase...")
         for key in self.__molecules_name:
             name = self.__molecules_name[key]  # nome della molecola
             part_path = os.path.join(self.__partition_path,
@@ -148,22 +152,22 @@ class DefaultGerbil(Gerbil):
                 writer = OutputWriter(filename=name, path=self.__output_path)
                 ht = self.__sort_dictionary(ht)
                 writer.write_to_output(ht)
-
+        print("terminata la seconda fase...")
     def read_from_partition_and_counting(self, partition_filepath, sema, molecule_name):
         sema.acquire()
         file_without_ext = partition_filepath.replace('.bin', '')
         minimizer = os.path.basename(os.path.normpath(file_without_ext))
         reader = SuperKmerReader(partition_filepath, self.__k, minimizer)
         size = reader.get_file_lenght()
-        hash_table = dict()
+        d = dict()
         while reader.has_next(size - 1):
             kmer = reader.read_next_kmer()
-            if kmer in hash_table:
-                hash_table[kmer] = hash_table[kmer] + 1
+            if kmer in d:
+                d[kmer] = d[kmer] + 1
             else:
-                hash_table[kmer] = 1
+                d[kmer] = 1
         sema.release()
-        return hash_table
+        return d
 
     def __get_partitions(self):
         l = os.listdir(self.__partition_path)

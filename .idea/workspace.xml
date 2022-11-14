@@ -5,22 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/latex/relazione.tex" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/latex/ringraziamenti.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FeaturesSelection.py" beforeDir="false" afterPath="$PROJECT_DIR$/FeaturesSelection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/View/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/View/CLIView.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DSKUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DSKUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/SuperKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/SuperKmerReader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/simplekmercounter/SimpleKmerCounter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/simplekmercounter/SimpleKmerCounter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/ExcelFile/Bacteria.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/resource/ExcelFile/Bacteria.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/Molecules/Bacteria.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/resource/Molecules/Bacteria.xlsx" afterDir="false" />
     </list>
-    <list id="ba01c171-396f-471d-a4d4-ff60c071513a" name="Changes by francesco" comment="" />
+    <list id="89a99cfa-5d7e-4b40-8538-b2c8f9222d2b" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,6 +41,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2DZFpSGmjQluhRu2PPBftunFIPy" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -51,8 +55,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
-    "last_opened_file_path": "D:/progetti/kmer-calculator/kmer-calculator",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "last_opened_file_path": "D:/progetti/pythonProjects/pythonVocieToText",
+    "run.code.analysis.last.selected.profile": "aDefault",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -67,7 +72,71 @@
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils\Writer" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_molecules_name">
+  <component name="RunManager" selected="Python.main">
+    <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-bibtex>
+        <compiler />
+        <compiler-path />
+        <compiler-arguments />
+        <envs />
+        <main-file>$APPLICATION_HOME_DIR$/jbr/bin</main-file>
+        <aux-dir>$APPLICATION_HOME_DIR$/jbr/bin</aux-dir>
+      </texify-bibtex>
+      <method v="2" />
+    </configuration>
+    <configuration name="bibliography" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify-bibtex>
+        <compiler>BIBER</compiler>
+        <compiler-path />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/latex/relazione.tex</main-file>
+        <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
+      </texify-bibtex>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>SUMATRA</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file />
+        <output-path>{projectDir}/out</output-path>
+        <auxil-path>{projectDir}/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>MIKTEX</latex-distribution>
+        <has-been-run>false</has-been-run>
+        <bib-run-config>[]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
+    <configuration name="relazione" type="LATEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory" temporary="true">
+      <texify>
+        <compiler>PDFLATEX</compiler>
+        <compiler-path />
+        <sumatra-path />
+        <pdf-viewer>NONE</pdf-viewer>
+        <viewer-command />
+        <compiler-arguments />
+        <envs />
+        <main-file>$PROJECT_DIR$/latex/relazione.tex</main-file>
+        <output-path>$PROJECT_DIR$/out</output-path>
+        <auxil-path>$PROJECT_DIR$/auxil</auxil-path>
+        <compile-twice>false</compile-twice>
+        <output-format>PDF</output-format>
+        <latex-distribution>MIKTEX</latex-distribution>
+        <has-been-run>true</has-been-run>
+        <bib-run-config>[BibTeX.bibliography]</bib-run-config>
+        <makeindex-run-config>[]</makeindex-run-config>
+      </texify>
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -81,7 +150,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="-n features_selection -m low_variance D:\kmerdsk\16s\output\out.csv D:\kmerdsk\16s\output\features.csv" />
+      <option name="PARAMETERS" value="-n dsk -input D:\kmerdsk\Benchmark\db\Bacteria\16S -part D:\kmerdsk\16s\partizioni -out D:\kmerdsk\16s\output\bacterial_16s.csv -k 4" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -114,20 +183,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;ExcelReaderTest.MyTestCase.test_get_sheet_names&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for GerbilTest.GerbilTest.test_first_phase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="kmer-calculator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/Gerbil" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;GerbilTest.GerbilTest.test_first_phase&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -173,13 +228,23 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="BibTeX.bibliography" />
+      <item itemvalue="LaTeX.relazione" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python tests.Python tests in D:/progetti/kmer-calculator/kmer-calculator/Test/DSK/DSKALgorithmTest.py -k 10" />
+      <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_molecules_name" />
+      <item itemvalue="Python tests.Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names" />
+      <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_large_dataset" />
+      <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_second_phase" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="LaTeX.relazione" />
         <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_molecules_name" />
         <item itemvalue="Python tests.Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names" />
         <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_large_dataset" />
         <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_second_phase" />
-        <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_first_phase" />
       </list>
     </recent_temporary>
   </component>

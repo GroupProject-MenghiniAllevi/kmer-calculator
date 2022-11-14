@@ -1,0 +1,339 @@
+\chapter{Algoritmi Per Kmer}
+
+\label{ch:algoritmiperkmer}
+In questo capitolo si andr\`a a discutere degli algoritmi utilizzati per il calcolo dei k-mer.
+Gli algoritmi che abbiamo implementato sono presenti nell'articolo scientifico presente nella bibliografia~\cite{algoritmiK-mer}.
+Secondo lo studio, i migliori algoritmi per il calcolo dei k-mer sono \textbf{DSK}, \textbf{Gerbil} e \textbf{KMC3}.
+Tutti e tre gli algoritmi sono detti ``disk based'', ovvero fanno affidamento sul disco fisso per cercare un buon compromesso
+tra l'utilizzo della memoria principale utilizzata e tempo di esecuzione.
+Di seguito verrano spiegati il loro funzionamento e la loro implementazione.
+
+\section{DSK}\label{sec:dsk}
+L'algoritmo DSK(disk streaming k-mer)~\cite{DSK} \`e un algoritmo per il calcolo dei k-mer
+in cui viene decisa dall'utente la quantità di memoria e spazio sul disco
+questo approccio attua un compromesso tra memoria, disco e tempo.
+Il multiset di tutti i k-mer viene partizionato e ogni partizione viene salvata
+nel disco poi, ogni partizione viene caricata separatamente in memoria in una
+hash table temporanea.
+Il conto dei k-mer esce fuori ripercorrendo ogni hash table.
+L'algoritmo prevede una prima fase in cui vengono calcolati:
+\begin{itemize}
+ \item il numero di k-mer presenti in una sequenza.
+ \item il numero d'iterazioni necessarie a leggere, salvare su disco e contare tutti i k-mer e la loro frequenza nella sequenza.
+ \item Il numero di partizioni necessarie per ogni iterazione.
+\end{itemize}
+Ad ogni iterazione vengono letti tutti i k-mer e \textbf{se \`e l'iterazione giusta}, il k-mer letto viene salvato in una delle partizioni create.
+La formula utilizzata per decidere se salvare o no il k-mer in una partizione \`e se il k-mer \textit{m } rispetta il seguente predicato:
+\begin{equation}\label{eq:predicatokmer}
+    (h(m) \mod N_{iters}) == i
+\end{equation}
+dove:
+\begin{itemize}
+    \item m \`e il kmer letto.
+    \item h(m) \`e una funzione di hash applicata al k-mer m.
+    \item Niters \`e il numero totale d'iterazioni.
+    \item i \`e l'iterazione attuale.
+\end{itemize}
+Se il k-mer rispetta il predicato soprastante (\ref{eq:predicatokmer}) allora verr\`a salvato nella partizione j.
+La formula per determinare in quale partizione salvare il k-mer \`e la seguente:
+\begin{equation} \label{eq:partizionegiusta}
+    j = (h(m)/N_{iters}) \mod N_{p}
+\end{equation}
+dove:
+\begin{itemize}
+    \item j \`e la partizione attuale.
+    \item m \`e il k-mer attuale.
+    \item Niters \`e il numero d'iterazioni totali.
+    \item h(m) \`e la funzione di hash applicata al k-mer m.
+    \item Np \`e il numero totale di partizioni necessarie.
+\end{itemize}
+\subsubsection{Calcolo del numero di iterazioni}%\label{subsec:calcolo-del-numero-di-iterazioni}
+Il numero d'iterazioni \`e dato dalla sequente formula:
+\begin{equation*}
+ N_{iters} = \lceil{\frac{v*2^{\log_2{2k}}}{D}}\rceil
+\end{equation*}
+Dove:
+\begin{itemize}
+ \item v \`e il numero di k-mer in una sequenza.
+ \item k \`e la dimensione dei k-mer.
+ \item D \`e dimensione su disco occupata dalle partizioni.
+\end{itemize}
+\subsubsection{Calcolo del numero di Partizioni necessarie ad ogni Iterazione:}%\label{subsec:calcolo-del-numero-di-partizioni-necessarie-ad-ogni-iterazione:}
+Il numero di partizioni necessarie ad ogni iterazione \`e dato da:
+\begin{equation*}
+ N_{p} = \lceil{\frac{v*(2^{\lceil\log_2{2k}\rceil}+32)}{0.7*N_{iters}*M}}\rceil
+\end{equation*}
+Dove:
+\begin{itemize}
+ \item v \`e il numero di k-mer presenti nella sequenza.
+ \item k \`e la dimensione dei k-mer.
+ \item N\_{iters} \`e il numero d'iterazioni necessarie.
+ \item M \`e la dimensione in memoria che l'algoritmo utilizzer\`a ad ogni iterazione.
+\end{itemize}
+Si noti che a ogni iterazione non \`e detto che vengano utilizzate tutte le partizioni per salvare i k-mer.
+\subsection{Descrizione del codice utilizzato per l'implementazione:}
+Di seguito verr\`a mostrata l'implementazione della lettura e del salvataggio nelle partizioni dell'algoritmo \textbf{DSK}.
+\begin{lstlisting}[label={lst:parte1}]
+ while kmer_reader.has_next(k_number):
+   kmer = kmer_reader.read_next_kmer()
+   dsk_utils = DefaultDSKUtils(j, kmer)
+   dsk_utils.set_partition_number(partition_number)
+   dsk_utils.set_iteration_number(iteration_number)
+   if dsk_utils.equals_to_ith_iteration():
+     dsk_utils.set_partition_index()
+     path = os.path.join(self.__partition_path,filename.split(".")[0])
+     path = os.path.join(path, "partition-"+
+                   str(dsk_utils.get_partition_index())+".bin")
+     dsk_utils.write_to_partitions(path,kmer)
+\end{lstlisting}
+La classe ``DefaultDSKUtils'' implementa le formule~\eqref{eq:predicatokmer} e~\eqref{eq:partizionegiusta} e si occupa di salvare nelle partizioni il k-mer.
+Infatti a ogni k-mer letto, l'oggetto creato dalla classe ``DefaultDSKUtils'' gli viene passato il kmer letto e il numero dell'iterazione attuale.
+Poi all'oggetto creato viene assegnato il numero totale d'iterazioni e di partizioni create.
+Il predicato~\eqref{eq:predicatokmer} viene implementato dal metodo ``equals\_to\_ith\_iteration'', mentre la formula~\eqref{eq:partizionegiusta} \`e implementata dal metodo ``set\_partition\_index''.
+La funzione di hash utilizzata \`e \textbf{MD5}.
+Una volta che i k-mer sono salvati nelle partizioni verranno letti e poi salvati nel file di uscita:
+\begin{lstlisting}[label={lst:codedsk2ndpart}]
+    for j in range(partition_number):
+      hash_table = self.initialize_dict()
+      path = os.path.join(self.__partition_path, filename)
+      path = os.path.join(path, "partition-" + str(j) + ".bin")
+      partition_kmer_reader = PartitionKmerReader(path, self.__k)
+      size = partition_kmer_reader.get_file_lenght()
+      while partition_kmer_reader.has_next(size):
+        m = partition_kmer_reader.read_next_kmer()
+        s = m.decode("utf-8")
+        if s in hash_table:
+          hash_table[s] = hash_table[s] + 1
+        else:
+          hash_table[s] = 1
+      if os.path.exists(path):
+        os.remove(path)
+        out_writer = OutputWriter(filename=molecule_name
+                                  , path=self.__out_path)
+        hash_table = self.__sort_dictionary(hash_table)
+        out_writer.write_to_output(hash_table)
+        out_writer.close_all_files()
+\end{lstlisting}
+Nel codice soprastante si leggono man mano i k-mer e si inseriscono temporaneamente in un dizionario la cui chiave corrisponde a un k-mer e il valore la sua frequenza.
+\section{Gerbil}\label{sec:gerbil}
+Gerbil~\cite{gerbil} ,
+\`e un algoritmo che legge i k-mer, li salva nelle partizioni, poi li conta e salva nel file di uscita.
+Gerbil per risparmiare lo spazio occupato dalle partizioni utilizza i minimizer.
+Gerbil \`e un algoritmo che lavora in modo pi\`u efficiente quando la lunghezza dei k-mer \`e maggiore o uguale di 32.
+\`E un algoritmo che \`e diviso in pi\`u fasi:
+\begin{enumerate}
+    \item viene letto un k-mer.Dal k-mer letto viene estratto il super k-mer.il super k-mer viene salvato in una partizione.
+    \item Vengono letti i super k-mer dalle partizioni, vengono trasformati in k-mer, vengono contati e salvati nel file di output.
+\end{enumerate}
+\subsection{Minimizers e Super k-mer}\label{subsec:minimizers-e-super-k-mer}
+I minimizer sono un modo per salvare pi\`u k-mer contigui risparmiando spazio.
+Un super k-mer \`e una sottostringa di un k-mer.
+\`E infatti grazie al super k-mer che i minimizer funzionano.
+\subsubsection{Esempio:}
+Si consideri la sequenza ``ACGACCUNNACCC'' e il valore \textit{k }uguale a 4.
+La sequenza \`e composta dai seguenti k-mer:
+ACGA,CGAC,GACC,ACCU,CCUN,CUNN,UNNA,\\
+NNAC,NACC,ACCC.
+Nei k-mer contigui ci sono alcune parti ripetute.
+Ad esempio i k-mer ACGA e CGAC hanno la sottostringa ``CGA'' in comune.
+Per estrarre i super k-mer da un k-mer bisogna prima decidere prima la lunghezza del minimizer.
+Il minimizer determina quale quanti nucleotidi dei k-mer contigui verranno eliminati.
+I super k-mer di lunghezza 2 estratti dalla sequenza con \textit{k }uguale a quattro sono:\\ \\
+\begin{tabular}{|l|c|}
+    \hline
+    \textbf{minimizer} & \textbf{super k-mer}\\
+    \hline
+    GA & AA,CC,CC\\
+    \hline
+    CU & AC,CN,NN\\
+    \hline
+    NA & UN,NC,CC\\
+    \hline
+    CC & AC\\
+    \hline
+\end{tabular}
+\\ \\
+Se \textit{k } \`e la lunghezza del k-mer e \textit{m } \`e la lunghezza del minimizer, allora il numero massimo di super k-mer contigui che quel minimizer pu\`o memorizzare \`e uguale a:
+\begin{equation} \label{eq:skmersize}
+    k - l + 1
+\end{equation}
+\subsection{Implementazione di Gerbil:} \label{subsec:implementazione-di-gerbil:}
+Di seguito l'implementazione della prima parte di Gerbil:
+\begin{lstlisting}[label={lst:primapartegerbil}]
+        minimizer = ""
+        gerbil_utils = DefaultMinimizerHandler(self.__k, self.__m)
+        kmer_list = list()
+        while reader.has_next(size):
+            kmer = reader.read_next_kmer()
+            if min_ith == 0:
+                minimizer = gerbil_utils.get_minimizers_from_kmer(kmer)
+                min_ith += 1
+                kmer_list.append(kmer)
+            elif min_ith == self.__super_kmer_length - 1:
+                kmer_list.append(kmer)
+                gerbil_utils.find_super_kmer_and_write(kmer_list
+                                                    , minimizer,
+                                                partition_file_path)
+                min_ith = 0
+                kmer_list.clear()
+            else:
+                min_ith += 1
+                kmer_list.append(kmer)
+        if len(kmer_list) > 0:
+            gerbil_utils.find_super_kmer_and_write(kmer_list
+                                                    , minimizer
+                                                    , partition_file_path)
+\end{lstlisting}
+La variabile ``minimizer'' \`e una stringa inizialmente vuota, ma che servir\`a come appoggio temporaneo ai minimizer trovati.
+L'oggetto ``gerbil\_utils'' serve a gestire i vari minimizer e super k-mer.
+Con il metodo ``get\_minimizers\_from\_kmer'' \`e possibile estrarre un minimizer da un k-mer.
+Esso restiuisce gli ultimi \textit{m } caratteri da un k-mer.
+Successivamente quando si saranno letti il numero dei k-mer ricavati dalla formula~\eqref{eq:skmersize}, questi verranno passati insieme al minimizer al metodo ``find\_super\_kmer\_and\_write'', che si occuper\`a di eliminare dai k-mer letti il minimizer e di creare (se non esiste gi\`a) e salvare nella partizione i super k-mer generati.
+Se ad esempio la sequenza \`e uguale ad ``AACACG''.
+Se il minimizer \`e ``CA'' (visto che il primo k-mer letto \`e ``AACA''), allora in ``find\_super\_kmer\_and\_write'' verranno creati i super k-mer AA,AC,CG.
+I super k-mer saranno scritti nelle partizioni tutti attaccati (quindi nel nostro esempio diventano ``AAACCG''), mentre il minimizer verr\`a usato nel nome della
+partizione.
+Se la partizione esiste gi\`a vuol dire che precedentemente \`e gi\`a stato trovato un altro minimizer identico.
+Di seguito l'implementazione della seconda parte di Gerbil:
+\begin{lstlisting}[label={lst:secondapartegerbil}]
+        while reader.has_next(size - 1):
+            kmer = reader.read_next_kmer()
+            if kmer in hash_table:
+                d[kmer] = d[kmer] + 1
+            else:
+                d[kmer] = 1
+\end{lstlisting}
+Questo pezzo di codice si occupa di leggere i super k-mer dalle partizioni, rimettere i minimizer al loro posto e salvarlo in un dizionario, dove la chiave \`e il k-mer,
+mentre il valore la frequenza.
+La lettura e il ricomponimento del k-mer \`e effettuato dall'oggetto ``reader'', che appartiene alla classe ``SuperKmerReader''.
+L'oggetto conosce il minimizer visto che \`e il nome della partizione e conosce anche quanto \`e lungo il super k-mer.
+Lui sa che al primo super k-mer letto, il minimizer deve essere aggiunto alla fine.
+Il secondo super k-mer, il minimizer deve essere aggiunto tra il penultimo e l'ultimo carattere.
+Il terzo super k-mer, il minimizer deve essere aggiunto tra il terzultimo e il penultimo carattere.
+Di seguito implementation del metodo ``read\_next\_kmer'' della classe ``SuperKmerReader'':
+\begin{lstlisting}[label={lst:superkmerreader}]
+super_kmer = self.__file.read(self.__super_kmer_size)
+        super_kmer = super_kmer.decode("utf-8")
+        if self.__ith == self.__super_kmer_size:
+            kmer = super_kmer + self.__minimizer
+        elif self.__ith == 0:
+            kmer = self.__minimizer + super_kmer
+        else:
+            kmer = super_kmer[:self.__ith] + self.__minimizer
+                                    + super_kmer[self.__ith:]
+        self.__ith -= 1
+        if self.__ith < 0:
+            self.__ith = self.__super_kmer_size
+        self.__size_counter += 1
+        return kmer
+\end{lstlisting}
+La variabile ``self.\_\_ith'' serve per sapere in quale posizione inserire il minimizer quando si legge il super k-mer.
+Inizialmente sar\`a impostata all'ultimo carattere, poi man mano che i super k-mer verranno letti, questa scala fino al primo carattere.
+In questo caso se nella partizione ci sono ancora super k-mer la variabile viene impostata di nuovo all'ultimo carattere.
+%\subsubsection{Implementazione del minimizer}
+%Nel progetto, nella cartella ``Main/kmer/Utils/minimizer'' \`e presente la classe ``DefaultMinimizer'' e la classe ``DefaultMinimizerHandler''.
+%Queste classi si occupano di implementare e gestire i minimizers e i super k-mer associati ai minimizer.
+%Inizialmente non \`e impostato nessun minimizer, quindi il primo k-mer deve essere passato alla classe tramite il metodo ``get_minimizers_from_kmer'' della classe ``DefaultMinimizerHandler''.
+%Questo metodo \`e implementato nel seguente modo:
+%\begin{lstlisting}[label={lst:getminfromkmer}]
+    %def get_minimizers_from_kmer(self, kmer):
+            %self.__minimizer = kmer[-m:]
+            %return self.__minimizer
+%\end{lstlisting}
+%Questo metodo estrae gli ultimi \textit{m }caratteri da un k-mer, li assegna al minimizer e lo restituisce.
+%Successivamente il metodo ``''
+
+\section{KMC3}\label{sec:kmc3}
+KMC3~\cite{KMC3} \`e un algoritmo per il conteggio della frequenza dei k-mer.
+Questo algoritmo \`e molto simile a gerbil. La pi\`u grande differenza \`e che le partizioni, nella seconda fase, vengono letti in base all'ordine lessicografico dei minimizer.
+L'algoritmo utilizza, per ordinare i minimizers, l'algoritmo \textbf{``Most Significant Radix Sort'' } (da qui in avanti verr\`a chiamato MS radix Sort).
+KMC3 \`e diviso in due fasi:
+\begin{enumerate}
+    \item viene letto un k-mer.Dal k-mer letto viene estratto il super k-mer.il super k-mer viene salvato in una partizione.
+    \item Vengono letti i minimizer delle partizioni, vengono ordinati e vengono letti i super k-mer dalle partizioni nell'ordine trovato.Poi vengono trasformati in k-mer, vengono contati e salvati nel file di output.
+\end{enumerate}
+\subsection{implementazione della prima fase:}\label{subsec:implementazione-della-prima-fase:}
+In questo caso il codice \`e identico alla prima fase di gerbil.
+\begin{lstlisting}[label={lst:prima-parte-KMC3}]
+    minimizer = ""
+        kmer_list = list()
+        mh = DefaultMinimizerHandler(self.__k, self.__m)
+        while reader.has_next(length):
+            kmer = reader.read_next_kmer()
+            if min_ith == 0:
+                kmer_list.append(kmer)
+                minimizer = mh.get_minimizers_from_kmer(kmer)
+                min_ith += 1
+            elif min_ith == self.__m - 1:
+                kmer_list.append(kmer)
+                mh.find_super_kmer_and_write(kmer_list, minimizer, partition_sub_path)
+                kmer_list.clear()
+                min_ith = 0
+            else:
+                kmer_list.append(kmer)
+                min_ith += 1
+        if len(kmer_list) > 0:
+            mh.find_super_kmer_and_write(kmer_list, minimizer, partition_sub_path)
+\end{lstlisting}
+Il modo in cui i super k-mer e i minimizers vengono letti e creati \`e lo stesso di Gerbil.
+\subsection{implementazione della seconda fase:}\label{subsec:seconda-fase:}
+In questa fase le partizioni vengono lette nell'ordine dettato da ``MS radix Sort''.
+MS radix sort, come si pu\`o dedurre dal nome, inizia ad ordinare le stringhe a partire dal carattere pi\`u significativo.
+L'algoritmo di ordinamento \`e stato implementato nel seguente modo dalla classe ``MostSignificantRadixSort'':
+\begin{lstlisting}[label={lst:ms-radix-sort}]
+    exp = self.__string_length-1
+        i = 0
+        while exp > i:
+            self.counting_sort(i)
+            i += 1
+\end{lstlisting}
+Come si pu\`o notare l'algoritmo utizza un altro algoritmo di ordinamento per ordinare le stringhe in base al carattere che si sta analizzando, ovvero \textbf{``Counting Sort''}.
+Una volta che si ha l'ordine in cui le partizioni devono essere lette, i super k-mer vengono trasformati in kmer dalla classe ``SuperKmerReader'' (descritta nel capitolo \ref{subsec:implementazione-di-gerbil:}. )
+Successivamente vengono inseriti in un dizionario in cui la chiave \`e il k-mer, mentre il valore corrisponde alla frequenza di quel k-mer.
+Di seguito l'implementazione della seconda fase:
+\begin{lstlisting}[label={lst:implementazione-seconda-fase-KMC3}]
+    size = reader.get_file_lenght()
+            ht = dict()
+            while reader.has_next(size - 1):
+                kmer = reader.read_next_kmer()
+                if kmer in ht:
+                    ht[kmer] += 1
+                else:
+                    ht[kmer] = 1
+                if len(ht) > 64:
+                    self.__write_kmer_count(part_name, ht)
+                    ht.clear()
+            if len(ht) > 0:
+                self.__write_kmer_count(part_name, ht)
+                ht.clear()
+\end{lstlisting}
+Come si pu\`o notare al massimo verranno letti 64 k-mer alla volta.
+Questo \`e stato fatto per non occupare troppa memoria principale.
+Infatti una partizione pu\`o contenere molti super k-mer.
+\section{Formato del file di uscita}\label{sec:formato-del-file-di-uscita}
+Il file di output \`e in formato ``CSV''.
+Nell'intestazione sono presenti i k-mer trovati in almeno una le molecole analizzate.
+Se ad esempio la molecola A ha il k-mer ``CC'' e la molecola B non lo ha, questo verr\`a comunque inserito nell'header.
+Il primo valore nell'intestazione \`e l'id.
+L'id corrisponde al nome della molecola.
+Dopo l'id, nell'intestazione sono presenti i k-mer messi prima in ordine di lunghezza e poi in ordine alfabetico.
+Ad esempio il k-mer ``U'' verr\`a inserito prima del k-mer ``AA''.
+\subsection{Esempio del file di uscita:}\label{subsec:esempio-del-file-di-uscita:}
+Prendiamo per esempio la molecola di nome ``A'' e la molecola di nome ``B''.
+La molecola A possiede i seguenti k-mer:
+\begin{itemize}
+    \item C con frequenza 2
+    \item CA con frequenza 3
+    \item UU con frequenza 1
+\end{itemize}
+La molecola B possiede i seguenti k-mer:
+\begin{itemize}
+    \item U con frequenza 10
+    \item GC con frequenza 2
+    \item UU con frequenza 3
+\end{itemize}
+Allora il file di uscita sar\`a fatto nel seguente modo:
+\\
+id,C,U,CA,CG,UU\\
+A,2,0,3,0,1\\
+B,0,10,0,2,3\\
