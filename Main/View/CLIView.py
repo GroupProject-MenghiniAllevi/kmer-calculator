@@ -10,13 +10,15 @@ class CLIView:
     __argc = 0
     __argv = []
     __mode = ""
-
+    __try_call = 0
     def __init__(self, argc, argv, mode: str = "kmerCalculator"):
         self.__argv = argv
         self.__argc = argc
         self.__mode = mode
 
+
     def check_if_is_help(self):
+        self.__try_call += 1
         if self.__argc == 2 and self.__argv[1] == '-h':
             print("Questo programma serve per calcolare i kmer delle sequenze di rna in formato dot bracket da 1 a k "
                   "di una lista di file.\n"
@@ -30,6 +32,7 @@ class CLIView:
                   "     dsk\n")
 
     def check_if_is_DSK(self):
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "dsk":
             input_path = self.__argv[4]
             part = self.__argv[6]
@@ -48,6 +51,7 @@ class CLIView:
                 k_index += 1
 
     def check_if_is_gerbil(self):
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "gerbil":
             input_path = self.__argv[4]
             part = self.__argv[6]
@@ -76,6 +80,7 @@ class CLIView:
     # -n kmc3 -input percorso/cartella/input/ -part percorso/cartella/partizioni/ -out percorso/file/output -k [
     # lunghezza massima dei kmer]
     def check_if_is_kmc3(self):
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "kmc3":
             input_path = self.__argv[4]
             part = self.__argv[6]
@@ -103,6 +108,7 @@ class CLIView:
                 k_index += 1
 
     def check_if_is_low_variance(self):  # -n features_selection -m low_variance path/input/file path/output/file
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__argv[3] == "-m" and self.__argv[
             4] == "low_variance":
             self.__check_if_input_output_empty()
@@ -144,6 +150,7 @@ class CLIView:
 
     # main -n features_selection -m chi2 path/input/file path/output/file
     def check_if_is_chi2(self):
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection":
             if self.__argv[3] == "-m" and self.__argv[4] == "chi2":
                 self.__check_if_input_output_empty()
@@ -153,6 +160,7 @@ class CLIView:
 
     # main -n features_selection -m threeFS path/input/file path/output/file
     def check_if_is_three_FS(self):
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "threeFS":
                 self.__check_if_input_output_empty()
@@ -170,6 +178,7 @@ class CLIView:
                 selector2.write_to_output(self.__argv[6])
 
     def check_if_is_rand_log_reg(self):
+        self.__try_call +=1
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "rlr":
                 self.__check_if_input_output_empty()
@@ -178,11 +187,14 @@ class CLIView:
                 selector.write_to_output(self.__argv[6])
 
     def check_right_command(self):
-        if self.__mode == "featuresSelction":
+        if self.__mode == "featuresSelction" and self.__try_call == 4:
             print("Il comando corretto e':\n"
                   "python FeaturesSelection.py -n <features_selection> -m <metodo-scelto> <file/csv/di/input> "
                   "<file/csv/di/output>")
         else:
-            print("Il comando corretto e':\n"
-                  "python KmerCalculator.py -n <nome-algoritmo> -input <cartella/di/input> -part "
-                  "<cartella/delle/partizioni> -out <file/di/output> -k <dimensione-massima-kmer>")
+            if self.__try_call == 3:
+                print("Il comando corretto e':\n"
+                      "python KmerCalculator.py -n <nome-algoritmo> -input <cartella/di/input> -part "
+                      "<cartella/delle/partizioni> -out <file/di/output> -k <dimensione-massima-kmer>")
+
+

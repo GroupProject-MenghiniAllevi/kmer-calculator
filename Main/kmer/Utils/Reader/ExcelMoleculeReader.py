@@ -32,7 +32,6 @@ class ExcelMoleculeReader:
         return self.__df
 
     def get_name_of_molecule(self, benchmark_id):
-        #print(benchmark_id.encode('utf-8'), benchmark_id == "CRW_16S_B_C_40 ")
         sub_df = self.__df.loc[self.__df['Benchmark ID'] == benchmark_id]
         name = sub_df.iloc[0]['Organisms']
         name = name.replace('\xa0', '')
@@ -53,11 +52,7 @@ class ExcelMoleculeReader:
         for sheet_name in self.__sheet_list:
             self.extract_sheet(sheet_name)
             file_list = self.__df["Benchmark ID"]
-            if sheet_name == "16S":
-                print("CRW_16S_B_C_40 " in file_list)
             for bench_id in file_list:
-                if bench_id == "CRW_16S_B_C_40 ":
-                    print("Ciaooo")
                 name = self.get_name_of_molecule(bench_id)
                 bench_id = bench_id.replace(" ", "")
                 bench_id = bench_id.replace("\n", "")
