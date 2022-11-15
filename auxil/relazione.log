@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.4)  14 NOV 2022 11:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2022.11.4)  15 NOV 2022 11:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2221,6 +2221,9 @@ No file relazione.ind.
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `relazione.out' has not changed.
 (rerunfilecheck)             Checksum: 2EAA731EF63FF76B0D9B9BE48A5E6A51;3683.
 
@@ -2239,10 +2242,10 @@ Package logreq Info: Writing requests to 'relazione.run.xml'.
 (\end occurred when \ifnum on line 1 was incomplete)
 (\end occurred when \iffalse on line 1 was incomplete) 
 Here is how much of TeX's memory you used:
- 24622 strings out of 475380
- 424944 string characters out of 2772016
+ 24627 strings out of 475380
+ 425019 string characters out of 2772016
  1222506 words of memory out of 3000000
- 45491 multiletter control sequences out of 15000+600000
+ 45492 multiletter control sequences out of 15000+600000
  478853 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,12n,93p,684b,1955s stack positions out of 10000i,1000n,20000p,200000b,80000s
@@ -2268,9 +2271,9 @@ hini/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb><C
 :/Users/Davide Menghini/AppData/Local/Programs/MiKTeX/fonts/type1/urw/courier/u
 crr8a.pfb>
 Output written on D:/progetti\kmer-calculator\kmer-calculator\out\relazione.pdf
- (19 pages, 286789 bytes).
+ (19 pages, 287797 bytes).
 PDF statistics:
- 483 PDF objects out of 1000 (max. 8388607)
- 195 named destinations out of 1000 (max. 500000)
+ 488 PDF objects out of 1000 (max. 8388607)
+ 199 named destinations out of 1000 (max. 500000)
  174 words of extra memory for PDF output out of 10000 (max. 10000000)
 

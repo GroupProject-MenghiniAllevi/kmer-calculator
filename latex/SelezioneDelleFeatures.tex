@@ -47,8 +47,11 @@ Il test del chi quadrato \`e un test statistico.
 Esso trasforma i valori in valori positivi facendone il quadrato.
 Chi quadrato misura la dipendenza tra variabili stocastiche, quindi questo metodo elimina le features
 che hanno maggiori probabilit\`a di essere indipendenti dalla classe.
-\begin{lstlisting}
-
+\begin{lstlisting}[label={lst:chi2_impl}]
+    y = np.asarray(list(self.__molecule_expected.values()))
+    chi2_feat = SelectPercentile(chi2)
+    self.__output_arr = chi2_feat.fit_transform(self.__df, y)
+    self.__selected_features = chi2_feat.get_support()
 \end{lstlisting}
 
 
