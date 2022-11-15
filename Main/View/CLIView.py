@@ -103,7 +103,8 @@ class CLIView:
                 k_index += 1
 
     def check_if_is_low_variance(self):  # -n features_selection -m low_variance path/input/file path/output/file
-        if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__argv[3] == "-m" and self.__argv[4] == "low_variance":
+        if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__argv[3] == "-m" and self.__argv[
+            4] == "low_variance":
             self.__check_if_input_output_empty()
             selector = FSelector(self.__argv[5])
             selector.apply_low_variance(threshold=(.8 * (1 - .8)))
@@ -156,8 +157,8 @@ class CLIView:
             if self.__argv[3] == "-m" and self.__argv[4] == "threeFS":
                 self.__check_if_input_output_empty()
                 parent_path = os.path.dirname(self.__argv[6])
-                f1_path = os.path.join(parent_path,"f1.csv")
-                f2_path = os.path.join(parent_path,"f2.csv")
+                f1_path = os.path.join(parent_path, "f1.csv")
+                f2_path = os.path.join(parent_path, "f2.csv")
                 selector = FSelector(self.__argv[5])
                 selector.apply_low_variance(threshold=(.9 * (1 - .9)))
                 selector.write_to_output(f1_path)
@@ -175,3 +176,13 @@ class CLIView:
                 selector = FSelector(self.__argv[5])
                 selector.rlr()
                 selector.write_to_output(self.__argv[6])
+
+    def check_right_command(self):
+        if self.__mode == "featuresSelction":
+            print("Il comando corretto e':\n"
+                  "python FeaturesSelection.py -n <features_selection> -m <metodo-scelto> <file/csv/di/input> "
+                  "<file/csv/di/output>")
+        else:
+            print("Il comando corretto e':\n"
+                  "python KmerCalculator.py -n <nome-algoritmo> -input <cartella/di/input> -part "
+                  "<cartella/delle/partizioni> -out <file/di/output> -k <dimensione-massima-kmer>")
