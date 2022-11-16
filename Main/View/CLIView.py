@@ -11,11 +11,11 @@ class CLIView:
     __argv = []
     __mode = ""
     __try_call = 0
+
     def __init__(self, argc, argv, mode: str = "kmerCalculator"):
         self.__argv = argv
         self.__argc = argc
         self.__mode = mode
-
 
     def check_if_is_help(self):
         self.__try_call += 1
@@ -38,6 +38,7 @@ class CLIView:
             part = self.__argv[6]
             output = self.__argv[8]
             k = int(self.__argv[10])
+
             with open(output, "wb+") as ff:
                 ff.truncate()
                 ff.close()
@@ -81,7 +82,7 @@ class CLIView:
     # lunghezza massima dei kmer]
     def check_if_is_kmc3(self):
         self.__try_call += 1
-        if self.__argv[1] == "-n" and self.__argv[2] == "kmc3":
+        if self.__argv[1] == "-n" and self.__argv[2] == "kmc3" and self.__argc == 11:
             input_path = self.__argv[4]
             part = self.__argv[6]
             output = self.__argv[8]
@@ -103,7 +104,6 @@ class CLIView:
                     kmc3.process()
                 else:
                     kmer_count = SimpleKmerCounter(input_path, 1)
-                    print(kmer_count.detect_molecule_name_from_input())
                     kmer_count.process(output)
                 k_index += 1
 
@@ -178,7 +178,7 @@ class CLIView:
                 selector2.write_to_output(self.__argv[6])
 
     def check_if_is_rand_log_reg(self):
-        self.__try_call +=1
+        self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "rlr":
                 self.__check_if_input_output_empty()
@@ -187,14 +187,12 @@ class CLIView:
                 selector.write_to_output(self.__argv[6])
 
     def check_right_command(self):
-        if self.__mode == "featuresSelction" and self.__try_call == 4:
-            print("Il comando corretto e':\n"
-                  "python FeaturesSelection.py -n <features_selection> -m <metodo-scelto> <file/csv/di/input> "
-                  "<file/csv/di/output>")
-        else:
-            if self.__try_call == 3:
-                print("Il comando corretto e':\n"
-                      "python KmerCalculator.py -n <nome-algoritmo> -input <cartella/di/input> -part "
-                      "<cartella/delle/partizioni> -out <file/di/output> -k <dimensione-massima-kmer>")
-
-
+        if self.__mode == "featuresSelction" and self.__try_call == 5:
+            return print("Il comando corretto e':\n"
+                         "python FeaturesSelection.py -n <features_selection> -m <metodo-scelto> <file/csv/di/input> "
+                         "<file/csv/di/output>")
+        elif self.__mode == "kmerCalculator" and not self.__argc == 11 and self.__try_call == 4:
+            return print("Errore nell'iserimento degli argomenti.\n"
+                         "Il comando corretto e':\n"
+                         "python KmerCalculator.py -n <nome-algoritmo> -input <cartella/di/input> -part "
+                         "<cartella/delle/partizioni> -out <file/di/output> -k <dimensione-massima-kmer>")

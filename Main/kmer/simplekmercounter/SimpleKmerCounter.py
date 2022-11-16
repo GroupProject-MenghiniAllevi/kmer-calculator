@@ -1,6 +1,6 @@
 import os
 
-from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
+from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
 from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader, get_default_path
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
@@ -8,7 +8,7 @@ from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 class SimpleKmerCounter:
     __input_path = ""
     __k = -1
-    __reader = DefaultDbNhReader()
+    __reader = FastaRnaReader()
     __ht = dict()
     __file_list = list()
     __molecules_name = dict()
@@ -16,12 +16,13 @@ class SimpleKmerCounter:
     def __init__(self, input_path, k):
         self.__k = k
         self.__input_path = input_path
-        self.__file_list = [x for x in os.listdir(input_path) if x.endswith(".db")]
+        self.__file_list = [x for x in os.listdir(input_path) if x.endswith(".db") or x.endswith(".fasta")]
         self.detect_molecule_name_from_input()
 
     def process(self,output_path):
         for file in self.__file_list:
-            self.__reader = DefaultDbNhReader()
+            print("leggendo il file "+str(file)+"...")
+            self.__reader = FastaRnaReader()
             self.__reader.set_path(os.path.join(self.__input_path, file))
             self.__reader.set_kmer_lenght(k=self.__k)
             size = self.__reader.get_file_lenght()
@@ -34,12 +35,13 @@ class SimpleKmerCounter:
                     self.__ht[kmer] = 1
                 i += 1
             self.__ht = self.__sort_dictionary(self.__ht)
-            output_writer = OutputWriter(self.__molecules_name[file], output_path)
+            output_writer = OutputWriter(file, output_path)
             output_writer.write_to_output(self.__ht)
             self.__ht.clear()
             self.__reader.close_file()
 
     def detect_molecule_name_from_input(self):
+        """
         excel_files_path = get_default_path()
         l = [f for f in os.listdir(excel_files_path) if os.path.isfile(os.path.join(excel_files_path, f)) and f.endswith(".xlsx")]
         excel_file_list = [v for v in l if v.endswith(".xlsx")]
@@ -61,6 +63,8 @@ class SimpleKmerCounter:
                     if check_nH:
                         s = s[:s_index] + "_nH" + s[s_index:]
                     self.__molecules_name[s] = d[key]
+        """
+        self.__molecules_name = [f for f in os.listdir(self.__input_path) if os.path.isfile(os.path.join(self.__input_path,f))]
         return self.__molecules_name
 
     def __sort_dictionary(self, ht):

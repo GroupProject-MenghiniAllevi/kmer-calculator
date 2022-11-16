@@ -1,14 +1,13 @@
 import multiprocessing
 import os
 import shutil
-from multiprocessing import Process, Lock, Pool
+from multiprocessing import Lock
 from Main.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from Main.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 from Main.kmer.DSK.DefaultDSKUtils import DefaultDSKUtils
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
-from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
+from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
 from Main.kmer.DSK.PartitionKmerReader import PartitionKmerReader
-from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader, get_default_path
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
 
@@ -69,7 +68,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     def apply_algorithm_for_file(self, filename, file_path, partition_path, molecule_name):
         dsk_info = self.get_dsk_info_complete(os.path.join(self.__path, file_path))
         ith_number = dsk_info.iteration_number(self.__diskUsage)
-        print("analizzando il file: " + filename+"...")
+        print("Leggendo i k-mer del file: " + filename+"...")
         partition_number = dsk_info.get_partition_number(self.__memoryUsage)
         self.create_partition_files(partition_path, partition_number)
         for i in range(ith_number):
@@ -90,7 +89,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
                 os.mkdir(partition_file_path)
             partition_path_list.append(partition_file_path)
             self.apply_algorithm_for_file(file_without_dot, file, partition_file_path,
-                                          self.__molecules_name[file])
+                                          file_without_dot)
         for process in process_list:
             process.join()
         for path in partition_path_list:
@@ -105,7 +104,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         return ht
 
     def thread_partitions_write(self, filename, j, partition_number, iteration_number):
-        kmer_reader = DefaultDbNhReader()
+        kmer_reader = FastaRnaReader()
         kmer_reader.set_kmer_lenght(self.__k)
         kmer_reader.set_path(os.path.join(self.__path, filename))
         k_number = kmer_reader.get_file_lenght()
@@ -153,11 +152,11 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     def get_dsk_info_complete(self, filepath):
         dsk_info = DefaultDSKInfo(filepath, self.__k)
         fn = os.path.basename(os.path.normpath(filepath))
-        dsk_info.getSingleKmerNumber(filepath, self.__molecules_name[fn])
+        dsk_info.getSingleKmerNumber(filepath, fn)
         return dsk_info
 
     def detect_molecule_name_from_input(self):
-        resource_path = get_default_path()
+        """resource_path = get_default_path()
         l = [f for f in os.listdir(resource_path) if
              os.path.isfile(os.path.join(resource_path, f)) and f.endswith(".xlsx")]
         excel_file_list = [v for v in l if v.endswith(".xlsx")]
@@ -179,6 +178,8 @@ class DefaultDskAlgorithm(DSKAlgorithm):
                     if check_nH:
                         s = s[:s_index] + "_nH" + s[s_index:]
                     self.__molecules_name[s] = d[key]
+        """
+        self.__molecules_name = [f for f in os.listdir(self.__path) if os.path.isfile(os.path.join(self.__path,f))]
         return self.__molecules_name
 
     def __remove_partition_file(self, filename):

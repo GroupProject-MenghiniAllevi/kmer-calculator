@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main/View/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/View/CLIView.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/ExcelMoleculeReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Gerbil/DefaultGerbil.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/KMC3/DefaultKMC3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DbNhKmerReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DbNhKmerReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DefaultDirectoryHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/DefaultDirectoryHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/simplekmercounter/SimpleKmerCounter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/simplekmercounter/SimpleKmerCounter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/utils/DbNhReaderTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/utils/DbNhReaderTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.log" beforeDir="false" afterPath="$PROJECT_DIR$/auxil/relazione.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/relazione.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/out/relazione.pdf" afterDir="false" />
     </list>
     <list id="89a99cfa-5d7e-4b40-8538-b2c8f9222d2b" name="Changes by francesco" comment="" />
     <option name="SHOW_DIALOG" value="false" />

@@ -3,7 +3,7 @@ from Main.kmer.Utils.Reader.KmerReader import KmerReader
 ALPHABET = ("A", "C", "G", "U", "R", "Y", "S", "W", "K", "M", "B", "D", "H", "V", "N", "-", ".")
 
 
-class DefaultDbNhReader(KmerReader):
+class FastaRnaReader(KmerReader):
     __path = ""
     __file = None
     __k = 0

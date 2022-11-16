@@ -5,7 +5,7 @@ import numpy as np
 import math
 
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
-from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
+from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
 
 
 class DefaultDSKInfo(DSKInfo):
@@ -25,7 +25,7 @@ class DefaultDSKInfo(DSKInfo):
 
     def getFullKmerNumber(self):
         dh = DefaultDirectoryHandler(self.__path)
-        kmer_reader = DefaultDbNhReader()
+        kmer_reader = FastaRnaReader()
         kmer_reader.set_kmer_lenght(self.__k)
         filelist = dh.get_all_files_names()
         total_size = 0
@@ -43,7 +43,7 @@ class DefaultDSKInfo(DSKInfo):
     """
 
     def getSingleKmerNumber(self, filepath, molecule):
-        kmer_reader = DefaultDbNhReader()
+        kmer_reader = FastaRnaReader()
         kmer_reader.set_kmer_lenght(self.__k)
         kmer_reader.set_path(filepath)
         sequence_size = kmer_reader.get_file_lenght()
@@ -51,7 +51,7 @@ class DefaultDSKInfo(DSKInfo):
             raise ValueError("errore nel calcolo della dimensione della sequenza nel file: ", filepath)
         kmer_reader.close_file()
         self.__kmerSize = sequence_size
-        print("sequence_size: ", sequence_size)
+        print("Il k-mer presenti nel file "+filepath+" sono "+str(sequence_size)+"...")
         return sequence_size
 
     def iteration_number(self, file_disk_space):

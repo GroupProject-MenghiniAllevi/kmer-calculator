@@ -2,7 +2,7 @@ import os
 import unittest
 from pathlib import Path
 
-from Main.kmer.Utils.Reader.DbNhKmerReader import DefaultDbNhReader
+from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
 
 
 class MyTestCase(unittest.TestCase):
@@ -45,7 +45,7 @@ class MyTestCase(unittest.TestCase):
             file.close()
 
     def __get_reader(self, path):
-        reader = DefaultDbNhReader()
+        reader = FastaRnaReader()
         reader.set_path(path)
         reader.set_kmer_lenght(3)
         return reader
