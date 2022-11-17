@@ -1,7 +1,6 @@
 import os
 
-from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
-from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader, get_default_path
+from Main.kmer.Utils.Reader.FastaReader import FastaRnaReader
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
 

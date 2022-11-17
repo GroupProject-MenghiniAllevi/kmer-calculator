@@ -4,7 +4,7 @@ import shutil
 from Main.kmer.KMC3.KMC3 import KMC3
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
 from Main.kmer.Utils.MostSignificantRadixSort import MostSignificantRadixSort
-from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
+from Main.kmer.Utils.Reader.FastaReader import FastaRnaReader
 from Main.kmer.Utils.Reader.ExcelMoleculeReader import ExcelMoleculeReader,get_default_path
 from Main.kmer.Utils.Reader.SuperKmerReader import SuperKmerReader
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
@@ -54,7 +54,6 @@ class DefaultKMC3(KMC3):
                 kmer_list.append(kmer)
                 min_ith += 1
         if len(kmer_list) > 0:
-            print(kmer_list)
             mh.find_super_kmer_and_write(kmer_list, minimizer, partition_sub_path)
 
     def read_skmer_and_print_to_output(self, filepart_path):

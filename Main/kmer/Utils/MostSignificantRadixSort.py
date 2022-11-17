@@ -1,4 +1,4 @@
-from Main.kmer.Utils.Reader import DbNhKmerReader
+from Main.kmer.Utils.Reader import FastaReader
 
 COUNT_SIZE = 17
 
@@ -8,7 +8,7 @@ class MostSignificantRadixSort:
     __byte_table = []
     __string_length = 0
     __list_len = 0
-    __alphabet = DbNhKmerReader.ALPHABET
+    __alphabet = [sub for sub in FastaReader.ALPHABET if all(ele.isupper() for ele in sub)]
     __alphabet_dict = dict()
     __alphabet_len = 0
 

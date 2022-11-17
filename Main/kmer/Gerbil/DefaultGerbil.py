@@ -2,7 +2,7 @@ import os
 import shutil
 from multiprocessing import Lock
 
-from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
+from Main.kmer.Utils.Reader.FastaReader import FastaRnaReader
 from Main.kmer.Utils.minimizer.DefaultMinimizerHandler import DefaultMinimizerHandler
 from Main.kmer.Gerbil.Gerbil import Gerbil
 from Main.kmer.Utils.Reader.SuperKmerReader import SuperKmerReader
@@ -70,9 +70,9 @@ class DefaultGerbil(Gerbil):
         return self.__molecules_name
 
     def start_first_phase_process(self):
-        print("iniziata la prima fase...")
         dh = DefaultDirectoryHandler(self.__input_path)
         file_list = dh.get_all_files_names()
+        print("iniziata la prima fase.\nCi sono "+str(len(file_list))+" file.")
         self.__lock = Lock()
         for file in file_list:
             file_fullpath = os.path.join(self.__input_path, file)

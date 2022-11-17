@@ -5,7 +5,7 @@ import numpy as np
 import math
 
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
-from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
+from Main.kmer.Utils.Reader.FastaReader import FastaRnaReader
 
 
 class DefaultDSKInfo(DSKInfo):

@@ -2,7 +2,7 @@ import os
 import unittest
 from pathlib import Path
 
-from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
+from Main.kmer.Utils.Reader.FastaReader import FastaRnaReader
 
 
 class MyTestCase(unittest.TestCase):

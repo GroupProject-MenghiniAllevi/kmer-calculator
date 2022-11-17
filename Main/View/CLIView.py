@@ -33,15 +33,18 @@ class CLIView:
 
     def check_if_is_DSK(self):
         self.__try_call += 1
-        if self.__argv[1] == "-n" and self.__argv[2] == "dsk":
+        if self.__argv[1] == "-n" and self.__argv[2] == "dsk" and self.__argc==11:
             input_path = self.__argv[4]
             part = self.__argv[6]
             output = self.__argv[8]
             k = int(self.__argv[10])
-
-            with open(output, "wb+") as ff:
-                ff.truncate()
-                ff.close()
+            if not os.path.exists(output):
+                with open(output,"x") as file:
+                    file.close()
+            else:
+                with open(output, "wb+") as ff:
+                    ff.truncate()
+                    ff.close()
             k_index = 1
             while k_index <= k:
                 print("calcolando i kmer per k == " + str(k_index))
@@ -53,7 +56,7 @@ class CLIView:
 
     def check_if_is_gerbil(self):
         self.__try_call += 1
-        if self.__argv[1] == "-n" and self.__argv[2] == "gerbil":
+        if self.__argv[1] == "-n" and self.__argv[2] == "gerbil" and self.__argc==11:
             input_path = self.__argv[4]
             part = self.__argv[6]
             output = self.__argv[8]

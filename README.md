@@ -50,4 +50,10 @@ Esempio di utilizzo dello script:
     -python FeaturesSelection.py -n features_selection -m low_variance D://input.csv D://output/out.csv  
 Il file di output, se non esiste, viene generato. Se invece il file esiste già, a questo vengono cancellati tutti i byte presenti. 
 
+# Classificazione della Tassonomia:
+Per Utilizzare Il classificatore della tassonomia bisogna spostarsi nella cartella "TaxonClassifier" tramite il comando:
+
+-cd TaxonClassifier
+
+Dopo essersi spostati bisogna seguire le indicazioni descritte [in questo file](TaxonClassifier\README.md).
 

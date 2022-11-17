@@ -6,7 +6,7 @@ from Main.kmer.DSK.DSKAlgorithm import DSKAlgorithm
 from Main.kmer.DSK.DefaultDSKInfo import DefaultDSKInfo
 from Main.kmer.DSK.DefaultDSKUtils import DefaultDSKUtils
 from Main.kmer.Utils.Reader.DefaultDirectoryHandler import DefaultDirectoryHandler
-from Main.kmer.Utils.Reader.DbNhKmerReader import FastaRnaReader
+from Main.kmer.Utils.Reader.FastaReader import FastaRnaReader
 from Main.kmer.DSK.PartitionKmerReader import PartitionKmerReader
 from Main.kmer.Utils.Writer.OutputWriter import OutputWriter
 
@@ -79,7 +79,6 @@ class DefaultDskAlgorithm(DSKAlgorithm):
 
     def process(self, output_path):
         self.__out_path = output_path
-        process_list = list()
         self.__molecules_name = self.detect_molecule_name_from_input()
         partition_path_list = list()
         for file in self.__file_list:
@@ -90,8 +89,6 @@ class DefaultDskAlgorithm(DSKAlgorithm):
             partition_path_list.append(partition_file_path)
             self.apply_algorithm_for_file(file_without_dot, file, partition_file_path,
                                           file_without_dot)
-        for process in process_list:
-            process.join()
         for path in partition_path_list:
             shutil.rmtree(path)
         new_out_path = os.path.dirname(self.__out_path)
