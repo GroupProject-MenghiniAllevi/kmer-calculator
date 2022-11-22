@@ -47,7 +47,7 @@ dove:
 
 Esempio di lancio con metodi non supervisionati:
  
-    python FeaturesSelection.py -n features_selection -m tree D://input.csv D://output.csv 
+    python FeaturesSelection.py -n features_selection -m low_variance D://input.csv D://output.csv 
 
 ### Supervisionato:
 Argomenti dello script con metodi supervisionati:
