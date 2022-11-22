@@ -7,6 +7,7 @@ from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE, \
     chi2, SelectPercentile
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC, SVC
+from stability_selection import RandomizedLogisticRegression, StabilitySelection
 
 
 class FSelector:
@@ -18,7 +19,7 @@ class FSelector:
     __molecule_expected = {}
     __sheets = ("5S", "16S", "23S")
 
-    def __init__(self, path, supervised: bool = False):
+    def __init__(self, path, supervised: bool = False, search: str = ""):
         if len(path) <= 0:
             raise ValueError("Non è stato inserito nessun percorso...")
         else:
@@ -28,9 +29,10 @@ class FSelector:
                     file.close()
             columns_size = self.__detect_column_size(path)
             self.__df = pd.read_csv(path, skiprows=[0], usecols=range(1, columns_size + 1), header=None)
+            #print(path)
             self.__detect_column_name(path)
             if supervised:
-                self.__detect_molecule_expected()
+                self.__detect_molecule_expected(search)
 
     def apply_low_variance(self, threshold):
         sel = VarianceThreshold(threshold=threshold)
@@ -40,10 +42,6 @@ class FSelector:
 
     def apply_L1_based(self):
         y = np.asarray(list(self.__molecule_expected.values()))
-        for mol in self.__molecule_list:
-            if not mol in self.__molecule_expected:
-                print(mol)
-        print(len(y))
         lsvc = LinearSVC(C=0.1, penalty="l1", dual=False).fit(X=self.__df, y=y)
         model = SelectFromModel(lsvc, prefit=True)
         self.__output_arr = model.transform(X=self.__df)
@@ -67,7 +65,7 @@ class FSelector:
                 c += 1
         df = pd.DataFrame(columns=l)
         row = list()
-        print(len(self.__selected_features), len(self.__output_arr), len(self.__molecule_list))
+        # print(len(self.__selected_features), len(self.__output_arr), len(self.__molecule_list))
         for i in range(len(self.__molecule_list)):
             row.append(self.__molecule_list[i])
             j = 0
@@ -134,34 +132,43 @@ class FSelector:
             file.close()
             # print(self.__molecule_list)
 
-    def __detect_molecule_expected(self):
+    def __detect_molecule_expected(self,search):
         # print(self.__molecule_list)
         molecules_path = self.__get_molecules_path()
         sub_file_path = [name for name in os.listdir(molecules_path) if
                          os.path.isfile(os.path.join(molecules_path, name))]
         for file in sub_file_path:
             path = os.path.join(molecules_path, file)
-            print(path)
             for s in self.__sheets:
                 df = pd.read_excel(path, sheet_name=s)
                 #print(len(self.__molecule_list))
-                for mol in self.__molecule_list:
+                sep = "."
+                l = [x.split(sep, 1)[0] for x in self.__molecule_list]
+                # print(len(l))
+                for mol in l:
                     if not mol in self.__molecule_expected:
-                        v = df.loc[df['Organisms'] == mol]
-                        if s == "16S" and mol == "Lactococcus lactis subsp. lactis" and path == "D:\progetti\kmer-calculator\kmer-calculator\resource\ExcelFile\Bacteria.xlsx":
-                            print(df.loc[95, 'Organisms'])
+                        v = df.loc[df['Benchmark ID'] == mol]
                         if not v.empty:
-                            value = v.iloc[0]['Phylum']
+                            value = v.iloc[0][search]
                             value = value.replace('\xa0', '')
+                            value = value.strip()
                             self.__molecule_expected[mol] = value
                         else:
                             m = mol + "\xa0"
-                            v = df.loc[df['Organisms'] == m]
+                            v = df.loc[df['Benchmark ID'] == m]
                             if not v.empty:
-                                value = v.iloc[0]['Phylum']
+                                value = v.iloc[0][search]
                                 value = value.replace('\xa0', '')
+                                value = value.strip()
                                 self.__molecule_expected[mol] = value
-
+                            else:
+                                m = mol + " "
+                                v = df.loc[df['Benchmark ID'] == m]
+                                if not v.empty:
+                                    value = v.iloc[0][search]
+                                    value = value.replace('\xa0', '')
+                                    value = value.strip()
+                                    self.__molecule_expected[mol] = value
     def __get_molecules_path(self):
         root = dirname(dirname(dirname(os.path.abspath(__file__))))
         resource_path = os.path.join(root, "resource")
@@ -182,4 +189,25 @@ class FSelector:
         self.__selected_features = chi2_feat.get_support()
 
     def rlr(self):
-        pass
+        y = np.asarray(list(self.__molecule_expected.values()))
+        # y = self.__create_data_for_rlr(y)
+        print("unique:",np.unique(y))
+        estimator = RandomizedLogisticRegression()
+        selector = StabilitySelection(base_estimator=estimator,n_jobs=1)
+        self.__output_arr = selector.fit_transform(self.__df,y)
+        self.__selected_features = selector.get_support()
+
+    def __create_data_for_rlr(self,y):
+        new_y = []
+        different_label = [class_ for class_ in y if not class_ in y]
+        different_label.sort()
+        sub_arr_size = len(different_label)
+        for data in y:
+            sub_array = [0] * sub_arr_size
+            for index in range(len(different_label)):
+                if different_label[index] == data:
+                    sub_array.append(1)
+                else:
+                    sub_array.append(0)
+            new_y.append(sub_array)
+        return new_y

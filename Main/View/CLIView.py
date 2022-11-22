@@ -11,11 +11,16 @@ class CLIView:
     __argv = []
     __mode = ""
     __try_call = 0
+    __mode_fs = ""
 
     def __init__(self, argc, argv, mode: str = "kmerCalculator"):
         self.__argv = argv
         self.__argc = argc
         self.__mode = mode
+        if self.__argc == 8:
+            self.__mode_fs = "sv"
+        elif self.__argc == 7:
+            self.__mode_fs = "uv"
 
     def check_if_is_help(self):
         self.__try_call += 1
@@ -114,35 +119,43 @@ class CLIView:
         self.__try_call += 1
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__argv[3] == "-m" and self.__argv[
             4] == "low_variance":
+            self.__try_call -= 1
             self.__check_if_input_output_empty()
             selector = FSelector(self.__argv[5])
             selector.apply_low_variance(threshold=(.8 * (1 - .8)))
             selector.write_to_output(self.__argv[6])
-
+            return
     # main -n features_selection -m l1_based path/input/file path/output/file
     def check_if_is_L1_based_selection(self):
+        if not self.__argc == 8 and self.__mode_fs == "sv":
+            return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "l1_based":
                 self.__check_if_input_output_empty()
-                selector = FSelector(self.__argv[5], supervised=True)
+                selector = FSelector(self.__argv[5], supervised=True,search=self.__argv[7])
                 selector.apply_L1_based()
                 selector.write_to_output(self.__argv[6])
 
     # main -n features_selection -m sfs_forward path/input/file path/output/file
     def check_if_is_sequential_features_selection(self):
+        if not self.__argc == 8 and self.__mode_fs == "sv":
+            return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "sfs_forward":
                 self.__check_if_input_output_empty()
-                selector = FSelector(self.__argv[5], supervised=True)
+                selector = FSelector(self.__argv[5], supervised=True, search=self.__argv[7])
                 selector.apply_Sequential_features_selection()
                 selector.write_to_output(self.__argv[6])
 
     # main -n features_selection -m rtree path/input/file path/output/file
     def check_if_is_recursive_tree_features_selection(self):
+        if not self.__argc == 8 and self.__mode_fs == "sv":
+            print("tree")
+            return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "tree":
                 self.__check_if_input_output_empty()
-                selector = FSelector(self.__argv[5], supervised=True)
+                selector = FSelector(self.__argv[5], supervised=True, search=self.__argv[7])
                 selector.apply_recursive_tree()
                 selector.write_to_output(self.__argv[6])
 
@@ -154,10 +167,13 @@ class CLIView:
     # main -n features_selection -m chi2 path/input/file path/output/file
     def check_if_is_chi2(self):
         self.__try_call += 1
+        if not self.__argc == 8 and self.__mode_fs == "sv":
+            print("chi2")
+            return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection":
             if self.__argv[3] == "-m" and self.__argv[4] == "chi2":
                 self.__check_if_input_output_empty()
-                selector = FSelector(self.__argv[5], supervised=True)
+                selector = FSelector(self.__argv[5], supervised=True, search=self.__argv[7])
                 selector.apply_chi2_test()
                 selector.write_to_output(self.__argv[6])
 
@@ -182,20 +198,31 @@ class CLIView:
 
     def check_if_is_rand_log_reg(self):
         self.__try_call += 1
+        if not self.__argc == 8  and self.__mode_fs == "sv":
+            print("rlr")
+            return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "rlr":
                 self.__check_if_input_output_empty()
-                selector = FSelector(self.__argv[5])
+                selector = FSelector(self.__argv[5],supervised=True, search=self.__argv[7])
                 selector.rlr()
                 selector.write_to_output(self.__argv[6])
 
     def check_right_command(self):
-        if self.__mode == "featuresSelction" and self.__try_call == 5:
+        if self.__mode == "featuresSelction" and not (self.__argc == 7 or self.__argc == 8):
             return print("Il comando corretto e':\n"
                          "python FeaturesSelection.py -n <features_selection> -m <metodo-scelto> <file/csv/di/input> "
                          "<file/csv/di/output>")
         elif self.__mode == "kmerCalculator" and not self.__argc == 11 and self.__try_call == 4:
-            return print("Errore nell'iserimento degli argomenti.\n"
+            return print("Errore nell'inserimento degli argomenti.\n"
                          "Il comando corretto e':\n"
                          "python KmerCalculator.py -n <nome-algoritmo> -input <cartella/di/input> -part "
                          "<cartella/delle/partizioni> -out <file/di/output> -k <dimensione-massima-kmer>")
+
+    def print_error_supervised(self):
+        return print("Il numero degli argomenti inseriti è "+str(self.__argc-1)+".\n"
+                     "Dovrebbero essere 7.\n"
+                     "Il comando corretto e':\n"
+                     "python FeaturesSelection.py -n features_selection -m <metodo-scelto> <file/csv/di/input> "
+                                                                                "<filogenesi_ricercata> "
+                     "<file/csv/di/output>")

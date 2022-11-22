@@ -31,29 +31,59 @@ Esempio di utilizzo dello script:
     * python KmerCalculator.py -n dsk -input D://input -part D://partizioni -out D://output/out.csv -k 3
 
 # selezione delle features:
-La selezione delle features è possibile farla tramite lo script presente nel file [FeaturesSelection.py](FeaturesSelection.py). Per avviare il programma bisogna inserire i seguenti argomenti:
--n features_selection -m <algoritmo_scelto> <percorso_file_input> <percorso_file_output>
+La selezione delle features è possibile farla tramite lo script presente nel file [FeaturesSelection.py](FeaturesSelection.py). Il programma si può avviare in due modi differenti.
+Il primo metodo si utilizza quando la selezione delle features viene effettuata con metodi non supervisionati.
+Il secondo metodo si utilizza quando la selezione delle features viene effettuata con metodi supervisionati.
+### Non Supervisionato:
+Argomenti dei metodi non supervisionati:
+
+    python FeaturesSelection.py -n features_selection -m <algoritmo_scelto> <percorso_file_input> <percorso_file_output>
+
 dove:
     
     -m: Corrisponde all'algoritmo scelto per la selezione delle features. Gli algoritmi disponibili sono (da inserire senza i due punti e l'asterisco):
               
             * low_variance: Questo algoritmo eleimina le features la cui varianza è inferiore a una certa soglia. La soglia impostata è l' 80 percento.
-            
+
+Esempio di lancio con metodi non supervisionati:
+ 
+    python FeaturesSelection.py -n features_selection -m tree D://input.csv D://output.csv 
+
+### Supervisionato:
+Argomenti dello script con metodi supervisionati:
+    
+    -python FeaturesSelection.py -n features_selection -m <algoritmo_scelto> <percorso_file_input> <percorso_file_output> <filogenesi_ricercata>
+
+dove:
+    
+    -m: Corrisponde all'algoritmo scelto per la selezione delle features. Gli algoritmi disponibili sono (da inserire senza i due punti e l'asterisco):
+               
             * l1_based: Questo algoritmo utilizza un modello lineare chiamato "LinearSVC" (Linear Support Vector Classification) con la penalità "l1", ovvero usando la norma (magnitudine) dei vettori generati dal modello lineare. 
     
             * chi2: Questo algoritmo attua il test del chi quadrato.
 
             * tree: Utilizza uno stimatore ad albero. Viene utilizzata la classe ExtraTreesClassifier che adatta un numero di alberi decisionali randomizzati su vari sottocampioni sul set di dati.
 
-Esempio di utilizzo dello script:
-    
-    -python FeaturesSelection.py -n features_selection -m low_variance D://input.csv D://output/out.csv  
-Il file di output, se non esiste, viene generato. Se invece il file esiste già, a questo vengono cancellati tutti i byte presenti. 
+            * rlr: Utilizza randomized Logistic Regression.    
+
+    -filogenesi_ricercata: Corrisponde alla selezione delle features in base alla filogenesi ricercata. I valori accettati sono tre (da inserire senza l'asterisco):
+          
+            * Phylum
+
+            * Class
+
+            * Order
+
+Notare che gli argomenti della filogenesi ricercata iniziano lettere maiuscole.  
+Esempio di lancio con metodi supervisionati:
+ 
+    python FeaturesSelection.py -n features_selection -m tree D://input.csv D://output.csv Phylum
+Il file di uscita, se non esiste, viene generato. Se invece il file esiste già, a questo vengono cancellati tutti i byte presenti. 
 
 # Classificazione della Tassonomia:
 Per Utilizzare Il classificatore della tassonomia bisogna spostarsi nella cartella "TaxonClassifier" tramite il comando:
 
--cd TaxonClassifier
+      cd TaxonClassifier
 
-Dopo essersi spostati bisogna seguire le indicazioni descritte [in questo file](TaxonClassifier\README.md).
+Dopo essersi spostati, bisogna seguire le indicazioni scritte nel README.md contenuto in quella cartella.
 

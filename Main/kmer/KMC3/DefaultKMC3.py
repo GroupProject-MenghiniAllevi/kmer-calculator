@@ -94,7 +94,10 @@ class DefaultKMC3(KMC3):
             self.write_kmer_to_partition(self.__partition_sub_dict[file], input_file_path)
             print("Ricostruendo i k-mer e la loro frequenza del file "+file+"...")
             self.read_skmer_and_print_to_output(self.__partition_sub_dict[file])
-
+        part_list = os.listdir(self.__partition_path)
+        for path in part_list:
+            p = os.path.join(self.__partition_path, path)
+            shutil.rmtree(p)
     def extract_file_list(self):
         dh = DefaultDirectoryHandler(path=self.__input_path)
         l = dh.get_all_files_names()

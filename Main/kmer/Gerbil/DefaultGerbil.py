@@ -164,6 +164,7 @@ class DefaultGerbil(Gerbil):
 
     def __delete_all_partitions(self):
         part_list = os.listdir(self.__partition_path)
+        print(part_list)
         for path in part_list:
             p = os.path.join(self.__partition_path, path)
             shutil.rmtree(p)
