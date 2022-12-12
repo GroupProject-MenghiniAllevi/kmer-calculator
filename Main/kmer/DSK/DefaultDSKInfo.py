@@ -48,17 +48,21 @@ class DefaultDSKInfo(DSKInfo):
         kmer_reader.set_path(filepath)
         sequence_size = kmer_reader.get_file_lenght()
         if sequence_size == -1:
-            raise ValueError("errore nel calcolo della dimensione della sequenza nel file: ", filepath)
+            # raise ValueError("errore nel calcolo della dimensione della sequenza nel file: ", filepath)
+            pass
         kmer_reader.close_file()
         self.__kmerSize = sequence_size
-        print("Il k-mer presenti nel file "+filepath+" sono "+str(sequence_size)+"...")
+        print("Il k-mer presenti nel file " + filepath + " sono " + str(sequence_size) + "...")
         return sequence_size
 
     def iteration_number(self, file_disk_space):
-        self.__check_invalid_kmer_size()
+        # self.__check_invalid_kmer_size()
         square = self.__get_square_of_ceil_log_2_k()
-        self.__itaretionNumber = math.ceil(self.__kmerSize * square / file_disk_space)
-        return self.__itaretionNumber
+        try:
+            self.__itaretionNumber = math.ceil(self.__kmerSize * square / file_disk_space)
+            return self.__itaretionNumber
+        except:
+            return 0
 
     def get_partition_number(self, memory_usage):
         self.__check_invalid_iteration_number()

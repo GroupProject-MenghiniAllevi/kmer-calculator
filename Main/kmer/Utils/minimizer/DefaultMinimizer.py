@@ -14,7 +14,7 @@ class DefaultMinimizer(Minimizers):
         self.__m = m
         self.__super_kmer = list()
 
-    def set_minimizers(self, minimizer):
+    def set_minimizer(self, minimizer):
         self.__minimizer = minimizer
 
     def add_kmer_without_minimizer(self, kmer):

@@ -32,7 +32,7 @@ class MinimizersTest(unittest.TestCase):
 
     def __get_minimizer(self):
         minimizer = DefaultMinimizer(4)
-        minimizer.set_minimizers("CUGU")
+        minimizer.set_minimizer("CUGU")
         return minimizer
 
 

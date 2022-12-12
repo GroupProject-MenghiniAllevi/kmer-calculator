@@ -4,7 +4,8 @@
 # calcolo dei kmer:
 Il calcolo dei kmer si può effettuare in tre modi differenti. Tutti e tre i metodi portano allo stesso risultato.
 Per calcolare i kmer bisogna utilizzare il file "[KmerCalculator.py](KmerCalculator.py)". Lo script accetta i seguenti argomenti nel seguente ordine:
- -n <nome_algoritmo> -input <percorso_cartella_file_input> -part <percorso_cartella_partizioni> -out <percorso_file_output> -k <dimensione_massima_kmer>
+ 
+     -n <nome_algoritmo> -input <percorso_cartella_file_input> -part <percorso_cartella_partizioni> -out <percorso_file_output> -k <dimensione_massima_kmer>
 
 dove:
     

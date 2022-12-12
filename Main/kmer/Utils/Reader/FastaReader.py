@@ -15,6 +15,7 @@ class FastaRnaReader(KmerReader):
         pass
 
     def read_next_kmer(self):
+        # print("sequence_row:", self.__sequence_row)
         kmer = self.__file.read(self.__k).decode('utf-8').upper()
         r = -(self.__k - 1)
         self.__file.seek(r, 1)
@@ -30,6 +31,7 @@ class FastaRnaReader(KmerReader):
             if not c:
                 break
             elif not c or c == b"\r" or c == b"\n":
+                # print(c, checked_value, actual_line)
                 if checked_value:
                     return actual_line
                 else:

@@ -5,9 +5,7 @@ import pandas as pd
 from sklearn.ensemble import ExtraTreesClassifier
 from sklearn.feature_selection import VarianceThreshold, SelectFromModel, RFE, \
     chi2, SelectPercentile
-from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC, SVC
-from stability_selection import RandomizedLogisticRegression, StabilitySelection
 
 
 class FSelector:
@@ -29,7 +27,7 @@ class FSelector:
                     file.close()
             columns_size = self.__detect_column_size(path)
             self.__df = pd.read_csv(path, skiprows=[0], usecols=range(1, columns_size + 1), header=None)
-            #print(path)
+            # print(path)
             self.__detect_column_name(path)
             if supervised:
                 self.__detect_molecule_expected(search)
@@ -132,7 +130,7 @@ class FSelector:
             file.close()
             # print(self.__molecule_list)
 
-    def __detect_molecule_expected(self,search):
+    def __detect_molecule_expected(self, search):
         # print(self.__molecule_list)
         molecules_path = self.__get_molecules_path()
         sub_file_path = [name for name in os.listdir(molecules_path) if
@@ -141,7 +139,7 @@ class FSelector:
             path = os.path.join(molecules_path, file)
             for s in self.__sheets:
                 df = pd.read_excel(path, sheet_name=s)
-                #print(len(self.__molecule_list))
+                # print(len(self.__molecule_list))
                 sep = "."
                 l = [x.split(sep, 1)[0] for x in self.__molecule_list]
                 # print(len(l))
@@ -169,6 +167,7 @@ class FSelector:
                                     value = value.replace('\xa0', '')
                                     value = value.strip()
                                     self.__molecule_expected[mol] = value
+
     def __get_molecules_path(self):
         root = dirname(dirname(dirname(os.path.abspath(__file__))))
         resource_path = os.path.join(root, "resource")
@@ -189,15 +188,17 @@ class FSelector:
         self.__selected_features = chi2_feat.get_support()
 
     def rlr(self):
+        """
         y = np.asarray(list(self.__molecule_expected.values()))
         # y = self.__create_data_for_rlr(y)
-        print("unique:",np.unique(y))
-        estimator = RandomizedLogisticRegression()
-        selector = StabilitySelection(base_estimator=estimator,n_jobs=1)
-        self.__output_arr = selector.fit_transform(self.__df,y)
+        print("valori diversi tra di loro nella variabile target:", np.unique(y))
+        estimator = RandomizedLogisticRegression(n_jobs=1)
+        selector = StabilitySelection(base_estimator=estimator, n_jobs=1)
+        self.__output_arr = selector.fit_transform(self.__df, y)
         self.__selected_features = selector.get_support()
+        """
 
-    def __create_data_for_rlr(self,y):
+    def __create_data_for_rlr(self, y):
         new_y = []
         different_label = [class_ for class_ in y if not class_ in y]
         different_label.sort()

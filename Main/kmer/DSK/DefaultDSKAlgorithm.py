@@ -1,4 +1,3 @@
-import multiprocessing
 import os
 import shutil
 from multiprocessing import Lock
@@ -42,7 +41,8 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         """
 
     def set_iteration_number(self):
-        self.__iteration_number = self.__dsk_info.iteration_number(self.__diskUsage)
+        if not self.__kmer_size == -1:
+            self.__iteration_number = self.__dsk_info.iteration_number(self.__diskUsage)
 
     """
     Qeusto metodo imposta il numero delle iterazioni
@@ -68,14 +68,16 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     def apply_algorithm_for_file(self, filename, file_path, partition_path, molecule_name):
         dsk_info = self.get_dsk_info_complete(os.path.join(self.__path, file_path))
         ith_number = dsk_info.iteration_number(self.__diskUsage)
-        print("Leggendo i k-mer del file: " + filename+"...")
-        partition_number = dsk_info.get_partition_number(self.__memoryUsage)
-        self.create_partition_files(partition_path, partition_number)
-        for i in range(ith_number):
-            self.save_to_partitions(i, partition_number, ith_number, file_path)
-            self.__lock.acquire()
-            self.write_to_output(partition_number, molecule_name, filename)
-            self.__lock.release()
+        print("Leggendo i k-mer del file: " + filename + "...")
+        if self.__check_sequence_size_and_k(file_path, file_path):
+            partition_number = dsk_info.get_partition_number(self.__memoryUsage)
+            self.create_partition_files(partition_path, partition_number)
+            if self.__check_sequence_size_and_k(file_path,file_path):
+                for i in range(ith_number):
+                    self.save_to_partitions(i, partition_number, ith_number, file_path)
+                    self.__lock.acquire()
+                    self.write_to_output(partition_number, molecule_name, filename)
+                    self.__lock.release()
 
     def process(self, output_path):
         self.__out_path = output_path
@@ -153,30 +155,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
         return dsk_info
 
     def detect_molecule_name_from_input(self):
-        """resource_path = get_default_path()
-        l = [f for f in os.listdir(resource_path) if
-             os.path.isfile(os.path.join(resource_path, f)) and f.endswith(".xlsx")]
-        excel_file_list = [v for v in l if v.endswith(".xlsx")]
-        check_nH = False
-        if not self.__file_list[0].find("_nH.db") == -1:
-            check_nH = True
-        clean_file_list = [v.replace("_nH.db", ".db") for v in self.__file_list]
-        for excel_file in excel_file_list:
-            path = os.path.join(resource_path, excel_file)
-            reader = ExcelMoleculeReader(path=path)
-            reader.extract_list_of_all_sheet()
-            reader.extract_all_molecule_name()
-            d = reader.get_molecules()
-            d = self.__add_db_to_filename(d)
-            for key in d:
-                if key in clean_file_list:
-                    s = key
-                    s_index = len(s) - 3
-                    if check_nH:
-                        s = s[:s_index] + "_nH" + s[s_index:]
-                    self.__molecules_name[s] = d[key]
-        """
-        self.__molecules_name = [f for f in os.listdir(self.__path) if os.path.isfile(os.path.join(self.__path,f))]
+        self.__molecules_name = [f for f in os.listdir(self.__path) if os.path.isfile(os.path.join(self.__path, f))]
         return self.__molecules_name
 
     def __remove_partition_file(self, filename):
@@ -186,6 +165,7 @@ class DefaultDskAlgorithm(DSKAlgorithm):
     def __initialize_values(self):
         self.__dsk_info = DefaultDSKInfo(self.__path, self.__k)
         self.__kmer_size = self.__dsk_info.getFullKmerNumber()
+        # print(self.__kmer_size," kmer size..")
 
     def __add_db_to_filename(self, d):
         x = dict()
@@ -193,3 +173,16 @@ class DefaultDskAlgorithm(DSKAlgorithm):
             s = key + ".db"
             x[s] = d[key]
         return x
+
+    def __check_sequence_size_and_k(self, path, filename):
+        reader = FastaRnaReader()
+        reader.set_path(os.path.join(self.__path,path))
+        reader.set_kmer_lenght(self.__k)
+        sequence_size = reader.get_file_lenght()
+        # print(sequence_size)
+        if sequence_size < self.__k:
+            print("ATTENZIONE: il valore k attuale " + str(
+                self.__k) + " è maggiore della lunghezza della sequenza " + filename + ": " + str(sequence_size))
+            return False
+        else:
+            return True

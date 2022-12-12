@@ -127,18 +127,18 @@ class CLIView:
             return
     # main -n features_selection -m l1_based path/input/file path/output/file
     def check_if_is_L1_based_selection(self):
-        if not self.__argc == 8 and self.__mode_fs == "sv":
+        if not self.__argc == 3 and self.__mode_fs == "sv":
             return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "l1_based":
                 self.__check_if_input_output_empty()
-                selector = FSelector(self.__argv[5], supervised=True,search=self.__argv[7])
+                selector = FSelector(self.__argv[5], supervised=True, search=self.__argv[7])
                 selector.apply_L1_based()
                 selector.write_to_output(self.__argv[6])
 
     # main -n features_selection -m sfs_forward path/input/file path/output/file
     def check_if_is_sequential_features_selection(self):
-        if not self.__argc == 8 and self.__mode_fs == "sv":
+        if not self.__argc == 3 and self.__mode_fs == "sv":
             return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
             if self.__argv[3] == "-m" and self.__argv[4] == "sfs_forward":
@@ -149,7 +149,7 @@ class CLIView:
 
     # main -n features_selection -m rtree path/input/file path/output/file
     def check_if_is_recursive_tree_features_selection(self):
-        if not self.__argc == 8 and self.__mode_fs == "sv":
+        if not self.__argc == 3 and self.__mode_fs == "sv":
             print("tree")
             return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":
@@ -167,7 +167,7 @@ class CLIView:
     # main -n features_selection -m chi2 path/input/file path/output/file
     def check_if_is_chi2(self):
         self.__try_call += 1
-        if not self.__argc == 8 and self.__mode_fs == "sv":
+        if not self.__argc == 3 and self.__mode_fs == "sv":
             print("chi2")
             return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection":
@@ -198,7 +198,7 @@ class CLIView:
 
     def check_if_is_rand_log_reg(self):
         self.__try_call += 1
-        if not self.__argc == 8  and self.__mode_fs == "sv":
+        if not self.__argc == 3  and self.__mode_fs == "sv":
             print("rlr")
             return self.print_error_supervised()
         if self.__argv[1] == "-n" and self.__argv[2] == "features_selection" and self.__mode == "featuresSelction":

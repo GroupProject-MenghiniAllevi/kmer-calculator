@@ -6,7 +6,7 @@ class Minimizers(metaclass=abc.ABCMeta):
     Il minimizer ci permette di semplificare il calcolo di gerbil trovando un minimizer per ogni k-mer
     """
 
-    def set_minimizers(self, minimizer):
+    def set_minimizer(self, minimizer):
         """
         imposta la sequenza della stringa da utilizzare come minimizer
         :param minimizer la parte della stringa da utilizzare come minimizer

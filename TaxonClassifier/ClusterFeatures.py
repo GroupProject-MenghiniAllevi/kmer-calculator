@@ -32,12 +32,13 @@ from sklearn.cluster import *
 from sklearn import metrics
 import argparse
 
+
 if len(sys.argv) != 3:
     print("Usage: python3 ClusterFeatures.py <molecule-list-csv-file> <eigenvalues-csv-file>")
     sys.exit(1)
 
 # Read the list of molecules
-molecules = pd.read_csv(sys.argv[1], sep=";")
+molecules = pd.read_csv(sys.argv[1], delimiter=";")
 
 # Create dictionary Id -> Index
 index_of = dict()
@@ -68,6 +69,7 @@ distances = pd.read_csv(sys.argv[2], sep=",")
 # ListFeatures =[]
 columns_list = distances.columns.to_list()
 columns_list.remove("id")
+print("In questo file ci sono "+str(len(columns_list))+" differenti k-mer.")
 ListFeatures = []
 
 for k in range(len(distances)):
@@ -76,9 +78,10 @@ for k in range(len(distances)):
     for f in columns_list:
         value = distances.loc[k].loc[f]
         sub_list[i] = value
+        # sub_list = distances.iloc[k].tolist()
         i += 1
     ListFeatures.append(sub_list)
-
+print("In questo file ci sono "+str(len(ListFeatures))+" sequenze differenti.")
 """
 for k in range(len(distances)):
     i = index_of[distances.loc[k].loc['Id1']]
@@ -98,7 +101,7 @@ labels_true = list(label_of.values())
 
 model = AgglomerativeClustering(n_clusters=n_clusters, affinity='euclidean', linkage='single').fit(ListFeatures)
 labels_pred = model.fit_predict(ListFeatures)
-
+# str_to_out = ""
 # Compute the metrics and print the evaluations
 print("Method: single")
 # print("Labels Pred", list(labels_pred))
@@ -106,6 +109,10 @@ print("Method: single")
 print("Rand_score", metrics.rand_score(labels_true, labels_pred))
 print("Homogeneity_score", metrics.homogeneity_score(labels_true, labels_pred))
 print("completeness_score", metrics.completeness_score(labels_true, labels_pred))
+
+# str_to_out = sys.argv[5] + "," + sys.argv[4] + "," + str(metrics.rand_score(labels_true, labels_pred)) + "," + str(
+    # metrics.homogeneity_score(labels_true, labels_pred)) + "," + str(
+    # metrics.completeness_score(labels_true, labels_pred))
 
 # Execute clustering with complete linkage and determines the predicted labels for each molecule. In this case features are used and the Euclidean distance is chosen as affinity.
 
@@ -119,7 +126,9 @@ print("Method: complete")
 print("Rand_score", metrics.rand_score(labels_true, labels_pred))
 print("Homogeneity_score", metrics.homogeneity_score(labels_true, labels_pred))
 print("completeness_score", metrics.completeness_score(labels_true, labels_pred))
-
+# str_to_out = str_to_out + "," + str(metrics.rand_score(labels_true, labels_pred)) + "," + str(
+    # metrics.homogeneity_score(labels_true, labels_pred)) + "," + str(
+    # metrics.completeness_score(labels_true, labels_pred))
 # Execute clustering with average linkage and determines the predicted labels for each molecule. In this case features are used and the Euclidean distance is chosen as affinity.
 
 model = AgglomerativeClustering(n_clusters=n_clusters, affinity='euclidean', linkage='average').fit(ListFeatures)
@@ -132,3 +141,10 @@ print("Method: average")
 print("Rand_score", metrics.rand_score(labels_true, labels_pred))
 print("Homogeneity_score", metrics.homogeneity_score(labels_true, labels_pred))
 print("completeness_score", metrics.completeness_score(labels_true, labels_pred))
+#str_to_out = str_to_out + "," + str(metrics.rand_score(labels_true, labels_pred)) + "," + str(
+    # metrics.homogeneity_score(labels_true, labels_pred)) + "," + str(
+    # metrics.completeness_score(labels_true, labels_pred))+","+str(sys.argv[6]) + "\n"
+
+# with open(sys.argv[3], "ab") as file:
+    # file.write(str_to_out.encode(encoding='utf-8'))
+    # file.close()

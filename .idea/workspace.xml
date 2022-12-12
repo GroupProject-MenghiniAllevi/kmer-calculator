@@ -5,7 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4221cfd1-30f8-4a8a-ae8a-81a1828d0448" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/FeaturesSelection/FSelector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/View/CLIView.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/View/CLIView.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/DSK/DefaultDSKInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/Reader/FastaReader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/Reader/FastaReader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizerHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/DefaultMinimizerHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/MinimizerHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/MinimizerHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/Minimizers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main/kmer/Utils/minimizer/Minimizers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TaxonClassifier/ClusterFeatures.py" beforeDir="false" afterPath="$PROJECT_DIR$/TaxonClassifier/ClusterFeatures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test/Gerbil/MinimizerTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test/Gerbil/MinimizerTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione-blx.bib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.bbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.bcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.blg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.lof" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.lol" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.lot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.run.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/relazione.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxil/ringraziamenti.aux" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/AlgoritmiPerKmer.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/Immagini/Cuordipietra_Famedoro.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/Immagini/Rockerduck.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/Immagini/amelia.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/Immagini/stemma.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/SelezioneDelleFeatures.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/biblio.bib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/introduzione.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/relazione.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/ringraziamenti.tex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/latex/unicam_thesis.cls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/relazione.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/relazione.synctex.gz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +79,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/progetti/pythonProjects/pythonVocieToText&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/progetti/relazione_GP&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
@@ -57,7 +96,7 @@
       <recent name="D:\progetti\kmer-calculator\kmer-calculator\it\unicam\cs\groupproject\kmer\Utils\Writer" />
     </key>
   </component>
-  <component name="RunManager" selected="LaTeX.relazione">
+  <component name="RunManager" selected="Python.ClusterFeatures">
     <configuration default="true" type="BIBTEX_RUN_CONFIGURATION" factoryName="LaTeX configuration factory">
       <texify-bibtex>
         <compiler />
@@ -75,8 +114,8 @@
         <compiler-path />
         <compiler-arguments />
         <envs />
-        <main-file>$PROJECT_DIR$/latex/relazione.tex</main-file>
-        <aux-dir>$PROJECT_DIR$/auxil</aux-dir>
+        <main-file>$APPLICATION_HOME_DIR$/jbr/bin</main-file>
+        <aux-dir>$APPLICATION_HOME_DIR$/jbr/bin</aux-dir>
       </texify-bibtex>
       <method v="2" />
     </configuration>
@@ -110,7 +149,7 @@
         <viewer-command />
         <compiler-arguments />
         <envs />
-        <main-file>$PROJECT_DIR$/latex/relazione.tex</main-file>
+        <main-file />
         <output-path>$PROJECT_DIR$/out</output-path>
         <auxil-path>$PROJECT_DIR$/auxil</auxil-path>
         <compile-twice>false</compile-twice>
@@ -120,6 +159,27 @@
         <bib-run-config>[BibTeX.bibliography]</bib-run-config>
         <makeindex-run-config>[]</makeindex-run-config>
       </texify>
+      <method v="2" />
+    </configuration>
+    <configuration name="ClusterFeatures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="kmer-calculator" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/TaxonClassifier" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TaxonClassifier/ClusterFeatures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -185,20 +245,6 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for GerbilTest.GerbilTest.test_second_phase" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="kmer-calculator" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Test/Gerbil" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;GerbilTest.GerbilTest.test_second_phase&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
     <configuration name="Python tests in D:/progetti/kmer-calculator/kmer-calculator/Test/DSK/DSKALgorithmTest.py -k 10" type="tests" factoryName="Autodetect" nameIsGenerated="true">
       <module name="kmer-calculator" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -217,19 +263,19 @@
       <item itemvalue="BibTeX.bibliography" />
       <item itemvalue="LaTeX.relazione" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.ClusterFeatures" />
       <item itemvalue="Python tests.Python tests in D:/progetti/kmer-calculator/kmer-calculator/Test/DSK/DSKALgorithmTest.py -k 10" />
       <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_molecules_name" />
       <item itemvalue="Python tests.Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names" />
       <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_large_dataset" />
-      <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_second_phase" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ClusterFeatures" />
         <item itemvalue="LaTeX.relazione" />
         <item itemvalue="Python tests.Python tests for DSKALgorithmTest.DSKAlgorithmTest.test_molecules_name" />
         <item itemvalue="Python tests.Python tests for ExcelReaderTest.MyTestCase.test_get_sheet_names" />
         <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_large_dataset" />
-        <item itemvalue="Python tests.Python tests for GerbilTest.GerbilTest.test_second_phase" />
       </list>
     </recent_temporary>
   </component>

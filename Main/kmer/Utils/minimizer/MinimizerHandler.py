@@ -3,16 +3,12 @@ from multiprocessing import Lock
 
 class MinimizerHandler:
 
-    def get_next_kmer(self):
-        """
-        Restituisce la sequenza del k-mer
-        :return:
-        """
+
 
     def get_minimizers_from_kmer(self, kmer):
         """
-        Restituisce il minimizer della sequenza k-mer
-        :param kmer:la sequenza k-mer
+        Restituisce il minimizer a partire dal k-mer
+        :param kmer:il kmer da cui estrarre il minimizer.
         :return:il minimizer
         """
 
@@ -24,8 +20,3 @@ class MinimizerHandler:
         :return:
         """
 
-    def get_empty_hash_map(self):
-        """
-        Questo metodo restituisce un hash map vuoto.
-        :return: un hash map vuoto.
-        """
